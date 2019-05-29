@@ -28,8 +28,20 @@ public class Validate {
     }
   }
 
-  public static <T extends Comparable> void inOrderOrEqual(T val1, T val2, String message) {
+  public static <T extends Comparable> void inOrder(T val1, T val2, String message) {
     if (val1.compareTo(val2)>0) {
+      throw new IllegalArgumentException(message);
+    }
+  }
+
+  public static <T extends Comparable> void inOrder(T val1, T val2, Supplier<String> messageSupplier) {
+    if (val1.compareTo(val2)>=0) {
+      throw new IllegalArgumentException(messageSupplier.get());
+    }
+  }
+
+  public static <T extends Comparable> void inOrderOrEqual(T val1, T val2, String message) {
+    if (val1.compareTo(val2)>=0) {
       throw new IllegalArgumentException(message);
     }
   }

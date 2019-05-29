@@ -4,15 +4,53 @@
 package org.blacksmith.commons.date;
 
 import java.time.LocalDate;
+import org.blacksmith.commons.test.TimingExtension;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import org.junit.jupiter.api.extension.ExtendWith;
+
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DisplayName("Date Utils")
+@ExtendWith(TimingExtension.class)
 public class DateTest {
-    @Test
-    public void addDaysToDate() {
-        assertThat(LocalDateUtils.plusDays(LocalDate.of(2019,01,01),3),is(LocalDate.of(2019,01,04)));
+
+  @Test
+  @DisplayName("Test jdk plusDays")
+  public void speed1() {
+    LocalDate ref = LocalDate.of(2019, 03, 15);
+    for (int i = 0; i < 100000000; i++) {
+      LocalDate x = ref.plusDays(i);
     }
+  }
+
+  @Test
+  @DisplayName("Test ref plusDays")
+  public void speed2() {
+    LocalDate ref = LocalDate.of(2019, 03, 15);
+    for (int i = 0; i < 100000000; i++) {
+      LocalDate x = LocalDateUtilsRef.plusDays(ref,i);
+    }
+  }
+
+  @Test
+  @DisplayName("Test date streamx")
+  public void dateStreamX() {
+    System.out.println("stream1:" + LocalDateUtilsRef.stream(LocalDate.now(),LocalDate.now().plusDays(10000)).count());
+  }
+  @Test
+  @DisplayName("Test date stream")
+  public void dateStream() {
+    System.out.println("stream2:"+LocalDateUtils.stream(LocalDate.now(),LocalDate.now().plusDays(10000)).count());
+  }
+  @Test
+  @DisplayName("LeapDay test")
+  public void leapDayTest() {
+    assertEquals(LocalDate.of(2020,02,29),LocalDateUtils.nextLeapDay(LocalDate.of(2019,03,01)));
+    assertEquals(LocalDate.of(2020,02,29),LocalDateUtils.nextLeapDay(LocalDate.of(2019,01,29)));
+    assertEquals(LocalDate.of(2020,02,29),LocalDateUtils.nextLeapDay(LocalDate.of(2020,02,28)));
+    assertEquals(LocalDate.of(2024,02,29),LocalDateUtils.nextLeapDay(LocalDate.of(2020,02,29)));
+    assertEquals(LocalDate.of(2024,02,29),LocalDateUtils.nextLeapDay(LocalDate.of(2020,03,29)));
+  }
 }
