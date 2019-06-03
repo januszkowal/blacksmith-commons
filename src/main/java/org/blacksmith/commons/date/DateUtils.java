@@ -5,7 +5,7 @@ import java.time.Year;
 import java.time.temporal.ChronoUnit;
 import java.util.stream.Stream;
 
-public class LocalDateUtils {
+public class DateUtils {
 
   public static long daysBetween(LocalDate startInclusive, LocalDate endExclusive) {
     return ChronoUnit.DAYS.between(startInclusive,endExclusive);

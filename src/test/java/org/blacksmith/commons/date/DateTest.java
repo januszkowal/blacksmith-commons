@@ -42,15 +42,15 @@ public class DateTest {
   @Test
   @DisplayName("Test date stream")
   public void dateStream() {
-    System.out.println("stream2:"+LocalDateUtils.stream(LocalDate.now(),LocalDate.now().plusDays(10000)).count());
+    System.out.println("stream2:"+ DateUtils.stream(LocalDate.now(),LocalDate.now().plusDays(10000)).count());
   }
   @Test
   @DisplayName("LeapDay test")
   public void leapDayTest() {
-    assertEquals(LocalDate.of(2020,02,29),LocalDateUtils.nextLeapDay(LocalDate.of(2019,03,01)));
-    assertEquals(LocalDate.of(2020,02,29),LocalDateUtils.nextLeapDay(LocalDate.of(2019,01,29)));
-    assertEquals(LocalDate.of(2020,02,29),LocalDateUtils.nextLeapDay(LocalDate.of(2020,02,28)));
-    assertEquals(LocalDate.of(2024,02,29),LocalDateUtils.nextLeapDay(LocalDate.of(2020,02,29)));
-    assertEquals(LocalDate.of(2024,02,29),LocalDateUtils.nextLeapDay(LocalDate.of(2020,03,29)));
+    assertEquals(LocalDate.of(2020,02,29), DateUtils.nextLeapDay(LocalDate.of(2019,03,01)));
+    assertEquals(LocalDate.of(2020,02,29), DateUtils.nextLeapDay(LocalDate.of(2019,01,29)));
+    assertEquals(LocalDate.of(2020,02,29), DateUtils.nextLeapDay(LocalDate.of(2020,02,28)));
+    assertEquals(LocalDate.of(2024,02,29), DateUtils.nextLeapDay(LocalDate.of(2020,02,29)));
+    assertEquals(LocalDate.of(2024,02,29), DateUtils.nextLeapDay(LocalDate.of(2020,03,29)));
   }
 }
