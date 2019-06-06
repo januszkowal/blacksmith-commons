@@ -39,6 +39,7 @@ task sourceJar(type: Jar) {
     from sourceSets.main.allJava
 }
 
+//gradle publishToMavelNocal
 publishing {
     publications {
         mavenJava(MavenPublication) {
