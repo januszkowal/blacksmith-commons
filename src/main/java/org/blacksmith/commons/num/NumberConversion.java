@@ -1,13 +1,13 @@
-package org.blacksmith.commons;
+package org.blacksmith.commons.num;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 
-public class NumUtils
+public class NumberConversion
 {
+  private NumberConversion() {}
   private static boolean long2bool(long value)
   {
     return value==1L ? true : false;
