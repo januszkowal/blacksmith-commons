@@ -1,8 +1,5 @@
 package org.blacksmith.commons.tree;
 
-import java.lang.reflect.Array;
-import java.util.Deque;
-import java.util.LinkedList;
 import java.util.List;
 
 public interface TreeNode<T> {
@@ -28,8 +25,8 @@ public interface TreeNode<T> {
     boolean onNode(TreeNode<T> node, U caller);
   }
 
-  interface TreeTraverser<T,U> {
-    boolean traverse(TreeNode<T> root, NodeVisitor<T, U> visitor, U callerData);
+  interface TreeTraverser {
+	  <T,U> boolean traverse(TreeNode<T> root, NodeVisitor<T, U> visitor, U callerData);
   }
 
 
