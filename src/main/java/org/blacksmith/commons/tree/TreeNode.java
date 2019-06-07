@@ -29,8 +29,6 @@ public interface TreeNode<T> {
 	  <T,U> boolean traverse(TreeNode<T> root, NodeVisitor<T, U> visitor, U callerData);
   }
 
-
   T[] toDataArray(T[] a, TreeTraverser traverser);
   Object[] toArray(TreeTraverser traverser);
-
 }

@@ -28,7 +28,7 @@ import java.util.List;
  * POST: 4,5,2,8,9,6,7,3,1
  * BREADTH_FIRST: 1,2,3,4,5,6,7,8,9
  */
-public enum StdBTreeTraverserX implements TreeNode.TreeTraverser {
+public enum StdTreeTraverserE implements TreeNode.TreeTraverser {
 
   PRE_ORDER {
     public boolean traverse(TreeNode root, TreeNode.NodeVisitor visitor, Object callerData) {

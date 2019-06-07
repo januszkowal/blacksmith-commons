@@ -6,3 +6,6 @@ build
 /Commons.iml
 /.idea
 /out
+/bin
+.classpath
+.project

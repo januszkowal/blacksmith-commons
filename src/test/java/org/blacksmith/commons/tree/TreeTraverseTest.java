@@ -26,19 +26,19 @@ public class TreeTraverseTest {
   @Test
   public void testTraversePRE() {
     TreeNode<Long> tree = createTree();
-    final Long[] xtree = tree.toDataArray(new Long[0], StdBTreeTraverser.PRE_ORDER);
+    final Long[] xtree = tree.toDataArray(new Long[0], StdTreeTraverser.PRE_ORDER);
     System.out.println("sort PRE:"+arrToString(xtree));
   }
   @Test
   public void testTraversePOST() {
     TreeNode<Long> tree = createTree();
-    final Long[] xtree = tree.toDataArray(new Long[0], StdBTreeTraverser.POST_ORDER);
+    final Long[] xtree = tree.toDataArray(new Long[0], StdTreeTraverser.POST_ORDER);
     System.out.println("sort POST:"+arrToString(xtree));
   }
   @Test
   public void testTraverseBREATH_FIRST() {
     TreeNode<Long> tree = createTree();
-    final Long[] xtree = tree.toDataArray(new Long[0], StdBTreeTraverser.BREADTH_ORDER);
+    final Long[] xtree = tree.toDataArray(new Long[0], StdTreeTraverser.BREADTH_ORDER);
     System.out.println("sort BREATH_FIRST:"+arrToString(xtree));
   }
 }

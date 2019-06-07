@@ -99,7 +99,7 @@ public class BTreeNode<T> implements TreeNode<T> {
   @Override
   public int size() {
     final int[] counter = { 0 };
-    StdBTreeTraverser.PRE_ORDER.traverse(this, (NodeVisitor<T, int[]>) (node, c) -> {
+    StdTreeTraverser.PRE_ORDER.traverse(this, (NodeVisitor<T, int[]>) (node, c) -> {
       c[0] = c[0] + 1;
       return true;
     }, counter);
@@ -140,7 +140,7 @@ public class BTreeNode<T> implements TreeNode<T> {
   @Override
   public TreeNode<T> findDescendantWith(final T o) {
     final Object[] found = { null };
-    StdBTreeTraverser.BREADTH_ORDER.traverse(this, (NodeVisitor<T, Object[]>) (node, found1) -> {
+    StdTreeTraverser.BREADTH_ORDER.traverse(this, (NodeVisitor<T, Object[]>) (node, found1) -> {
       if (node.getData().equals(o)) {
         found1[0] = node;
         return false;
