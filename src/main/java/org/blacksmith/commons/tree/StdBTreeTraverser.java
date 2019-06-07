@@ -43,8 +43,7 @@ public enum StdBTreeTraverser implements TreeNode.TreeTraverser {
         }
         final List<? extends TreeNode<?>> children = n.getChildren();
         for (int i=children.size()-1; i>=0; --i) {
-          final TreeNode<?> child = children.get(i);
-          dq.add(child);
+          dq.add(children.get(i));
         }
       }
       return true;
@@ -63,8 +62,7 @@ public enum StdBTreeTraverser implements TreeNode.TreeTraverser {
         final List<? extends TreeNode<?>> children = n.getChildren();
         final int childrenCount = children.size();
         for (int i=0; i<childrenCount; ++i) {
-          final TreeNode<?> child = children.get(i);
-          dq.add(child);
+          dq.add(children.get(i));
         }
       }
 
@@ -96,8 +94,7 @@ public enum StdBTreeTraverser implements TreeNode.TreeTraverser {
         final List<? extends TreeNode<?>> children = n.getChildren();
         final int childrenCount = children.size();
         for (int i=0; i<childrenCount; ++i) {
-          final TreeNode<?> child = children.get(i);
-          dq.add(child);
+          dq.add(children.get(i));
         }
       }
 
