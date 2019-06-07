@@ -1,15 +1,16 @@
 package org.blacksmith.commons.tree;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class TreeNodeImpl<T> implements TreeNode<T> {
+public class BTreeNode<T> implements TreeNode<T> {
   private T data;
   private TreeNode<T> parent;
   private List<TreeNode<T>> children = Collections.emptyList();
 
-  public TreeNodeImpl(T data) {
+  public BTreeNode(T data) {
     this.data = data;
   }
 
@@ -55,7 +56,7 @@ public class TreeNodeImpl<T> implements TreeNode<T> {
   }
 
   @Override public TreeNode<T> addChildWith(T o) {
-    return addChild(new TreeNodeImpl<T>(o));
+    return addChild(new BTreeNode<T>(o));
   }
 
   @Override public boolean isParentOf(TreeNode<T> n) {
@@ -92,6 +93,61 @@ public class TreeNodeImpl<T> implements TreeNode<T> {
   }
 
   @Override public boolean isRoot() {
-    return this.parent==null;
+    return this.parent == null;
   }
+
+  @Override
+  public int size() {
+    final int[] counter = { 0 };
+    StdBTreeTraverser.PRE_ORDER.traverse(this, (NodeVisitor<T, int[]>) (node, c) -> {
+      c[0] = c[0] + 1;
+      return true;
+    }, counter);
+    return counter[0];
+  }
+
+  @Override public T[] toDataArray(T[] a, TreeTraverser traverser) {
+    final int size = size();
+    if (a.length < size) {
+      a = (T[]) Array.newInstance(a.getClass().getComponentType(), size);
+    }
+
+    traverser.traverse(this,new NodeVisitor<T, T[]>() {
+      int index = 0;
+      @Override
+      public boolean onNode(TreeNode<T> node, T[] a) {
+        a[index++] = node.getData();
+        return true;
+      }
+    }, a);
+    return a;
+  }
+
+  @Override public Object[] toArray(TreeTraverser traverser) {
+    final int size = size();
+    Object[] a = new Object[size];
+    traverser.traverse(this,new NodeVisitor<T, Object[]>() {
+      int index = 0;
+      @Override
+      public boolean onNode(TreeNode<T> node, Object[] a) {
+        a[index++] = node;
+        return true;
+      }
+    }, a);
+    return a;
+  }
+
+  @Override
+  public TreeNode<T> findDescendantWith(final T o) {
+    final Object[] found = { null };
+    StdBTreeTraverser.BREADTH_ORDER.traverse(this, (NodeVisitor<T, Object[]>) (node, found1) -> {
+      if (node.getData().equals(o)) {
+        found1[0] = node;
+        return false;
+      }
+      return true;
+    }, found);
+    return (TreeNode<T>) found[0];
+  }
+
 }
