@@ -7,23 +7,25 @@ import java.util.List;
 import org.blacksmith.commons.tree.TreeNode.NodeVisitor;
 
 /**
- * (1)
- * /  \
- * /     \
- * /        \
- * /           \
- * /              \
- * (2)               (3)
- * / \               / \
- * /    \            /    \
- * /       \         /       \
- * /          \      /          \
+ *                     (1)
+ *                    /  \
+ *                  /     \
+ *                /        \
+ *              /           \
+ *            /              \
+ *         (2)               (3)
+ *         / \               / \
+ *       /    \            /    \
+ *     /       \         /       \
+ *   /          \      /          \
  * (4)          (5)  6)           (7)
- * / \
- * /   \
- * /     \
- * /       \
- * (8)      (9)
+ *                  / \
+ *                 /   \
+ *                /     \
+ *               /       \
+ *             (8)      (9)
+ *
+ *
  * PRE:  1,2,4,5,3,6,8,9,7
  * POST: 4,5,2,8,9,6,7,3,1
  * BREADTH_FIRST: 1,2,3,4,5,6,7,8,9
@@ -103,7 +105,7 @@ public class StdTreeTraverser {
         }
       }
 
-      return false;
+      return true;
     }
   }
 }
