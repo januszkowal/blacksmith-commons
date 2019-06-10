@@ -7,6 +7,7 @@ import java.util.List;
 import org.blacksmith.commons.tree.TreeNode.NodeVisitor;
 
 /**
+ * @f:off
  *                     (1)
  *                    /  \
  *                  /     \
@@ -25,6 +26,7 @@ import org.blacksmith.commons.tree.TreeNode.NodeVisitor;
  *               /       \
  *             (8)      (9)
  *
+ * @f:on
  *
  * PRE:  1,2,4,5,3,6,8,9,7
  * POST: 4,5,2,8,9,6,7,3,1
