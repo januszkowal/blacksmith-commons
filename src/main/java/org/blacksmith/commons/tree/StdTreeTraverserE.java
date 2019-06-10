@@ -34,7 +34,7 @@ public enum StdTreeTraverserE implements TreeNode.TreeTraverser {
     public boolean traverse(TreeNode root, TreeNode.NodeVisitor visitor, Object callerData) {
       final Deque<TreeNode<?>> dq = new LinkedList<>();
       dq.add(root);
-      while (! dq.isEmpty()) {
+      while (!dq.isEmpty()) {
         TreeNode<?> n = dq.pollLast();
 
         if (!visitor.onNode(n, callerData)) {
@@ -42,31 +42,31 @@ public enum StdTreeTraverserE implements TreeNode.TreeTraverser {
           return false;
         }
         final List<? extends TreeNode<?>> children = n.getChildren();
-        for (int i=children.size()-1; i>=0; --i) {
+        for (int i = children.size() - 1; i >= 0; --i) {
           dq.add(children.get(i));
         }
       }
       return true;
     }
   },
-  POST_ORDER{
+  POST_ORDER {
     public boolean traverse(TreeNode root, TreeNode.NodeVisitor visitor, Object callerData) {
       final Deque<TreeNode<?>> dq = new LinkedList<>();
       final Deque<TreeNode<?>> dq2 = new LinkedList<>();
       dq.add(root);
 
-      while (! dq.isEmpty()) {
+      while (!dq.isEmpty()) {
         TreeNode<?> n = dq.pollLast();
         dq2.add(n);
 
         final List<? extends TreeNode<?>> children = n.getChildren();
         final int childrenCount = children.size();
-        for (int i=0; i<childrenCount; ++i) {
+        for (int i = 0; i < childrenCount; ++i) {
           dq.add(children.get(i));
         }
       }
 
-      while (! dq2.isEmpty()) {
+      while (!dq2.isEmpty()) {
         TreeNode<?> n = dq2.pollLast();
 
         if (!visitor.onNode(n, callerData)) {
@@ -78,12 +78,12 @@ public enum StdTreeTraverserE implements TreeNode.TreeTraverser {
       return true;
     }
   },
-  BREADTH_ORDER{
+  BREADTH_ORDER {
     public boolean traverse(TreeNode root, TreeNode.NodeVisitor visitor, Object callerData) {
       final Deque<TreeNode<?>> dq = new LinkedList<>();
       dq.add(root);
 
-      while (! dq.isEmpty()) {
+      while (!dq.isEmpty()) {
         TreeNode<?> n = dq.pollFirst();
 
         if (!visitor.onNode(n, callerData)) {
@@ -93,7 +93,7 @@ public enum StdTreeTraverserE implements TreeNode.TreeTraverser {
 
         final List<? extends TreeNode<?>> children = n.getChildren();
         final int childrenCount = children.size();
-        for (int i=0; i<childrenCount; ++i) {
+        for (int i = 0; i < childrenCount; ++i) {
           dq.add(children.get(i));
         }
       }

@@ -112,8 +112,9 @@ public class BTreeNode<T> implements TreeNode<T> {
       a = (T[]) Array.newInstance(a.getClass().getComponentType(), size);
     }
 
-    traverser.traverse(this,new NodeVisitor<T, T[]>() {
+    traverser.traverse(this, new NodeVisitor<T, T[]>() {
       int index = 0;
+
       @Override
       public boolean onNode(TreeNode<T> node, T[] a) {
         a[index++] = node.getData();
@@ -126,8 +127,9 @@ public class BTreeNode<T> implements TreeNode<T> {
   @Override public Object[] toArray(TreeTraverser traverser) {
     final int size = size();
     Object[] a = new Object[size];
-    traverser.traverse(this,new NodeVisitor<T, Object[]>() {
+    traverser.traverse(this, new NodeVisitor<T, Object[]>() {
       int index = 0;
+
       @Override
       public boolean onNode(TreeNode<T> node, Object[] a) {
         a[index++] = node;
