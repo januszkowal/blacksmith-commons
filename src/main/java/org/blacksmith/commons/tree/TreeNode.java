@@ -15,6 +15,7 @@ public interface TreeNode<T> {
   boolean isDescendantOf(TreeNode<T> n);
   TreeNode<T> removeDescendantWith(T o);
   TreeNode<T> findDescendantWith(final T o);
+  TreeNode<T>[] findDescendantsWith(final T o);
   boolean contains(T o);
   void clear();
   boolean isLeaf();

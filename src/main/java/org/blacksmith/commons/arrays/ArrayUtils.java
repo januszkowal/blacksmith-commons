@@ -1,5 +1,6 @@
 package org.blacksmith.commons.arrays;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,5 +31,11 @@ public class ArrayUtils {
       }
     }
     return list.toArray();
+  }
+
+  public static <C, T extends C> C[] listToArray(Class<C> componentType, List<T> list) {
+    @SuppressWarnings("unchecked")
+    C[] array = (C[]) Array.newInstance(componentType, list.size());
+    return list.toArray(array);
   }
 }

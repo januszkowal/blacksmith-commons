@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import org.blacksmith.commons.arrays.ArrayUtils;
 
 public class BTreeNode<T> implements TreeNode<T> {
   private T data;
@@ -150,6 +151,18 @@ public class BTreeNode<T> implements TreeNode<T> {
       return true;
     }, found);
     return (TreeNode<T>) found[0];
+  }
+
+  @Override public TreeNode<T>[] findDescendantsWith(T o) {
+    final List<TreeNode<T>> found = new ArrayList<>();
+    StdTreeTraverser.BREADTH_ORDER.traverse(this, (node, found1) -> {
+      if (node.getData().equals(o)) {
+        found1.add(node);
+        return false;
+      }
+      return true;
+    }, found);
+    return ArrayUtils.listToArray(TreeNode.class,found);
   }
 
 }

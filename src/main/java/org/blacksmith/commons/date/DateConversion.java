@@ -2,7 +2,6 @@ package org.blacksmith.commons.date;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
 
 public class DateConversion {
   private DateConversion() {}
