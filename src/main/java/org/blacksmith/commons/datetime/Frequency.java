@@ -22,8 +22,7 @@ public class Frequency implements TemporalAmount {
   @EqualsAndHashCode.Include
   @ToString.Include
   private final int amount;
-  //@EqualsAndHashCode.Include
-  @ToString.Include //TODO: to be removed - for testing purposes only
+  @ToString.Include
   private final Period period;
 
   public Frequency(TimeUnit unit, int amount) {
@@ -33,7 +32,6 @@ public class Frequency implements TemporalAmount {
   }
 
   public Frequency(Period period) {
-    final List<TemporalUnit> u = period.getUnits();
     if (period.getYears() > 0) {
       this.unit = TimeUnit.YEAR;
       this.amount = period.getYears();
@@ -132,16 +130,4 @@ public class Frequency implements TemporalAmount {
   @Override public Temporal subtractFrom(Temporal temporal) {
     return period.subtractFrom(temporal);
   }
- //  private final TimeUnit unit;
-//  private final int amount;
-//
-//  public
-//
-//  @Override public LocalDate plus(LocalDate date, int amount) {
-//    return unit.plus(date,amount);
-//  }
-//
-//  @Override public LocalDate minus(LocalDate date, int amount) {
-//    return this.unit.minus(date,amount);
-//  }
 }

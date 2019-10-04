@@ -3,26 +3,24 @@ package org.blacksmith.commons.arg;
 import java.util.function.Supplier;
 
 public class Validate {
+  private Validate(){}
   /**
    * Checks that an object is not null.
    *
    * @param o Object to be checked.
    * @throws IllegalArgumentException if {@code o} is {@code null}.
    */
-  public static void checkNotNull(Object o)
-      throws IllegalArgumentException {
+  public static void checkNotNull(Object o) {
     if (o == null) {
       throw new IllegalArgumentException();
     }
   }
-  public static void checkNotNull(Object o, String message)
-      throws IllegalArgumentException {
+  public static void checkNotNull(Object o, String message) {
     if (o == null) {
       throw new IllegalArgumentException(message);
     }
   }
-  public static void checkNotNull(Object o, Supplier<String> messageSupplier)
-      throws IllegalArgumentException {
+  public static void checkNotNull(Object o, Supplier<String> messageSupplier) {
     if (o == null) {
       throw new IllegalArgumentException(messageSupplier.get());
     }

@@ -31,20 +31,20 @@ public enum TimeUnit implements DateOperation {
   },
   QUARTER{
     @Override public LocalDate plus(LocalDate date, int amount) {
-      return date.plusMonths(3*amount);
+      return date.plusMonths(3L*amount);
     }
 
     @Override public LocalDate minus(LocalDate date, int amount) {
-      return date.minusMonths(3*amount);
+      return date.minusMonths(3L*amount);
     }
   },
   HALF_YEAR{
     @Override public LocalDate plus(LocalDate date, int amount) {
-      return date.plusMonths(6*amount);
+      return date.plusMonths(6L*amount);
     }
 
     @Override public LocalDate minus(LocalDate date, int amount) {
-      return date.minusMonths(6*amount);
+      return date.minusMonths(6L*amount);
     }
   },
   YEAR{

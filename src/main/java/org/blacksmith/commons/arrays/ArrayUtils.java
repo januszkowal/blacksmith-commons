@@ -18,11 +18,12 @@ public class ArrayUtils {
    * {@code array}.
    */
   public static Object[] flatten(Object[] array) {
-    final List<Object> list = new ArrayList<Object>();
+    final List<Object> list = new ArrayList<>();
     if (array != null) {
       for (Object o : array) {
         if (o instanceof Object[]) {
-          for (Object oR : flatten((Object[]) o)) {
+          final Object[] fo = flatten((Object[]) o);
+          for (Object oR : fo) {
             list.add(oR);
           }
         } else {

@@ -33,9 +33,10 @@ import org.blacksmith.commons.tree.TreeNode.NodeVisitor;
  * BREADTH_FIRST: 1,2,3,4,5,6,7,8,9
  */
 public class StdTreeTraverser {
-  public final static TreeNode.TreeTraverser PRE_ORDER = new PreOrderTreeTraverser();
-  public final static TreeNode.TreeTraverser POST_ORDER = new PostOrderTreeTraverser();
-  public final static TreeNode.TreeTraverser BREADTH_ORDER = new BreadthOrderTreeTraverser();
+  private StdTreeTraverser(){}
+  public static final TreeNode.TreeTraverser PRE_ORDER = new PreOrderTreeTraverser();
+  public static final TreeNode.TreeTraverser POST_ORDER = new PostOrderTreeTraverser();
+  public static final TreeNode.TreeTraverser BREADTH_ORDER = new BreadthOrderTreeTraverser();
 
   private static final class PostOrderTreeTraverser implements TreeNode.TreeTraverser {
     public <T, U> boolean traverse(TreeNode<T> root, NodeVisitor<T, U> visitor, U callerData) {
@@ -58,7 +59,6 @@ public class StdTreeTraverser {
         TreeNode<T> n = dq2.pollLast();
 
         if (!visitor.onNode(n, callerData)) {
-          // No more iteration if the caller callback returns false;
           return false;
         }
       }
@@ -75,7 +75,6 @@ public class StdTreeTraverser {
         TreeNode<T> n = dq.pollLast();
 
         if (!visitor.onNode(n, callerData)) {
-          // No more iteration if the caller callback returns false;
           return false;
         }
         final List<TreeNode<T>> children = n.getChildren();
@@ -96,7 +95,6 @@ public class StdTreeTraverser {
         TreeNode<T> n = dq.pollFirst();
 
         if (!visitor.onNode(n, callerData)) {
-          // No more iteration if the caller callback returns false;
           return false;
         }
 

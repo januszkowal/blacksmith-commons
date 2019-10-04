@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class EnumUtils {
+  private EnumUtils() {}
   public static <E extends Enum<E>> E getEnumByName(Class<E> enumClass, String enumName) {
     if (enumName == null) {
       return null;
@@ -48,12 +49,12 @@ public class EnumUtils {
 
   public static <E extends Enum<E>> List<String> getEnumNames(List<E> enums)
   {
-    return enums.stream().map(e->e.name()).collect(Collectors.toList());
+    return enums.stream().map(Enum::name).collect(Collectors.toList());
   }
 
   public static <E extends Enum<E>> List<String> getEnumNamesList(Class<E> enumClass)
   {
-    return Arrays.stream(enumClass.getEnumConstants()).map(e->e.name()).collect(Collectors.toList());
+    return Arrays.stream(enumClass.getEnumConstants()).map(Enum::name).collect(Collectors.toList());
   }
 
   public static <E extends Enum<E>> String[] getEnumNamesArray(Class<E> enumClass)

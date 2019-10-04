@@ -10,7 +10,7 @@ public class NumberConversion
   private NumberConversion() {}
   private static boolean long2bool(long value)
   {
-    return value==1L ? true : false;
+    return value==1L;
   }
 
   public static Long createLong(Number value)
@@ -75,17 +75,17 @@ public class NumberConversion
 
   public static Long booleanToLong(Boolean value)
   {
-    return (value==null) ? (null) : (value ? 1L : 0L);
+    return (value==null) ? null : (value.booleanValue() ? 1L : 0L);
   }
 
   public static Integer booleanToInteger(Boolean value)
   {
-    return (value==null) ? (null) : (value ? 1 : 0);
+    return (value==null) ? null : (value.booleanValue() ? 1 : 0);
   }
 
   public static List<Long> toListLong(List<BigInteger> list)
   {
-    List<Long> result = new ArrayList<Long>();
+    List<Long> result = new ArrayList<>();
     for (int i=0; i<list.size();i++)
     {
       result.add(Long.valueOf(list.get(i).longValue()));

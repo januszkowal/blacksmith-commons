@@ -7,6 +7,7 @@ import org.apache.commons.beanutils.PropertyUtils;
 
 public class ClassPropertyUtils
 {
+  private ClassPropertyUtils() {}
   public static String getPropertyFromMethod(Method method)
   {
     return BsStringUtils.firstLetterToLowerCase(method.getName().substring(3));
@@ -34,25 +35,26 @@ public class ClassPropertyUtils
   {
     if (!method.getName().startsWith("get"))
       return false;
-    if (method.getParameterTypes().length != 0)
+    else if (method.getParameterTypes().length != 0)
       return false;
-    if (void.class.equals(method.getReturnType()))
+    else if (void.class.equals(method.getReturnType()))
       return false;
-    return true;
+    else
+      return true;
   }
 
   public static boolean isSetter(Method method)
   {
     if (!method.getName().startsWith("set"))
       return false;
-    if (method.getParameterTypes().length != 1)
+    else if (method.getParameterTypes().length != 1)
       return false;
-    return true;
+    else return true;
   }
 
   public static Object getProperty(Object object, String path) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException
   {
-    String patha[] = path.split("\\.");
+    String[] patha = path.split("\\.");
     Object o = object;
     for (String pe: patha)//Splitter.on(".").splitToList(path))
     {
