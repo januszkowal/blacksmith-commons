@@ -1,4 +1,4 @@
-package org.blacksmith.commons.date;
+package org.blacksmith.commons.datetime;
 
 import java.time.LocalDate;
 import java.time.Year;
@@ -29,10 +29,10 @@ public class DateUtils {
   }
 
   /**
-   * Finds the next leap day after the input date.
+   * Finds the next leap day after the input datetime.
    *
-   * @param input  the input date
-   * @return the next leap day date
+   * @param input  the input datetime
+   * @return the next leap day datetime
    */
   public static LocalDate nextLeapDay(LocalDate input) {
     //already a leap year
@@ -56,13 +56,13 @@ public class DateUtils {
   }
 
   /**
-   * Finds the next leap day on or after the input date.
+   * Finds the next leap day on or after the input datetime.
    * <p>
-   * If the input date is February 29, the input date is returned unaltered.
-   * Otherwise, the adjuster returns the next occurrence of February 29 after the input date.
+   * If the input datetime is February 29, the input datetime is returned unaltered.
+   * Otherwise, the adjuster returns the next occurrence of February 29 after the input datetime.
    *
-   * @param input  the input date
-   * @return the next leap day date
+   * @param input  the input datetime
+   * @return the next leap day datetime
    */
   public static LocalDate nextOrSameLeapDay(LocalDate input) {
     //already a leap year

@@ -1,4 +1,4 @@
-package org.blacksmith.commons.date;
+package org.blacksmith.commons.datetime;
 
 import java.time.LocalDate;
 import java.util.Iterator;
@@ -23,11 +23,11 @@ public class LocalDateUtilsRef {
 
   //-------------------------------------------------------------------------
   /**
-   * Finds the day-of-year of the date.
+   * Finds the day-of-year of the datetime.
    * <p>
    * Faster than the JDK method.
    *
-   * @param date  the date to query
+   * @param date  the datetime to query
    * @return the day-of-year
    */
   static int doy(LocalDate date) {
@@ -36,13 +36,13 @@ public class LocalDateUtilsRef {
   }
 
   /**
-   * Adds a number of days to the date.
+   * Adds a number of days to the datetime.
    * <p>
    * Faster than the JDK method.
    *
-   * @param date  the date to add to
+   * @param date  the datetime to add to
    * @param daysToAdd  the days to add
-   * @return the new date
+   * @return the new datetime
    */
   static LocalDate plusDays(LocalDate date, int daysToAdd) {
     if (daysToAdd == 0) {
@@ -73,9 +73,9 @@ public class LocalDateUtilsRef {
    * <p>
    * Faster than the JDK method.
    *
-   * @param firstDate  the first date
-   * @param secondDate  the second date, after the first
-   * @return the new date
+   * @param firstDate  the first datetime
+   * @param secondDate  the second datetime, after the first
+   * @return the new datetime
    */
   static long daysBetween(LocalDate firstDate, LocalDate secondDate) {
     int firstYear = firstDate.getYear();
@@ -93,11 +93,11 @@ public class LocalDateUtilsRef {
   /**
    * Streams the set of dates included in the range.
    * <p>
-   * This returns a stream consisting of each date in the range.
+   * This returns a stream consisting of each datetime in the range.
    * The stream is ordered.
    *
-   * @param startInclusive  the start date
-   * @param endExclusive  the end date
+   * @param startInclusive  the start datetime
+   * @param endExclusive  the end datetime
    * @return the stream of dates from the start to the end
    */
   static Stream<LocalDate> stream(LocalDate startInclusive, LocalDate endExclusive) {
