@@ -51,7 +51,7 @@ public class LocalDateUtilsRef {
     // add the days to the current day-of-month
     // if it is guaranteed to be in this month or the next month then fast path it
     // (59th Jan is 28th Feb, 59th Feb is 31st Mar)
-    long dom = date.getDayOfMonth() + daysToAdd;
+    int dom = date.getDayOfMonth() + daysToAdd;
     if (dom > 0 && dom <= 59) {
       int monthLen = date.lengthOfMonth();
       int month = date.getMonthValue();

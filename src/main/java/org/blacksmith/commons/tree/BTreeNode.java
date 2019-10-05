@@ -100,13 +100,14 @@ public class BTreeNode<T> implements TreeNode<T> {
   @Override
   public int size() {
     final int[] counter = { 0 };
-    StdTreeTraverser.PRE_ORDER.traverse(this, (node, c) -> {
+    StdTreeTraverser.PRE2_ORDER.traverse(this, (node, c) -> {
       c[0] = c[0] + 1;
       return true;
     }, counter);
     return counter[0];
   }
 
+  @SuppressWarnings("unchecked")
   @Override public T[] toDataArray(T[] a, TreeTraverser traverser) {
     final int size = size();
     if (a.length < size) {
@@ -140,10 +141,11 @@ public class BTreeNode<T> implements TreeNode<T> {
     return a;
   }
 
+  @SuppressWarnings("unchecked")
   @Override
   public TreeNode<T> findDescendantWith(final T o) {
     final Object[] found = { null };
-    StdTreeTraverser.BREADTH_ORDER.traverse(this, (node, found1) -> {
+    StdTreeTraverser.PRE2_ORDER.traverse(this, (node, found1) -> {
       if (node.getData().equals(o)) {
         found1[0] = node;
         return false;
@@ -153,9 +155,10 @@ public class BTreeNode<T> implements TreeNode<T> {
     return (TreeNode<T>) found[0];
   }
 
+  @SuppressWarnings("unchecked")
   @Override public TreeNode<T>[] findDescendantsWith(T o) {
     final List<TreeNode<T>> found = new ArrayList<>();
-    StdTreeTraverser.BREADTH_ORDER.traverse(this, (node, found1) -> {
+    StdTreeTraverser.PRE2_ORDER.traverse(this, (node, found1) -> {
       if (node.getData().equals(o)) {
         found1.add(node);
         return false;
@@ -164,5 +167,4 @@ public class BTreeNode<T> implements TreeNode<T> {
     }, found);
     return ArrayUtils.listToArray(TreeNode.class,found);
   }
-
 }
