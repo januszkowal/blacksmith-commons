@@ -75,12 +75,12 @@ public class NumberConversion
 
   public static Long booleanToLong(Boolean value)
   {
-    return (value==null) ? null : (value.booleanValue() ? 1L : 0L);
+    return (value==null) ? null : booleanToLong(value.booleanValue());
   }
 
   public static Integer booleanToInteger(Boolean value)
   {
-    return (value==null) ? null : (value.booleanValue() ? 1 : 0);
+    return (value==null) ? null : booleanToInt(value.booleanValue());
   }
 
   public static List<Long> toListLong(List<BigInteger> list)
@@ -91,5 +91,13 @@ public class NumberConversion
       result.add(Long.valueOf(list.get(i).longValue()));
     }
     return result;
+  }
+  
+  private static int booleanToInt(boolean value) {
+    return value ? 1 : 0;
+  }
+
+  private static long booleanToLong(boolean value) {
+    return value ? 1L : 0L;
   }
 }

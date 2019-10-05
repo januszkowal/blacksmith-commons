@@ -2,11 +2,16 @@ package org.blacksmith.commons.tree;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
+import org.blacksmith.commons.test.TimingExtension;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@DisplayName("TreeTraverseTest")
+@ExtendWith(TimingExtension.class)
 public class TreeTraverseTest {
   private final static Logger LOGGER = LoggerFactory.getLogger(TreeTraverseTest.class);
   public BTreeNode<Long> createTree() {
@@ -49,7 +54,7 @@ public class TreeTraverseTest {
   public void testTraverseFAST() {
     TreeNode<Long> tree = createTree();
     final Long[] xtree = tree.toDataArray(new Long[0], StdTreeTraverser.PRE2_ORDER);
-    LOGGER.info("sort FAST:{}",arrToString(xtree));
+    LOGGER.info("sort FAST:{}",arrToString(xtree));   
   }
   @Test
   public void testSize() {

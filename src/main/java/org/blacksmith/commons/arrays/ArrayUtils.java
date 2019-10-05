@@ -14,24 +14,32 @@ public class ArrayUtils {
    * Transform a multidimensional array into a one-dimensional list.
    *
    * @param array Array (possibly multidimensional).
-   * @return a list of all the {@code Object} instances contained in
+   * @return an array of all the {@code Object} instances contained in
    * {@code array}.
    */
   public static Object[] flatten(Object[] array) {
+    return flattenArrayToList(array).toArray();
+  }
+
+  /**
+   * Transform a multidimensional array into a one-dimensional list.
+   *
+   * @param array Array (possibly multidimensional).
+   * @return a list of all the {@code Object} instances contained in
+   * {@code array}.
+   */
+  public static List<Object> flattenArrayToList(Object[] array) {
     final List<Object> list = new ArrayList<>();
     if (array != null) {
       for (Object o : array) {
         if (o instanceof Object[]) {
-          final Object[] fo = flatten((Object[]) o);
-          for (Object oR : fo) {
-            list.add(oR);
-          }
+          list.addAll(flattenArrayToList((Object[]) o));
         } else {
           list.add(o);
         }
       }
     }
-    return list.toArray();
+    return list;
   }
 
   public static <C, T extends C> C[] listToArray(Class<C> componentType, List<T> list) {

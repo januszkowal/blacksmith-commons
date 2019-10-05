@@ -16,9 +16,8 @@ public class EnumUtils {
     try {
       return Enum.valueOf(enumClass, enumName.trim().toUpperCase());
     } catch (IllegalArgumentException ex) {
-
+      return null;
     }
-    return null;
   }
 
   public static <E extends Enum<E>> E getEnumByName(Class<E> enumClass, String enumName, E defaultValue) {
