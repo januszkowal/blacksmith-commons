@@ -21,7 +21,7 @@ repositories {
 
 dependencies {
     //Prefer the implementation configuration over api when possible
-    compileOnly 'org.projectlombok:lombok:1.18.8'
+    compileOnly 'org.projectlombok:lombok:1.18.10'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
     compile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.3'
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.28'
