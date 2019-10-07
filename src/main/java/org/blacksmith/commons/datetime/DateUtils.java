@@ -90,15 +90,9 @@ public class DateUtils {
     }
   }
 
-  public static Stream<LocalDate> dateStreamRange(LocalDate startInclusive, LocalDate endExclusive) {
-    long numOfDaysBetween = ChronoUnit.DAYS.between(startInclusive,endExclusive);
-    return Stream.iterate(startInclusive,date->date.plusDays(1))
-        .limit(numOfDaysBetween);
-  }
-
-  public static Stream<LocalDate> dateStreamRangeClosed(LocalDate startInclusive, LocalDate endInclusive) {
-    long numOfDaysBetween = ChronoUnit.DAYS.between(startInclusive,endInclusive)+1;
-    return Stream.iterate(startInclusive,date->date.plusDays(1))
+  public static Stream<LocalDate> stream(DateRange range) {
+    long numOfDaysBetween = ChronoUnit.DAYS.between(range.getLowerInclusive(),range.getUpperInclusive())+1;
+    return Stream.iterate(range.getLowerInclusive(),date->date.plusDays(1))
         .limit(numOfDaysBetween);
   }
 }
