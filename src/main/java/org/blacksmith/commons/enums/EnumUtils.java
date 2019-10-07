@@ -78,10 +78,6 @@ public class EnumUtils {
   public static <E extends Enum<E>> String getName(E enumItem) {
     return (enumItem==null) ? null : enumItem.name();
   }
-  public static <E extends Enum<E>>boolean inArray(E item, E[] arr)
-  {
-    return Arrays.asList(arr).contains(item);
-  }
 
   public static <E extends Enum<E>>boolean inList(E item, List<E> list)
   {
@@ -89,9 +85,9 @@ public class EnumUtils {
   }
 
   @SafeVarargs
-  public static <E extends Enum<E>>boolean inVArray(E item, E ... list)
+  public static <E extends Enum<E>>boolean inArray(E item, E ... arr)
   {
-    return Arrays.asList(list).contains(item);
+    return Arrays.asList(arr).contains(item);
   }
 
 }
