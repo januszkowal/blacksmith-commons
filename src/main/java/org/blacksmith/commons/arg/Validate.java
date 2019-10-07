@@ -13,7 +13,7 @@ public class Validate {
    */
   public static void checkNotNull(Object o) {
     if (o == null) {
-      throw new IllegalArgumentException();
+      throw new IllegalArgumentException("Argument can't be null");
     }
   }
   public static void checkNotNull(Object o, String message) {
@@ -27,53 +27,35 @@ public class Validate {
     }
   }
 
-  public static void checkNotEmpty(Object[] o) {
-    if (o == null) {
-      throw new IllegalArgumentException();
-    }
-    if (o.length == 0) {
-      throw new IllegalArgumentException();
+  public static void checkNotEmpty(Object[] a) {
+    if (a==null || a.length == 0) {
+      throw new IllegalArgumentException("Array can't be empty or null");
     }
   }
   public static void checkNotEmpty(Collection<?> c) {
-    if (c == null) {
-      throw new IllegalArgumentException();
-    }
-    if (c.isEmpty()) {
-      throw new IllegalArgumentException();
+    if (c==null || c.isEmpty()) {
+      throw new IllegalArgumentException("Collection can't be empty or null");
     }
   }
 
-  public static void checkNotEmpty(Object[] o, String message) {
-    if (o == null) {
-      throw new IllegalArgumentException(message);
-    }
-    if (o.length == 0) {
+  public static void checkNotEmpty(Object[] a, String message) {
+    if (a==null || a.length == 0) {
       throw new IllegalArgumentException(message);
     }
   }
   public static void checkNotEmpty(Collection<?> c, String message) {
-    if (c == null) {
-      throw new IllegalArgumentException(message);
-    }
-    if (c.isEmpty()) {
+    if (c == null || c.isEmpty()) {
       throw new IllegalArgumentException(message);
     }
   }
 
-  public static void checkNotEmpty(Object[] o, Supplier<String> messageSupplier) {
-    if (o == null) {
-      throw new IllegalArgumentException(messageSupplier.get());
-    }
-    if (o.length == 0) {
+  public static void checkNotEmpty(Object[] a, Supplier<String> messageSupplier) {
+    if (a==null || a.length == 0) {
       throw new IllegalArgumentException(messageSupplier.get());
     }
   }
   public static void checkNotEmpty(Collection<?> c, Supplier<String> messageSupplier) {
-    if (c == null) {
-      throw new IllegalArgumentException(messageSupplier.get());
-    }
-    if (c.isEmpty()) {
+    if (c==null || c.isEmpty()) {
       throw new IllegalArgumentException(messageSupplier.get());
     }
   }
