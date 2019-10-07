@@ -42,7 +42,7 @@ public class DateTest {
   @Test
   @DisplayName("Test datetime stream")
   public void dateStream() {
-    System.out.println("stream2:"+ DateUtils.stream(LocalDate.now(),LocalDate.now().plusDays(10000)).count());
+    System.out.println("stream2:"+ DateUtils.stream(DateRange.closed(LocalDate.now(),LocalDate.now().plusDays(10000))).count());
   }
   @Test
   @DisplayName("LeapDay test")
