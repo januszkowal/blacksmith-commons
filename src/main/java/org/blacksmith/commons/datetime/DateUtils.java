@@ -12,6 +12,10 @@ public class DateUtils {
     return Math.toIntExact(ChronoUnit.DAYS.between(startInclusive,endExclusive));
   }
 
+  public static int yearsBetween(LocalDate startInclusive, LocalDate endExclusive) {
+    return Math.toIntExact(ChronoUnit.YEARS.between(startInclusive,endExclusive));
+  }
+
   public static int dayOfYear(LocalDate date) {
     return date.getDayOfYear();
   }
