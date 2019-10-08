@@ -8,8 +8,8 @@ import java.util.stream.Stream;
 public class DateUtils {
   private DateUtils() {}
 
-  public static long daysBetween(LocalDate startInclusive, LocalDate endExclusive) {
-    return ChronoUnit.DAYS.between(startInclusive,endExclusive);
+  public static int daysBetween(LocalDate startInclusive, LocalDate endExclusive) {
+    return Math.toIntExact(ChronoUnit.DAYS.between(startInclusive,endExclusive));
   }
 
   public static int dayOfYear(LocalDate date) {
