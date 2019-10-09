@@ -4,6 +4,7 @@
 package org.blacksmith.commons.datetime;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import org.blacksmith.commons.test.TimingExtension;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -72,5 +73,10 @@ public class DateTest {
   @DisplayName("LeapDayRange2Test")
   public void LeapDayRange2Test() {
     System.out.println("leap days2="+DateUtils.numberOfLeapDays2(LocalDate.of(1900,1,1),LocalDate.of(2100,1,1)));
+  }
+  @Test
+  @DisplayName("TimeUnitOperationTest")
+  public void TimeUnitOperationTest() {
+    assertEquals(LocalDate.of(2019, 1, 4),TimeUnit.DAY.plus(LocalDate.of(2019, 1,1),3));
   }
 }
