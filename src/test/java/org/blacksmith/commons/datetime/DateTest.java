@@ -53,4 +53,15 @@ public class DateTest {
     assertEquals(LocalDate.of(2024,02,29), DateUtils.nextLeapDay(LocalDate.of(2020,02,29)));
     assertEquals(LocalDate.of(2024,02,29), DateUtils.nextLeapDay(LocalDate.of(2020,03,29)));
   }
+  @Test
+  @DisplayName("LeapDayRange test")
+  public void LeapDayRange() {
+    assertEquals(0,DateUtils.numberOfLeapDays(LocalDate.of(2020,3,1),LocalDate.of(2023,2,1)));
+    assertEquals(0,DateUtils.numberOfLeapDays(LocalDate.of(2020,3,1),LocalDate.of(2024,2,28)));
+    assertEquals(1,DateUtils.numberOfLeapDays(LocalDate.of(2020,2,1),LocalDate.of(2024,2,28)));
+    assertEquals(1,DateUtils.numberOfLeapDays(LocalDate.of(2020,2,28),LocalDate.of(2024,2,28)));
+    assertEquals(1,DateUtils.numberOfLeapDays(LocalDate.of(2020,2,29),LocalDate.of(2024,2,28)));
+    assertEquals(2,DateUtils.numberOfLeapDays(LocalDate.of(2020,2,29),LocalDate.of(2024,2,29)));
+
+  }
 }

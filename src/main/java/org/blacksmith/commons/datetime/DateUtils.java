@@ -1,6 +1,7 @@
 package org.blacksmith.commons.datetime;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.Year;
 import java.time.temporal.ChronoUnit;
 import java.util.stream.Stream;
@@ -83,6 +84,48 @@ public class DateUtils {
     else {
       return ensureLeapDay(((input.getYear() / 4) * 4) + 4);
     }
+  }
+
+  public static boolean isLeapDay(LocalDate input) {
+    return input.getMonthValue()==2 && input.getDayOfMonth()==29;
+  }
+
+  /**
+   * Calculates number of leap days in period
+   * @param startInclusive period start date
+   * @param endInclusive period start date
+   * @return the true if period contains leap year
+   */
+  public static int numberOfLeapDays(LocalDate startInclusive, LocalDate endInclusive) {
+    int count = 0;
+    for (int y=startInclusive.getYear(); y<=endInclusive.getYear();y++) {
+      if (Year.isLeap(y)) {
+        if (startInclusive.isBefore(LocalDate.of(y,3,1)) &&
+            endInclusive.isAfter(LocalDate.of(y,2,28))) {
+          count++;
+        }
+      }
+    }
+    return count;
+  }
+
+  public static int numberOfLeapDays2(LocalDate startInclusive, LocalDate endInclusive) {
+    int count = isLeapDay(startInclusive) ? 1 : 0;
+    LocalDate temp = nextLeapDay(startInclusive);
+    while (!temp.isAfter(endInclusive)) {
+      count++;
+      temp = nextLeapDay(temp);
+    }
+    return count;
+  }
+  /**
+   * Checks if period contains leap year
+   * @param startInclusive period start date
+   * @param endInclusive period start date
+   * @return the true if period contains leap year
+   */
+  public static boolean periodContainsLeapYear(LocalDate startInclusive, LocalDate endInclusive) {
+    return numberOfLeapDays(startInclusive,endInclusive)>0;
   }
 
   // handle 2100, which is not a leap year
