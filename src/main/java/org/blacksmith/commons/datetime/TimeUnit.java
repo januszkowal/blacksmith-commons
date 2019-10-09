@@ -69,19 +69,19 @@ public enum TimeUnit implements DateOperation {
     }
   };
   private String symbol;
-  private String symbolName;
+  private String unitName;
   private static Map<String,TimeUnit> unitMap =
       Arrays.stream(TimeUnit.values()).collect(Collectors.toMap(TimeUnit::symbol, e -> e));
 
-  TimeUnit(String symbol, String symbolName) {
+  TimeUnit(String symbol, String unitName) {
     this.symbol = symbol;
-    this.symbolName = symbolName;
+    this.unitName = unitName;
   }
   public String symbol() {
     return this.symbol;
   }
-  public String symbolName() {
-    return this.symbolName;
+  public String unitName() {
+    return this.unitName;
   }
   public TimeUnit of(String symbol) {
     return unitMap.get(symbol);
