@@ -62,6 +62,15 @@ public class DateTest {
     assertEquals(1,DateUtils.numberOfLeapDays(LocalDate.of(2020,2,28),LocalDate.of(2024,2,28)));
     assertEquals(1,DateUtils.numberOfLeapDays(LocalDate.of(2020,2,29),LocalDate.of(2024,2,28)));
     assertEquals(2,DateUtils.numberOfLeapDays(LocalDate.of(2020,2,29),LocalDate.of(2024,2,29)));
-
+  }
+  @Test
+  @DisplayName("LeapDayRange1Test")
+  public void LeapDayRange1Test() {
+    System.out.println("leap days1="+DateUtils.numberOfLeapDays(LocalDate.of(1900,1,1),LocalDate.of(2100,1,1)));
+  }
+  @Test
+  @DisplayName("LeapDayRange2Test")
+  public void LeapDayRange2Test() {
+    System.out.println("leap days2="+DateUtils.numberOfLeapDays2(LocalDate.of(1900,1,1),LocalDate.of(2100,1,1)));
   }
 }
