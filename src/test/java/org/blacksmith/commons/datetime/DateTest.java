@@ -4,8 +4,7 @@
 package org.blacksmith.commons.datetime;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import org.blacksmith.commons.test.TimingExtension;
+import org.blacksmith.test.TimingExtension;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
