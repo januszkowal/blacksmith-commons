@@ -33,8 +33,9 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.28'
     testCompile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
     testCompile group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'
-    testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
-    testImplementation('org.hamcrest:hamcrest-library:2.1')
+    testImplementation 'org.blacksmith:blacksmith-test:0.1.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.2'
+    testImplementation 'org.hamcrest:hamcrest-library:2.1'
 }
 
 

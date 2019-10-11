@@ -2,7 +2,7 @@ package org.blacksmith.commons.tree;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
-import org.blacksmith.commons.test.TimingExtension;
+import org.blacksmith.test.TimingExtension;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
