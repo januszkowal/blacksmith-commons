@@ -1,7 +1,7 @@
-package org.blacksmith.commons;
+package org.blacksmith.commons.string;
 
-public class BsStringUtils {
-  private BsStringUtils() {}
+public class StringUtils {
+  private StringUtils() {}
   public static String firstLetterToUpperCase(String value)
   {
     char[] c = value.toCharArray();
