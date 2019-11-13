@@ -17,7 +17,7 @@ public class DateConversion {
   }
 
   /* Via SqlDate */
-  public Date convertLocalDateToDateViaSqlDate(LocalDate localDate) {
+  public static Date convertLocalDateToDateViaSqlDate(LocalDate localDate) {
     return java.sql.Date.valueOf(localDate);
   }
 
@@ -26,7 +26,7 @@ public class DateConversion {
     return java.util.Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
   }
 
-  public Date convertLocalDateTimeToDateViaSqlTimestamp(LocalDateTime localDateTime) {
+  public static Date convertLocalDateTimeToDateViaSqlTimestamp(LocalDateTime localDateTime) {
     return java.sql.Timestamp.valueOf(localDateTime);
   }
 
@@ -43,12 +43,12 @@ public class DateConversion {
   }
 
   /* Via SqlDate */
-  public LocalDate convertDateToLocalDateViaSqlDate(Date date) {
+  public static LocalDate convertDateToLocalDateViaSqlDate(Date date) {
     return new java.sql.Date(date.getTime()).toLocalDate();
   }
 
   /* Via instant*/
-  public LocalDateTime convertToLocalDateTime(Date date) {
+  public static LocalDateTime convertDateToLocalDateTime(Date date) {
     return date.toInstant()
         .atZone(ZoneId.systemDefault()).toLocalDateTime();
   }
@@ -60,7 +60,7 @@ public class DateConversion {
   }
 
   /* Via SqlTimestamp */
-  public LocalDateTime convertDateToLocalDateTimeViaSqlTimestamp(Date date) {
+  public static LocalDateTime convertDateToLocalDateTimeViaSqlTimestamp(Date date) {
     return new java.sql.Timestamp(date.getTime()).toLocalDateTime();
   }
 }
