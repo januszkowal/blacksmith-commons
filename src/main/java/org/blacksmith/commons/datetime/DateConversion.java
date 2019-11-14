@@ -1,5 +1,6 @@
 package org.blacksmith.commons.datetime;
 
+import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -18,6 +19,10 @@ public class DateConversion {
 
   /* Via SqlDate */
   public static Date convertLocalDateToDateViaSqlDate(LocalDate localDate) {
+    return convertLocalDateToSqlDate(localDate);
+  }
+
+  public static java.sql.Date convertLocalDateToSqlDate(LocalDate localDate) {
     return java.sql.Date.valueOf(localDate);
   }
 
@@ -26,7 +31,11 @@ public class DateConversion {
     return java.util.Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
   }
 
-  public static Date convertLocalDateTimeToDateViaSqlTimestamp(LocalDateTime localDateTime) {
+  public static Date convertLocalDateTimeViaSqlTimestamp(LocalDateTime localDateTime) {
+    return convertLocalDateTimeToSqlTimestamp(localDateTime);
+  }
+
+  public static Timestamp convertLocalDateTimeToSqlTimestamp(LocalDateTime localDateTime) {
     return java.sql.Timestamp.valueOf(localDateTime);
   }
 
@@ -44,7 +53,11 @@ public class DateConversion {
 
   /* Via SqlDate */
   public static LocalDate convertDateToLocalDateViaSqlDate(Date date) {
-    return new java.sql.Date(date.getTime()).toLocalDate();
+    return convertDateToSqlDate(date).toLocalDate();
+  }
+
+  public static java.sql.Date convertDateToSqlDate(Date date) {
+    return new java.sql.Date(date.getTime());
   }
 
   /* Via instant*/
@@ -61,6 +74,10 @@ public class DateConversion {
 
   /* Via SqlTimestamp */
   public static LocalDateTime convertDateToLocalDateTimeViaSqlTimestamp(Date date) {
-    return new java.sql.Timestamp(date.getTime()).toLocalDateTime();
+    return convertDateToLocalDateTimeToSqlTimestamp(date).toLocalDateTime();
+  }
+
+  public static Timestamp convertDateToLocalDateTimeToSqlTimestamp(Date date) {
+    return new java.sql.Timestamp(date.getTime());
   }
 }
