@@ -8,13 +8,12 @@ import java.time.ZoneId;
 import java.util.Date;
 
 public class DateConversion {
-  private DateConversion() {
-  }
+  private DateConversion() {}
 
-  /* Via instant*/
+  /* Via instant */
   public static Date convertLocalDateToDate(LocalDate localDate) {
-    return java.util.Date.from(localDate.atStartOfDay()
-        .atZone(ZoneId.systemDefault()).toInstant());
+    return (localDate == null) ? null
+        : java.util.Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
   }
 
   /* Via SqlDate */
@@ -23,12 +22,13 @@ public class DateConversion {
   }
 
   public static java.sql.Date convertLocalDateToSqlDate(LocalDate localDate) {
-    return java.sql.Date.valueOf(localDate);
+    return (localDate == null) ? null : java.sql.Date.valueOf(localDate);
   }
 
   /* Via Instant */
   public static Date convertLocalDateTimeToDate(LocalDateTime localDateTime) {
-    return java.util.Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+    return (localDateTime == null) ? null
+        : java.util.Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
   }
 
   public static Date convertLocalDateTimeViaSqlTimestamp(LocalDateTime localDateTime) {
@@ -36,19 +36,17 @@ public class DateConversion {
   }
 
   public static Timestamp convertLocalDateTimeToSqlTimestamp(LocalDateTime localDateTime) {
-    return java.sql.Timestamp.valueOf(localDateTime);
+    return (localDateTime == null) ? null : java.sql.Timestamp.valueOf(localDateTime);
   }
 
-  /* Via instant*/
+  /* Via instant */
   public static LocalDate convertDateToLocalDate(Date date) {
-    return date.toInstant()
-        .atZone(ZoneId.systemDefault()).toLocalDate();
+    return (date == null) ? null : date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
   }
 
   /* via milisecond */
   public static LocalDate convertDateToLocalDateViaMilisecond(Date date) {
-    return Instant.ofEpochMilli(date.getTime())
-        .atZone(ZoneId.systemDefault()).toLocalDate();
+    return (date == null) ? null : Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
   }
 
   /* Via SqlDate */
@@ -57,27 +55,25 @@ public class DateConversion {
   }
 
   public static java.sql.Date convertDateToSqlDate(Date date) {
-    return new java.sql.Date(date.getTime());
+    return (date == null) ? null : new java.sql.Date(date.getTime());
   }
 
-  /* Via instant*/
+  /* Via instant */
   public static LocalDateTime convertDateToLocalDateTime(Date date) {
-    return date.toInstant()
-        .atZone(ZoneId.systemDefault()).toLocalDateTime();
+    return (date == null) ? null : date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
   }
 
   /* via milisecond */
   public static LocalDateTime convertDateToLocalDateTimeViaMilisecond(Date date) {
-    return Instant.ofEpochMilli(date.getTime())
-        .atZone(ZoneId.systemDefault()).toLocalDateTime();
+    return (date == null) ? null : Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDateTime();
   }
 
   /* Via SqlTimestamp */
   public static LocalDateTime convertDateToLocalDateTimeViaSqlTimestamp(Date date) {
-    return convertDateToLocalDateTimeToSqlTimestamp(date).toLocalDateTime();
+    return (date == null) ? null : convertDateToLocalDateTimeToSqlTimestamp(date).toLocalDateTime();
   }
 
   public static Timestamp convertDateToLocalDateTimeToSqlTimestamp(Date date) {
-    return new java.sql.Timestamp(date.getTime());
+    return (date == null) ? null : new java.sql.Timestamp(date.getTime());
   }
 }

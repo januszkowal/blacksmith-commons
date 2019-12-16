@@ -150,9 +150,6 @@ public class NumberConversion
   private static Number convertNumberToTargetClassInternal(Number number, Class<? extends Number> targetClass)
       throws IllegalArgumentException {
 
-    Validate.notNull(number, "Number must not be null");
-    Validate.notNull(targetClass, "Target class must not be null");
-
     if (targetClass.isInstance(number)) {
       return number;
     }
