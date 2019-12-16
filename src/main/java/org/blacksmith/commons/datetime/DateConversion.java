@@ -51,7 +51,7 @@ public class DateConversion {
 
   /* Via SqlDate */
   public static LocalDate convertDateToLocalDateViaSqlDate(Date date) {
-    return convertDateToSqlDate(date).toLocalDate();
+    return (date == null) ? null : convertDateToSqlDate(date).toLocalDate();
   }
 
   public static java.sql.Date convertDateToSqlDate(Date date) {
