@@ -5,7 +5,6 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
-import org.blacksmith.commons.arg.Validate;
 
 public class NumberConversion
 {
@@ -131,25 +130,15 @@ public class NumberConversion
     return value ? 1L : 0L;
   }
 
-  public static Number convertNumberObjectToTargetClass(Object number, Class<?> targetClass)
-      throws IllegalArgumentException {
-
-    Validate.notNull(number, "Number must not be null");
-    Validate.notNull(targetClass, "Target class must not be null");
-    return convertNumberToTargetClassInternal((Number)number, (Class<Number>)targetClass);
+  public static Number convertNumberObjectToTargetClass(Object number, Class<?> targetClass) {
+    return (number==null) ? null : convertNumberToTargetClassInternal((Number)number, (Class<Number>)targetClass);
   }
 
-  public static <T extends Number> T convertNumberToTargetClass(Number number, Class<T> targetClass)
-      throws IllegalArgumentException {
-
-    Validate.notNull(number, "Number must not be null");
-    Validate.notNull(targetClass, "Target class must not be null");
-    return (T)convertNumberToTargetClassInternal(number, targetClass);
+  public static <T extends Number> T convertNumberToTargetClass(Number number, Class<T> targetClass) {
+    return (number==null) ? null : (T)convertNumberToTargetClassInternal(number, targetClass);
   }
 
-  private static Number convertNumberToTargetClassInternal(Number number, Class<? extends Number> targetClass)
-      throws IllegalArgumentException {
-
+  private static Number convertNumberToTargetClassInternal(Number number, Class<? extends Number> targetClass) {
     if (targetClass.isInstance(number)) {
       return number;
     }
