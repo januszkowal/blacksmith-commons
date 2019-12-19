@@ -16,4 +16,8 @@ public class ReflectionUtils {
     }
     throw new RuntimeException();
   }
+  private static ParameterizedType findByRawType(Class<?> clazz, Class<?> expectedRawType)
+  {
+	return findByRawType(clazz.getGenericInterfaces(), expectedRawType);
+  }
 }
