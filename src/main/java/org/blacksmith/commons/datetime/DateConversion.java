@@ -79,7 +79,7 @@ public class DateConversion {
 
   /* Via Instant*/
   public static ZonedDateTime createZonedDateTimeFromDateViaInstant(java.util.Date date) {
-    /* don't pass java.sql.Date - it violates Liscov Substitution Principle*/
+    /* don't pass java.sql.Date - it violates Liskov Substitution Principle*/
     return date.toInstant().atZone(ZoneId.systemDefault());
   }
 
