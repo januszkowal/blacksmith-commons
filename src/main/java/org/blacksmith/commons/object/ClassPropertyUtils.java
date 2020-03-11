@@ -1,16 +1,22 @@
-package org.blacksmith.commons;
+package org.blacksmith.commons.object;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import org.apache.commons.beanutils.PropertyUtils;
+import org.blacksmith.commons.string.StringUtils;
 
 public class ClassPropertyUtils
 {
   private ClassPropertyUtils() {}
   public static String getPropertyFromMethod(Method method)
   {
-    return BsStringUtils.firstLetterToLowerCase(method.getName().substring(3));
+    if (method.getName().startsWith("is"))
+      return StringUtils.firstLetterToLowerCase(method.getName().substring(2));
+    else if (method.getName().startsWith("get"))
+      return StringUtils.firstLetterToLowerCase(method.getName().substring(3));
+    else
+      return StringUtils.firstLetterToLowerCase(method.getName());
   }
 
   public static Field getPropertyField(Class<?> type, String name) throws NoSuchFieldException
@@ -33,7 +39,7 @@ public class ClassPropertyUtils
 
   public static boolean isGetter(Method method)
   {
-    if (!method.getName().startsWith("get"))
+    if (!(method.getName().startsWith("get") || method.getName().startsWith("is")))
       return false;
     else if (method.getParameterTypes().length != 0)
       return false;

@@ -91,4 +91,40 @@ public class Validate {
       throw new IllegalArgumentException(messageSupplier.get());
     }
   }
+
+  public static void checkStringLength(String value, int length) {
+    notNull(value);
+    if (value.length()!=length)
+      throw new IllegalArgumentException("Length must be equal " + length + " actual: " + value.length());
+
+  }
+  public static void checkStringLength(String value, int length, String message) {
+    notNull(value);
+    if (value.length()!=length)
+      throw new IllegalArgumentException(message);
+  }
+
+  public static void checkStringLength(String value, int length, Supplier<String> messageSupplier) {
+    notNull(value);
+    if (value.length()!=length)
+      throw new IllegalArgumentException(messageSupplier.get());
+  }
+
+  public static void checkStringLength(String value, int minLength, int maxLength) {
+    notNull(value);
+    if (value.length()<minLength || value.length()>maxLength)
+      throw new IllegalArgumentException("Length must be between " + minLength + " and " + maxLength + " actual: " + value.length());
+
+  }
+  public static void checkStringLength(String value, int minLength, int maxLength, String message) {
+    notNull(value);
+    if (value.length()<minLength || value.length()>maxLength)
+      throw new IllegalArgumentException(message);
+  }
+  public static void checkStringLength(String value, int minLength, int maxLength, Supplier<String> messageSupplier) {
+    notNull(value);
+    if (value.length()<minLength || value.length()>maxLength)
+      throw new IllegalArgumentException(messageSupplier.get());
+  }
+
 }

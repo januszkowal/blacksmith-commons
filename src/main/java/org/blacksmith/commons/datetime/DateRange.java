@@ -1,7 +1,6 @@
 package org.blacksmith.commons.datetime;
 
 import java.time.LocalDate;
-import java.time.Period;
 import org.apache.commons.lang3.Validate;
 
 /*
