@@ -5,6 +5,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.lang3.StringUtils;
+import org.blacksmith.commons.exceptions.ConversionException;
 
 public class NumberConversion
 {
@@ -20,8 +21,7 @@ public class NumberConversion
 
   public static boolean isNumber(Object value) {
     try {
-      Number n = (Number)value;
-      return true;
+      return (value==null) ? false : ((Number)value).longValue()>0;
     }
     catch (Exception e) {
       return false;
@@ -145,21 +145,21 @@ public class NumberConversion
     else if (Byte.class == targetClass) {
       long value = checkedLongValue(number, targetClass);
       if (value < Byte.MIN_VALUE || value > Byte.MAX_VALUE) {
-        raiseOverflowException(number, targetClass);
+        throwOverflowException(number, targetClass);
       }
       return Byte.valueOf(number.byteValue());
     }
     else if (Short.class == targetClass) {
       long value = checkedLongValue(number, targetClass);
       if (value < Short.MIN_VALUE || value > Short.MAX_VALUE) {
-        raiseOverflowException(number, targetClass);
+        throwOverflowException(number, targetClass);
       }
       return Short.valueOf(number.shortValue());
     }
     else if (Integer.class == targetClass) {
       long value = checkedLongValue(number, targetClass);
       if (value < Integer.MIN_VALUE || value > Integer.MAX_VALUE) {
-        raiseOverflowException(number, targetClass);
+        throwOverflowException(number, targetClass);
       }
       return Integer.valueOf(number.intValue());
     }
@@ -189,8 +189,8 @@ public class NumberConversion
       return new BigDecimal(number.toString());
     }
     else {
-      throw new IllegalArgumentException("Could not convert number [" + number + "] of type [" +
-          number.getClass().getName() + "] to unsupported target class [" + targetClass.getName() + "]");
+      throwUnsuportedTargetClassException(number,targetClass);
+      return null;
     }
   }
 
@@ -204,13 +204,17 @@ public class NumberConversion
     }
     // Effectively analogous to JDK 8's BigInteger.longValueExact()
     if (bigInt != null && (bigInt.compareTo(LONG_MIN) < 0 || bigInt.compareTo(LONG_MAX) > 0)) {
-      raiseOverflowException(number, targetClass);
+      throwOverflowException(number, targetClass);
     }
     return number.longValue();
   }
 
-  private static void raiseOverflowException(Number number, Class<?> targetClass) {
-    throw new IllegalArgumentException("Could not convert number [" + number + "] of type [" +
-        number.getClass().getName() + "] to target class [" + targetClass.getName() + "]: overflow");
+  private static void throwUnsuportedTargetClassException(Number number, Class<?> targetClass) {
+    throw ConversionException
+        .ofMessageFormat("Could not convert number [{0}] of type [{1}] to unsuported target class [{2}]",number.getClass().getName(),targetClass.getName());
+  }
+
+  private static void throwOverflowException(Number number, Class<?> targetClass) {
+    throw ConversionException.ofMessageFormat("Could not convert number [{0}] of type [{1}] to target class [{2}] - overflow",number.getClass().getName(),targetClass.getName());
   }
 }
