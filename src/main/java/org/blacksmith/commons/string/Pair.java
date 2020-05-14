@@ -9,8 +9,8 @@ public class Pair<L,R> {
     this.right = right;
   }
 
-  public static Pair of(String left, String right) {
-    return new Pair(left, right);
+  public static <T> Pair of(T left, T right) {
+    return new Pair<T,T>(left, right);
   }
 
   public L getLeft() {
