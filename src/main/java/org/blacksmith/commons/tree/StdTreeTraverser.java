@@ -52,8 +52,8 @@ public class StdTreeTraverser {
 
         final List<? extends TreeNode<T>> children = n.getChildren();
         final int childrenCount = children.size();
-        for (int i = 0; i < childrenCount; ++i) {
-          dq.add(children.get(i));
+        for (TreeNode<T> child : children) {
+          dq.add(child);
         }
       }
 
@@ -102,8 +102,8 @@ public class StdTreeTraverser {
 
         final List<TreeNode<T>> children = n.getChildren();
         final int childrenCount = children.size();
-        for (int i = 0; i < childrenCount; ++i) {
-          dq.add(children.get(i));
+        for (TreeNode<T> child : children) {
+          dq.add(child);
         }
       }
 
@@ -118,8 +118,8 @@ public class StdTreeTraverser {
       }
       final List<TreeNode<T>> children = root.getChildren();
       final int childrenCount = children.size();
-      for (int i = 0; i < childrenCount; ++i) {
-        if (!internalTraverse(children.get(i),visitor,callerData))
+      for (TreeNode<T> child : children) {
+        if (!internalTraverse(child, visitor, callerData))
           return false;
       }
       return true;      

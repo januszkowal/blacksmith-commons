@@ -21,7 +21,7 @@ public class NumberConversion
 
   public static boolean isNumber(Object value) {
     try {
-      return (value==null) ? false : ((Number)value).longValue()>0;
+      return (value != null) && ((Number) value).longValue() > 0;
     }
     catch (Exception e) {
       return false;
@@ -44,7 +44,7 @@ public class NumberConversion
 
   public static Long createLong(Number value)
   {
-    return (value==null) ? null : Long.valueOf(value.longValue());
+    return (value==null) ? null : value.longValue();
   }
 
   public static Long createLong(String value)
@@ -54,7 +54,7 @@ public class NumberConversion
 
   public static Integer createInteger(Number value)
   {
-    return (value==null) ? null : Integer.valueOf(value.intValue());
+    return (value==null) ? null : value.intValue();
   }
 
   public static Integer createInteger(String value)
@@ -74,18 +74,18 @@ public class NumberConversion
 
   public static long toLong(Number value)
   {
-    return (value==null) ? 0 : Long.valueOf(value.longValue());
+    return (value==null) ? 0 : value.longValue();
   }
 
-  public static long toLong(String value) { return (StringUtils.isEmpty(value)) ? 0L : Long.valueOf(value);
+  public static long toLong(String value) { return (StringUtils.isEmpty(value)) ? 0L : Long.parseLong(value);
   }
 
   public static int toInt(Number value)
   {
-    return (value==null) ? 0 : Integer.valueOf(value.intValue());
+    return (value==null) ? 0 : value.intValue();
   }
 
-  public static int toInt(String value) { return (StringUtils.isEmpty(value)) ? 0 : Integer.valueOf(value);
+  public static int toInt(String value) { return (StringUtils.isEmpty(value)) ? 0 : Integer.parseInt(value);
   }
 
   public static Boolean createBoolean(Number value)
@@ -105,15 +105,14 @@ public class NumberConversion
 
   public static Integer booleanToInteger(Boolean value)
   {
-    return (value==null) ? null : booleanToInt(value.booleanValue());
+    return (value==null) ? null : booleanToInt(value);
   }
 
   public static List<Long> toListLong(List<BigInteger> list)
   {
     List<Long> result = new ArrayList<>();
-    for (int i=0; i<list.size();i++)
-    {
-      result.add(Long.valueOf(list.get(i).longValue()));
+    for (BigInteger bigInteger : list) {
+      result.add(bigInteger.longValue());
     }
     return result;
   }
@@ -143,25 +142,25 @@ public class NumberConversion
       if (value < Byte.MIN_VALUE || value > Byte.MAX_VALUE) {
         throwOverflowException(number, targetClass);
       }
-      return Byte.valueOf(number.byteValue());
+      return number.byteValue();
     }
     else if (Short.class == targetClass) {
       long value = checkedLongValue(number, targetClass);
       if (value < Short.MIN_VALUE || value > Short.MAX_VALUE) {
         throwOverflowException(number, targetClass);
       }
-      return Short.valueOf(number.shortValue());
+      return number.shortValue();
     }
     else if (Integer.class == targetClass) {
       long value = checkedLongValue(number, targetClass);
       if (value < Integer.MIN_VALUE || value > Integer.MAX_VALUE) {
         throwOverflowException(number, targetClass);
       }
-      return Integer.valueOf(number.intValue());
+      return number.intValue();
     }
     else if (Long.class == targetClass) {
       long value = checkedLongValue(number, targetClass);
-      return Long.valueOf(value);
+      return value;
     }
     else if (BigInteger.class == targetClass) {
       if (number instanceof BigDecimal) {
@@ -174,10 +173,10 @@ public class NumberConversion
       }
     }
     else if (Float.class == targetClass) {
-      return Float.valueOf(number.floatValue());
+      return number.floatValue();
     }
     else if (Double.class == targetClass) {
-      return Double.valueOf(number.doubleValue());
+      return number.doubleValue();
     }
     else if (BigDecimal.class == targetClass) {
       // always use BigDecimal(String) here to avoid unpredictability of BigDecimal(double)

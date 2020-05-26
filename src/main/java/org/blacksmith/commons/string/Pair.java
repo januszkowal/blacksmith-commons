@@ -9,7 +9,7 @@ public class Pair<L,R> {
     this.right = right;
   }
 
-  public static <T> Pair of(T left, T right) {
+  public static <T> Pair<T,T> of(T left, T right) {
     return new Pair<>(left, right);
   }
 

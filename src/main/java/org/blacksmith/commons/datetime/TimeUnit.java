@@ -20,10 +20,10 @@ public enum TimeUnit implements DateOperation {
   private final String unitName;
   private final ChronoUnit chronoUnit;
   private final int chronoUnitCount;
-  private static Map<String, TimeUnit> unitMap =
+  private static final Map<String, TimeUnit> unitMap =
       Arrays.stream(TimeUnit.values()).collect(Collectors.toMap(TimeUnit::symbol, e -> e));
-  private static Set<ChronoUnit> supportedUnits =
-      Collections.unmodifiableSet(Arrays.stream(TimeUnit.values()).map(TimeUnit::chronoUnit).distinct().collect(Collectors.toSet()));
+  private static final Set<ChronoUnit> supportedUnits =
+      Collections.unmodifiableSet(Arrays.stream(TimeUnit.values()).map(TimeUnit::chronoUnit).collect(Collectors.toSet()));
 
   TimeUnit(String symbol, String unitName, ChronoUnit chronoUnit, int chronoUnitCount) {
     this.symbol = symbol;

@@ -29,7 +29,7 @@ public class TreeTraverseTest {
   }
 
   public String arrToString(Long[] array) {
-    return String.join(",",Arrays.stream(array).map(Object::toString).collect(Collectors.toList()));
+    return Arrays.stream(array).map(Object::toString).collect(Collectors.joining(","));
   }
 
   @Test
