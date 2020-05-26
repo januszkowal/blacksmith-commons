@@ -10,7 +10,7 @@ public enum BoundType {
     this.inclusive = inclusive;
   }
 
-  /** Returns the bound type corresponding to a boolean value for inclusivity. */
+  /** Returns the bound type corresponding to a boolean value for inclusively. */
   static BoundType ofBoolean(boolean inclusive) {
     return inclusive ? CLOSED : OPEN;
   }

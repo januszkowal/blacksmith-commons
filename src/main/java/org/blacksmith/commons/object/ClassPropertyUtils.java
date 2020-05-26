@@ -53,18 +53,17 @@ public class ClassPropertyUtils
   {
     if (!method.getName().startsWith("set"))
       return false;
-    else if (method.getParameterTypes().length != 1)
-      return false;
-    else return true;
+    else
+      return method.getParameterTypes().length == 1;
   }
 
   public static Object getProperty(Object object, String path) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException
   {
-    String[] patha = path.split("\\.");
+    String[] paths = path.split("\\.");
     Object o = object;
-    for (String pe: patha)//Splitter.on(".").splitToList(path))
+    for (String p: paths)//Splitter.on(".").splitToList(path))
     {
-      o = PropertyUtils.getSimpleProperty(o, pe);
+      o = PropertyUtils.getSimpleProperty(o, p);
       if (o==null) break;
     }
     return o;

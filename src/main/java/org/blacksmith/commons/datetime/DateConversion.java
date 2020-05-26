@@ -32,12 +32,12 @@ public class DateConversion {
 
   /* java.util.Date->java.time.LocalDate */
   public static LocalDate convertDateToLocalDate(java.util.Date date) {
-    return (date == null) ? null : createZonedDateTimeFromMilis(date.getTime()).toLocalDate();
+    return (date == null) ? null : createZonedDateTimeFromMillis(date.getTime()).toLocalDate();
   }
 
   /* java.util.Date->java.sql.Date */
   public static java.sql.Date convertDateToSqlDate(java.util.Date date) {
-    return (date == null) ? null : createSqlDateFromMilis(date.getTime());
+    return (date == null) ? null : createSqlDateFromMillis(date.getTime());
   }
 
   /* java.sql.Date->java.time.LocalDate */
@@ -47,32 +47,32 @@ public class DateConversion {
 
   /* java.util.Date->java.time.LocalDateTime */
   public static LocalDateTime convertDateToLocalDateTime(java.util.Date date) {
-    return (date == null) ? null : createZonedDateTimeFromMilis(date.getTime()).toLocalDateTime();
+    return (date == null) ? null : createZonedDateTimeFromMillis(date.getTime()).toLocalDateTime();
   }
 
   /* java.sql.Date->java.time.LocalDateTime */
   public static LocalDateTime convertSqlDateToLocalDateTime(java.sql.Date date) {
-    return (date == null) ? null : createZonedDateTimeFromMilis(date.getTime()).toLocalDateTime();
+    return (date == null) ? null : createZonedDateTimeFromMillis(date.getTime()).toLocalDateTime();
   }
 
   /* java.sql.Date->java.time.LocalDateTime */
-  public static LocalDateTime createLocalDateTimeFromMilis(long milis) {
-    return createZonedDateTimeFromMilis(milis).toLocalDateTime();
+  public static LocalDateTime createLocalDateTimeFromMiLlis(long milLis) {
+    return createZonedDateTimeFromMillis(milLis).toLocalDateTime();
   }
 
   /* java.util.Date->java.sql.Timestamp */
   public static java.sql.Timestamp convertDateToSqlTimestamp(java.util.Date date) {
-    return (date == null) ? null : createSqlTimestampFromDateViaMilis(date);
+    return (date == null) ? null : createSqlTimestampFromDateViaMillis(date);
   }
 
   /* java.util.Date->java.time.LocalTime */
   public static java.time.LocalTime convertDateToLocalTime(java.util.Date date) {
-    return (date == null) ? null : createZonedDateTimeFromMilis(date.getTime()).toLocalTime();
+    return (date == null) ? null : createZonedDateTimeFromMillis(date.getTime()).toLocalTime();
   }
 
   /* java.util.Date->java.time.LocalDate */
   public static ZonedDateTime convertDateToZonedDateTime(java.util.Date date) {
-    return (date == null) ? null : createZonedDateTimeFromMilis(date.getTime());
+    return (date == null) ? null : createZonedDateTimeFromMillis(date.getTime());
   }
 
 
@@ -91,19 +91,19 @@ public class DateConversion {
   }
 
   /* Via Miliseconds */
-  public static ZonedDateTime createZonedDateFromMilis(long milis) {
-    return Instant.ofEpochMilli(milis).atZone(ZoneId.systemDefault());
+  public static ZonedDateTime createZonedDateFromMillis(long millis) {
+    return Instant.ofEpochMilli(millis).atZone(ZoneId.systemDefault());
   }
 
-  public static java.sql.Timestamp createSqlTimestampFromDateViaMilis(java.util.Date date) {
+  public static java.sql.Timestamp createSqlTimestampFromDateViaMillis(java.util.Date date) {
     return new java.sql.Timestamp(date.getTime());
   }
 
-  public static java.sql.Date createSqlDateFromMilis(long milis) {
-    return new java.sql.Date(milis);
+  public static java.sql.Date createSqlDateFromMillis(long millis) {
+    return new java.sql.Date(millis);
   }
   
-  public static ZonedDateTime createZonedDateTimeFromMilis(long milis) {
+  public static ZonedDateTime createZonedDateTimeFromMillis(long milis) {
     return Instant.ofEpochMilli(milis).atZone(ZoneId.systemDefault());
   }
 }

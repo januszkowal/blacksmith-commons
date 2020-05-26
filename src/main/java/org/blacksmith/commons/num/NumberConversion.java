@@ -159,8 +159,7 @@ public class NumberConversion
       return number.intValue();
     }
     else if (Long.class == targetClass) {
-      long value = checkedLongValue(number, targetClass);
-      return value;
+      return checkedLongValue(number, targetClass);
     }
     else if (BigInteger.class == targetClass) {
       if (number instanceof BigDecimal) {

@@ -13,9 +13,7 @@ public class Pair<L,R> {
     return new Pair<>(left, right);
   }
 
-  public L getLeft() {
-    return left;
-  }
+  public L getLeft() { return left; }
 
   public R getRight() {
     return right;

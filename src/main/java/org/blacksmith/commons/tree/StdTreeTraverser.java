@@ -51,10 +51,7 @@ public class StdTreeTraverser {
         dq2.add(n);
 
         final List<? extends TreeNode<T>> children = n.getChildren();
-        final int childrenCount = children.size();
-        for (TreeNode<T> child : children) {
-          dq.add(child);
-        }
+        dq.addAll(children);
       }
 
       while (!dq2.isEmpty()) {
@@ -102,9 +99,7 @@ public class StdTreeTraverser {
 
         final List<TreeNode<T>> children = n.getChildren();
         final int childrenCount = children.size();
-        for (TreeNode<T> child : children) {
-          dq.add(child);
-        }
+        dq.addAll(children);
       }
 
       return true;
