@@ -77,9 +77,7 @@ public class NumberConversion
     return (value==null) ? 0 : Long.valueOf(value.longValue());
   }
 
-  public static long toLong(String value)
-  {
-    return (StringUtils.isEmpty(value)) ? null : Long.valueOf(value);
+  public static long toLong(String value) { return (StringUtils.isEmpty(value)) ? 0L : Long.valueOf(value);
   }
 
   public static int toInt(Number value)
@@ -87,9 +85,7 @@ public class NumberConversion
     return (value==null) ? 0 : Integer.valueOf(value.intValue());
   }
 
-  public static int toInt(String value)
-  {
-    return (StringUtils.isEmpty(value)) ? null : Integer.valueOf(value);
+  public static int toInt(String value) { return (StringUtils.isEmpty(value)) ? 0 : Integer.valueOf(value);
   }
 
   public static Boolean createBoolean(Number value)

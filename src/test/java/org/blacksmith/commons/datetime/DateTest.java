@@ -16,7 +16,7 @@ public class DateTest {
   @Test
   @DisplayName("Test jdk plusDays")
   public void speed1() {
-    LocalDate ref = LocalDate.of(2019, 03, 15);
+    LocalDate ref = LocalDate.of(2019, 3, 15);
     for (int i = 0; i < 100000000; i++) {
       LocalDate x = ref.plusDays(i);
     }
@@ -25,7 +25,7 @@ public class DateTest {
   @Test
   @DisplayName("Test ref plusDays")
   public void speed2() {
-    LocalDate ref = LocalDate.of(2019, 03, 15);
+    LocalDate ref = LocalDate.of(2019, 3, 15);
     for (int i = 0; i < 100000000; i++) {
       LocalDate x = LocalDateUtilsRef.plusDays(ref,i);
     }
@@ -44,11 +44,11 @@ public class DateTest {
   @Test
   @DisplayName("LeapDay test")
   public void leapDayTest() {
-    assertEquals(LocalDate.of(2020,02,29), DateUtils.nextLeapDay(LocalDate.of(2019,03,01)));
-    assertEquals(LocalDate.of(2020,02,29), DateUtils.nextLeapDay(LocalDate.of(2019,01,29)));
-    assertEquals(LocalDate.of(2020,02,29), DateUtils.nextLeapDay(LocalDate.of(2020,02,28)));
-    assertEquals(LocalDate.of(2024,02,29), DateUtils.nextLeapDay(LocalDate.of(2020,02,29)));
-    assertEquals(LocalDate.of(2024,02,29), DateUtils.nextLeapDay(LocalDate.of(2020,03,29)));
+    assertEquals(LocalDate.of(2020, 2,29), DateUtils.nextLeapDay(LocalDate.of(2019, 3, 1)));
+    assertEquals(LocalDate.of(2020, 2,29), DateUtils.nextLeapDay(LocalDate.of(2019, 1,29)));
+    assertEquals(LocalDate.of(2020, 2,29), DateUtils.nextLeapDay(LocalDate.of(2020, 2,28)));
+    assertEquals(LocalDate.of(2024, 2,29), DateUtils.nextLeapDay(LocalDate.of(2020, 2,29)));
+    assertEquals(LocalDate.of(2024, 2,29), DateUtils.nextLeapDay(LocalDate.of(2020, 3,29)));
   }
   @Test
   @DisplayName("LeapDayRange test")
@@ -73,6 +73,6 @@ public class DateTest {
   @Test
   @DisplayName("TimeUnitOperationTest")
   public void TimeUnitOperationTest() {
-    assertEquals(LocalDate.of(2019, 1, 4),TimeUnit.DAY.plus(LocalDate.of(2019, 1,1),3));
+    assertEquals(LocalDate.of(2019, 1, 4),TimeUnit.DAY.addTo(LocalDate.of(2019, 1,1),3));
   }
 }

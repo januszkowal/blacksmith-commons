@@ -37,13 +37,13 @@ public class EnumUtils {
 
   public static <E extends Enum<E>> EnumMap<E,String> getEnumNameMap(Class<E> enumClass)
   {
-    return new EnumMap<E, String>(enumClass);
+    return new EnumMap<>(enumClass);
   }
 
 
   public static <E extends Enum<E>> List<E> getEnumList(Class<E> enumClass)
   {
-    return new ArrayList<E>(Arrays.asList(enumClass.getEnumConstants()));
+    return new ArrayList<>(Arrays.asList(enumClass.getEnumConstants()));
   }
 
   public static <E extends Enum<E>> List<String> getEnumNames(List<E> enums)

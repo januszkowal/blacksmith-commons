@@ -45,7 +45,7 @@ public class KVSplitter {
   public static class KVSplitterBuilder {
 
     private String keyValueSeparator="=";
-    private String separator=";";
+    private String pairSeparator=";";
     private boolean trimResults=false;
 
     public KVSplitterBuilder() {
@@ -66,17 +66,27 @@ public class KVSplitter {
       return this;
     }
 
+    public KVSplitterBuilder withPairSeparator(char pairSeparator) {
+      this.pairSeparator = String.valueOf(pairSeparator);
+      return this;
+    }
+
+    public KVSplitterBuilder withPairSeparator(String pairSeparator) {
+      this.pairSeparator = pairSeparator;
+      return this;
+    }
+
     public KVSplitterBuilder trimResults(boolean trimResults) {
       this.trimResults = trimResults;
       return this;
     }
 
     public KVSplitter build() {
-      String pattern = "";
+      String pattern;
       if (keyValueSeparator.equals(" ") || keyValueSeparator.equals("\\s+"))
-        pattern = "(?:(\\w*)" + keyValueSeparator + "(\\w*\\s*))(?=" + separator +"|$)";
+        pattern = "(?:(\\w*)" + keyValueSeparator + "(\\w*\\s*))(?=" + pairSeparator +"|$)";
       else
-        pattern = "(?:(\\s*\\w*\\s*)" + keyValueSeparator + "(\\s*\\w*\\s*))(?=" + separator +"|$)";
+        pattern = "(?:(\\s*\\w*\\s*)" + keyValueSeparator + "(\\s*\\w*\\s*))(?=" + pairSeparator +"|$)";
       return new KVSplitter(Pattern.compile(pattern),trimResults);
     }
   }

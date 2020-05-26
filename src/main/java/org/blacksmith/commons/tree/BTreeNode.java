@@ -57,7 +57,7 @@ public class BTreeNode<T> implements TreeNode<T> {
   }
 
   @Override public TreeNode<T> addChildWith(T o) {
-    return addChild(new BTreeNode<T>(o));
+    return addChild(new BTreeNode<>(o));
   }
 
   @Override public boolean isParentOf(TreeNode<T> n) {
@@ -114,7 +114,7 @@ public class BTreeNode<T> implements TreeNode<T> {
       a = (T[]) Array.newInstance(a.getClass().getComponentType(), size);
     }
 
-    traverser.traverse(this, new NodeVisitor<T, T[]>() {
+    traverser.traverse(this, new NodeVisitor<>() {
       int index = 0;
 
       @Override
@@ -129,7 +129,7 @@ public class BTreeNode<T> implements TreeNode<T> {
   @Override public Object[] toArray(TreeTraverser traverser) {
     final int size = size();
     Object[] a = new Object[size];
-    traverser.traverse(this, new NodeVisitor<T, Object[]>() {
+    traverser.traverse(this, new NodeVisitor<>() {
       int index = 0;
 
       @Override

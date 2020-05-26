@@ -10,7 +10,7 @@ public class Pair<L,R> {
   }
 
   public static <T> Pair of(T left, T right) {
-    return new Pair<T,T>(left, right);
+    return new Pair<>(left, right);
   }
 
   public L getLeft() {

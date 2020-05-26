@@ -57,11 +57,11 @@ public class LocalDateUtilsRef {
       int month = date.getMonthValue();
       int year = date.getYear();
       if (dom <= monthLen) {
-        return LocalDate.of(year, month, (int) dom);
+        return LocalDate.of(year, month, dom);
       } else if (month < 12) {
-        return LocalDate.of(year, month + 1, (int) (dom - monthLen));
+        return LocalDate.of(year, month + 1, dom - monthLen);
       } else {
-        return LocalDate.of(year + 1, 1, (int) (dom - monthLen));
+        return LocalDate.of(year + 1, 1, dom - monthLen);
       }
     }
     long mjDay = Math.addExact(date.toEpochDay(), daysToAdd);
@@ -101,7 +101,7 @@ public class LocalDateUtilsRef {
    * @return the stream of dates from the start to the end
    */
   static Stream<LocalDate> stream(LocalDate startInclusive, LocalDate endExclusive) {
-    Iterator<LocalDate> it = new Iterator<LocalDate>() {
+    Iterator<LocalDate> it = new Iterator<>() {
       private LocalDate current = startInclusive;
 
       @Override

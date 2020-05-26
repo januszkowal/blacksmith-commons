@@ -26,8 +26,8 @@ import org.apache.commons.lang3.Validate;
 public class DateRange {
   public static final String LOWER_DATE_MUST_BE_NOT_NULL = "Lower date must be not null";
   public static final String UPPER_DATE_MUST_BE_NOT_NULL = "Upper date must be not null";
-  private LocalDate lowerInclusive;
-  private LocalDate upperInclusive;
+  private final LocalDate lowerInclusive;
+  private final LocalDate upperInclusive;
 
   public DateRange(LocalDate lowerInclusive, LocalDate upperInclusive) {
     this.lowerInclusive = lowerInclusive;

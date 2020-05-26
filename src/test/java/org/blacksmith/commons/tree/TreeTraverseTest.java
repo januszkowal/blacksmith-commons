@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 public class TreeTraverseTest {
   private final static Logger LOGGER = LoggerFactory.getLogger(TreeTraverseTest.class);
   public BTreeNode<Long> createTree() {
-    BTreeNode<Long> root = new BTreeNode<Long>(1L);
+    BTreeNode<Long> root = new BTreeNode<>(1L);
     final TreeNode<Long> node2 = root.addChildWith(2L);
     node2.addChildWith(4L);
     node2.addChildWith(5L);
@@ -23,13 +23,13 @@ public class TreeTraverseTest {
     final TreeNode<Long> node3 = root.addChildWith(3L);
     final TreeNode<Long> node6 = node3.addChildWith(6L);
     node3.addChildWith(7L);
-    node6.addChildWith(8l);
+    node6.addChildWith(8L);
     node6.addChildWith(9L);
     return root;
   }
 
   public String arrToString(Long[] array) {
-    return String.join(",",Arrays.stream(array).map(l -> l.toString()).collect(Collectors.toList()));
+    return String.join(",",Arrays.stream(array).map(Object::toString).collect(Collectors.toList()));
   }
 
   @Test
