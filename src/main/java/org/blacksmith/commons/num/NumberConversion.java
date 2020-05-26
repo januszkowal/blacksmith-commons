@@ -59,7 +59,7 @@ public class NumberConversion
 
   public static Integer createInteger(String value)
   {
-    return (StringUtils.isEmpty(value)) ? null : Integer.valueOf(value);
+    return StringUtils.isEmpty(value) ? null : Integer.valueOf(value);
   }
 
   public static BigInteger createBigInteger(long value)
