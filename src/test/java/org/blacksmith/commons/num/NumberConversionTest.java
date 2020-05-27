@@ -20,7 +20,6 @@ class NumberConversionTest {
   void bigDecimalFromDoubleTest() {
     Assertions.assertEquals(BigDecimal.valueOf(89.999993d),NumberConversion.doubleToBigDecimal(89.999993d));
   }
-
   @Test
   void isNumberTest() {
     //objects
