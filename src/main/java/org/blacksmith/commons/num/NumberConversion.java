@@ -15,7 +15,7 @@ public class NumberConversion
 
   private NumberConversion() {}
 
-  public static BigDecimal bigDecimalFromDouble(double value) {
+  public static BigDecimal doubleToBigDecimal(double value) {
     return BigDecimal.valueOf(value) ;
   }
 
