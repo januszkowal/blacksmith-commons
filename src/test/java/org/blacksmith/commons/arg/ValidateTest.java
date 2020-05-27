@@ -11,6 +11,8 @@ class ValidateTest {
   void notNull() {
     assertThrows(IllegalArgumentException.class,()->{
       Validate.notNull(null);
+      Validate.notNull(null,"null value");
+      Validate.notNull(null,()->"null value");
     });
     Validate.notNull("");
   }
