@@ -2,13 +2,14 @@ package org.blacksmith.commons.arg;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class ValidateTest {
 
 
   @Test()
-  void notNull() {
+  void testNotNull() {
     assertThrows(IllegalArgumentException.class,()->{
       Validate.notNull(null);
       Validate.notNull(null,"null value");
@@ -18,15 +19,25 @@ class ValidateTest {
   }
 
   @Test
-  void testNotNull() {
-  }
-
-  @Test
-  void testNotNull1() {
-  }
-
-  @Test
   void notEmpty() {
+    assertThrows(IllegalArgumentException.class,()->{
+      Validate.notEmpty(List.of());
+    });
+    assertThrows(IllegalArgumentException.class,()->{
+      Validate.notEmpty(List.of(),"empty list");
+    });
+    assertThrows(IllegalArgumentException.class,()->{
+      Validate.notEmpty(List.of(),()->"empty list");
+    });
+    assertThrows(IllegalArgumentException.class,()->{
+      Validate.notEmpty(new String[]{});
+    });
+    assertThrows(IllegalArgumentException.class,()->{
+      Validate.notEmpty(new String[]{},"empty array");
+    });
+    assertThrows(IllegalArgumentException.class,()->{
+      Validate.notEmpty(new String[]{},()->"empty array");
+    });
   }
 
   @Test
