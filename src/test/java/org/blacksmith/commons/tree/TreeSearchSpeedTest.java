@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 public class TreeSearchSpeedTest {
 
-  private static final int NODES_COUNT = 100;
+  private static final int NODES_COUNT = 111;
 
   private static final BTreeNode<Integer> root = BTreeNode.of(0);
 
