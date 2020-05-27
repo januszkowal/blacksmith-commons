@@ -46,7 +46,8 @@ public class ArrayUtils {
 
   public static <C, T extends C> C[] listToArray(Class<C> componentType, List<T> list) {
     @SuppressWarnings("unchecked")
-    C[] array = (C[]) Array.newInstance(componentType, list.size());
+    //C[] array = (C[]) Array.newInstance(componentType, list.size());
+    C[] array = (C[]) Array.newInstance(componentType, 0);
     return list.toArray(array);
   }
   

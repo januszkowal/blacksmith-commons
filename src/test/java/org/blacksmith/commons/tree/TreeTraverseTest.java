@@ -2,6 +2,11 @@ package org.blacksmith.commons.tree;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
+import org.blacksmith.commons.tree.traverser.BreadthOrderTreeTraverser;
+import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverserRecur;
+import org.blacksmith.commons.tree.traverser.PostOrderTreeTraverser;
+import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverser;
+import org.blacksmith.commons.tree.traverser.RevOrderTreeTraverserRecur;
 import org.blacksmith.test.TimingExtension;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -14,51 +19,58 @@ import org.slf4j.LoggerFactory;
 @ExtendWith(TimingExtension.class)
 public class TreeTraverseTest {
   private final static Logger LOGGER = LoggerFactory.getLogger(TreeTraverseTest.class);
-  public BTreeNode<Long> createTree() {
-    BTreeNode<Long> root = new BTreeNode<>(1L);
-    final TreeNode<Long> node2 = root.addChildWith(2L);
-    node2.addChildWith(4L);
-    node2.addChildWith(5L);
+  public BTreeNode<Integer> createTree() {
+    BTreeNode<Integer> root = new BTreeNode<>(1);
+    final TreeNode<Integer> node2 = root.addChildWith(2);
+    node2.addChildWith(4);
+    node2.addChildWith(5);
 
-    final TreeNode<Long> node3 = root.addChildWith(3L);
-    final TreeNode<Long> node6 = node3.addChildWith(6L);
-    node3.addChildWith(7L);
-    node6.addChildWith(8L);
-    node6.addChildWith(9L);
+    final TreeNode<Integer> node3 = root.addChildWith(3);
+    final TreeNode<Integer> node6 = node3.addChildWith(6);
+    node3.addChildWith(7);
+    node6.addChildWith(8);
+    node6.addChildWith(9);
     return root;
   }
 
-  public String arrToString(Long[] array) {
+  public String arrToString(Integer[] array) {
     return Arrays.stream(array).map(Object::toString).collect(Collectors.joining(","));
   }
 
   @Test
-  public void testTraversePRE() {
-    TreeNode<Long> tree = createTree();
-    final Long[] xtree = tree.toDataArray(new Long[0], StdTreeTraverser.PRE_ORDER);
-    LOGGER.info("sort PRE:{}",arrToString(xtree));
+  public void testPreOrderTreeTraverser() {
+    TreeNode<Integer> tree = createTree();
+    final Integer[] xtree = tree.toDataArray(new Integer[0], new PreOrderTreeTraverser());
+    Assertions.assertArrayEquals(new Integer[]{1,2,4,5,3,6,8,9,7},xtree);
   }
   @Test
-  public void testTraversePOST() {
-    TreeNode<Long> tree = createTree();
-    final Long[] xtree = tree.toDataArray(new Long[0], StdTreeTraverser.POST_ORDER);
-    LOGGER.info("sort POST:{}",arrToString(xtree));
+  public void testPostOrderTreeTraverser() {
+    TreeNode<Integer> tree = createTree();
+    final Integer[] xtree = tree.toDataArray(new Integer[0], new PostOrderTreeTraverser());
+    Assertions.assertArrayEquals(new Integer[]{4, 5, 2, 8, 9, 6, 7, 3, 1},xtree);
   }
   @Test
-  public void testTraverseBREATH_FIRST() {
-    TreeNode<Long> tree = createTree();
-    final Long[] xtree = tree.toDataArray(new Long[0], StdTreeTraverser.BREADTH_ORDER);
-    LOGGER.info("sort BREATH_FIRST:{}",arrToString(xtree));
+  public void testBreadthOrderTreeTraverser() {
+    TreeNode<Integer> tree = createTree();
+    final Integer[] xtree = tree.toDataArray(new Integer[0], new BreadthOrderTreeTraverser());
+    Assertions.assertArrayEquals(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9},xtree);
   }
   @Test
-  public void testTraverseFAST() {
-    TreeNode<Long> tree = createTree();
-    final Long[] xtree = tree.toDataArray(new Long[0], StdTreeTraverser.PRE2_ORDER);
-    LOGGER.info("sort FAST:{}",arrToString(xtree));   
+  public void testPreOrderTreeTraverserStack() {
+    TreeNode<Integer> tree = createTree();
+    final Integer[] xtree = tree.toDataArray(new Integer[0], new PreOrderTreeTraverserRecur());
+    Assertions.assertArrayEquals(new Integer[]{1,2,4,5,3,6,8,9,7},xtree);
+
+  }
+  @Test
+  public void testRevOrderTreeTraverserStack2() {
+    TreeNode<Integer> tree = createTree();
+    final Integer[] xtree = tree.toDataArray(new Integer[0], new RevOrderTreeTraverserRecur());
+    Assertions.assertArrayEquals(new Integer[]{1,3,7,6,9,8,2,5,4},xtree);
   }
   @Test
   public void testSize() {
-    TreeNode<Long> tree = createTree();
+    TreeNode<Integer> tree = createTree();
     Assertions.assertEquals(9,tree.size());
   }
 }

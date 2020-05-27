@@ -125,10 +125,12 @@ public class NumberConversion
     return value ? 1L : 0L;
   }
 
+  @SuppressWarnings("unchecked")
   public static Number convertNumberObjectToTargetClass(Object number, Class<?> targetClass) {
     return (number==null) ? null : convertNumberToTargetClassInternal((Number)number, (Class<Number>)targetClass);
   }
 
+  @SuppressWarnings("unchecked")
   public static <T extends Number> T convertNumberToTargetClass(Number number, Class<T> targetClass) {
     return (number==null) ? null : (T)convertNumberToTargetClassInternal(number, targetClass);
   }

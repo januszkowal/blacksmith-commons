@@ -59,7 +59,7 @@ public class EnumUtils {
   public static <E extends Enum<E>> String[] getEnumNamesArray(Class<E> enumClass)
   {
     List<String> lst = getEnumNamesList(enumClass);
-    return lst.toArray(new String[lst.size()]);
+    return lst.toArray(new String[0]);
   }
 
   public static <E extends Enum<E>> boolean isValidEnum(Class<E> enumClass,

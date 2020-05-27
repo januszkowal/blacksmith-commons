@@ -1,18 +1,25 @@
 package org.blacksmith.commons.tree;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import org.blacksmith.commons.arrays.ArrayUtils;
+import java.util.function.Predicate;
+import org.blacksmith.commons.tree.traverser.RevOrderTreeTraverserRecur;
 
 public class BTreeNode<T> implements TreeNode<T> {
+
+  public static final TreeNode.TreeTraverser TRAVERSER = RevOrderTreeTraverserRecur.of();
+  public static final TreeNode.TreeTraverser SIZE_TRAVERSER = RevOrderTreeTraverserRecur.of();
   private T data;
-  private TreeNode<T> parent;
+  private BTreeNode<T> parent;
   private List<TreeNode<T>> children = Collections.emptyList();
 
   public BTreeNode(T data) {
     this.data = data;
+  }
+
+  public static <T> BTreeNode of(T data) {
+    return new BTreeNode(data);
   }
 
   @Override
@@ -26,145 +33,157 @@ public class BTreeNode<T> implements TreeNode<T> {
   }
 
   @Override
-  public TreeNode<T> getParent() {
+  public BTreeNode<T> getParent() {
     return this.parent;
   }
 
   @Override
   public void setParent(TreeNode<T> parent) {
-    this.parent = parent;
+    this.parent = (BTreeNode<T>) parent;
   }
 
-  @Override public List<TreeNode<T>> getChildren() {
+  @Override
+  public List<TreeNode<T>> getChildren() {
     return this.children;
   }
 
-  @Override public TreeNode<T> addChild(TreeNode<T> child) {
+  @Override
+  public BTreeNode<T> addChild(TreeNode<T> child) {
     if (children.isEmpty()) {
       children = new ArrayList<>();
     }
-    children.add(child);
     child.setParent(this);
-    return child;
+    children.add(child);
+    return (BTreeNode<T>) child;
   }
 
-  @Override public TreeNode<T> removeChild(TreeNode<T> child) {
+  @Override
+  public BTreeNode<T> removeChild(TreeNode<T> child) {
     if (child != null && children.remove(child)) {
       child.setParent(null);
-      return child;
+      return (BTreeNode<T>)child;
     }
     return null;
   }
 
-  @Override public TreeNode<T> addChildWith(T o) {
+  @Override
+  public BTreeNode<T> addChildWith(T o) {
     return addChild(new BTreeNode<>(o));
   }
 
-  @Override public boolean isParentOf(TreeNode<T> n) {
+  @Override
+  public boolean isParentOf(TreeNode<T> n) {
     if (n == null) {
       return false;
     }
     return this.equals(n.getParent());
   }
 
-  @Override public boolean isDescendantOf(TreeNode<T> n) {
-    if (n == null) {
-      return false;
-    }
-    TreeNode<T> tmp = findDescendantWith(data);
-    return this.equals(tmp);
-  }
-
-  @Override public TreeNode<T> removeDescendantWith(T o) {
+  @Override
+  public BTreeNode<T> removeDescendantWith(T o) {
     return null;
   }
 
-  @Override public boolean contains(T o) {
+  @Override
+  public boolean contains(T o) {
     return false;
   }
 
-  @Override public void clear() {
+  @Override
+  public void clear() {
     children.clear();
     parent = null;
     data = null;
   }
 
-  @Override public boolean isLeaf() {
+  @Override
+  public boolean isLeaf() {
     return this.children.isEmpty();
   }
 
-  @Override public boolean isRoot() {
+  @Override
+  public boolean isRoot() {
     return this.parent == null;
   }
 
   @Override
   public int size() {
-    final int[] counter = { 0 };
-    StdTreeTraverser.PRE2_ORDER.traverse(this, (node, c) -> {
+    return size(SIZE_TRAVERSER);
+  }
+
+  @Override
+  public int size(TreeTraverser traverser) {
+    final int[] counter = {0};
+    traverser.traverse(this, (node, c) -> {
       c[0] = c[0] + 1;
-      return true;
     }, counter);
     return counter[0];
   }
 
-  @SuppressWarnings("unchecked")
-  @Override public T[] toDataArray(T[] a, TreeTraverser traverser) {
-    final int size = size();
-    if (a.length < size) {
-      a = (T[]) Array.newInstance(a.getClass().getComponentType(), size);
-    }
-
-    traverser.traverse(this, new NodeVisitor<>() {
-      int index = 0;
-
-      @Override
-      public boolean onNode(TreeNode<T> node, T[] a) {
-        a[index++] = node.getData();
-        return true;
-      }
-    }, a);
-    return a;
+  @Override
+  public Object[] toArray() {
+    return toArray(TRAVERSER);
   }
 
-  @Override public Object[] toArray(TreeTraverser traverser) {
-    final int size = size();
-    Object[] a = new Object[size];
-    traverser.traverse(this, new NodeVisitor<>() {
-      int index = 0;
+  @Override
+  public T[] toDataArray(T[] a) {
+    return toDataArray(a,TRAVERSER);
+  }
 
-      @Override
-      public boolean onNode(TreeNode<T> node, Object[] a) {
-        a[index++] = node;
-        return true;
-      }
-    }, a);
-    return a;
+  @Override
+  public List<TreeNode<T>> toList() {
+    return toList(TRAVERSER);
+  }
+
+  @Override
+  public List<T> toDataList() {
+    return toDataList(TRAVERSER);
   }
 
   @SuppressWarnings("unchecked")
   @Override
   public TreeNode<T> findDescendantWith(final T o) {
-    final Object[] found = { null };
-    StdTreeTraverser.PRE2_ORDER.traverse(this, (node, found1) -> {
+    final Object[] found = {null};
+    TRAVERSER.traverse(this,(node,found1)->{
       if (node.getData().equals(o)) {
         found1[0] = node;
         return false;
       }
       return true;
-    }, found);
+    },found);
     return (TreeNode<T>) found[0];
   }
 
+  @Override
+  public TreeNode<T>[] findDescendantsWith(T o) {
+    return findDescendantsListWith(o).toArray(new TreeNode[0]);
+  }
+
+  @Override
+  public TreeNode<T>[] findDescendantsWith(Predicate<T> p) {
+    return findDescendantsListWith(p).toArray(new TreeNode[0]);
+  }
+
   @SuppressWarnings("unchecked")
-  @Override public TreeNode<T>[] findDescendantsWith(T o) {
+  @Override
+  public List<TreeNode<T>> findDescendantsListWith(T o) {
     final List<TreeNode<T>> found = new ArrayList<>();
-    StdTreeTraverser.PRE2_ORDER.traverse(this, (node, found1) -> {
+    TRAVERSER.traverse(this, (node, f) -> {
       if (node.getData().equals(o)) {
-        found1.add(node);
-        return false;
+        f.add(node);
       }
-      return true;
     }, found);
-    return ArrayUtils.listToArray(TreeNode.class,found);
+    return found;
+  }
+
+  @Override
+  public List<TreeNode<T>> findDescendantsListWith(Predicate<T> p) {
+    final List<TreeNode<T>> found = new ArrayList<>();
+    TRAVERSER.traverse(this, (node, f) -> {
+      if (p.test(node.getData())) {
+        f.add(node);
+      }
+    }, found);
+    return found;
   }
 }
