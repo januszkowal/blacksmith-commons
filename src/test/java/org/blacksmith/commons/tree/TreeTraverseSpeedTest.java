@@ -1,9 +1,6 @@
 package org.blacksmith.commons.tree;
 
-import java.util.Deque;
-import java.util.LinkedList;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
 import org.blacksmith.commons.tree.traverser.BreadthOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.PostOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverser;
@@ -16,7 +13,7 @@ import org.junit.jupiter.api.RepeatedTest;
 public class TreeTraverseSpeedTest {
 
   private static final int TEST_REPEAT = 5;
-  private static final int NODES_COUNT = 5_0000_000;
+  private static final int NODES_COUNT = 5_0000;
 
   private static final BTreeNode<Integer> root = BTreeNode.of(0);
 

@@ -1,10 +1,7 @@
 package org.blacksmith.commons.tree;
 
 import java.util.Arrays;
-import java.util.Deque;
-import java.util.LinkedList;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -12,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 public class TreeSearchSpeedTest {
 
-  private static final int NODES_COUNT = 50;
+  private static final int NODES_COUNT = 5;
 
   private static final BTreeNode<Integer> root = BTreeNode.of(0);
 
@@ -20,6 +17,7 @@ public class TreeSearchSpeedTest {
   public static void setUp() {
     System.out.println("Set up");
     new TreeFactory<>(Long::intValue).populate(root,NODES_COUNT, 3);
+    System.out.println("Initialized with size: "+root.size());
   }
 
   @Test
@@ -34,8 +32,8 @@ public class TreeSearchSpeedTest {
 
   @Test
   public void testSingleFound2() {
-    Assertions.assertArrayEquals(new Integer[]{3}, Arrays.stream(root.findDescendantsWith(3)).map(TreeNode::getData).collect(
-        Collectors.toList()).toArray());
+    Assertions.assertArrayEquals(new Integer[]{3},
+        Arrays.stream(root.findDescendantsWith(3)).map(TreeNode::getData).toArray());
   }
 
   @Test

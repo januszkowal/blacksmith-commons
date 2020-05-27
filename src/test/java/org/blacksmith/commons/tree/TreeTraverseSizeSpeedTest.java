@@ -1,8 +1,5 @@
 package org.blacksmith.commons.tree;
 
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.concurrent.atomic.AtomicInteger;
 import org.blacksmith.commons.tree.traverser.BreadthOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.PostOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverser;

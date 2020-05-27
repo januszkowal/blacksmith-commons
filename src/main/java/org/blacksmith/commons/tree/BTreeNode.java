@@ -19,7 +19,7 @@ public class BTreeNode<T> implements TreeNode<T> {
   }
 
   public static <T> BTreeNode of(T data) {
-    return new BTreeNode(data);
+    return new BTreeNode<>(data);
   }
 
   @Override
