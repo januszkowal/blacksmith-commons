@@ -81,12 +81,17 @@ public class BTreeNode<T> implements TreeNode<T> {
 
   @Override
   public BTreeNode<T> removeDescendantWith(T o) {
-    return null;
+    var node = (BTreeNode<T>)findDescendantWith(o);
+    if (node!=null && node.parent!=null) {
+      node.getParent().removeChild(node);
+      node.setParent(null);
+    }
+    return node;
   }
 
   @Override
   public boolean contains(T o) {
-    return false;
+    return findDescendantWith(o)!=null;
   }
 
   @Override

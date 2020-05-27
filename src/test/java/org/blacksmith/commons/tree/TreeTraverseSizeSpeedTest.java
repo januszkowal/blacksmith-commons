@@ -17,26 +17,12 @@ public class TreeTraverseSizeSpeedTest {
   private static final int TEST_REPEAT = 3;
   private static final int NODES_COUNT = 5_000_000;
   private static final int MAX_CHILDREN_COUNT = 5;
-  private static BTreeNode<Integer> root = BTreeNode.of(0);
-
-  private static void populate(TreeNode<Integer> node, AtomicInteger counter, int maxTotalCount, int maxChildrenCount) {
-    final Deque<TreeNode<Integer>> dq = new LinkedList<>();
-    dq.add(node);
-    while (!dq.isEmpty()) {
-      var xnode = dq.pollFirst();
-      if (counter.get() < maxTotalCount) {
-        for (int i = 0; i < maxChildrenCount; i++) {
-          var subnode = xnode.addChildWith(counter.incrementAndGet());
-          dq.add(subnode);
-        }
-      }
-    }
-  }
+  private static final BTreeNode<Integer> root = BTreeNode.of(0);
 
   @BeforeAll
   public static void setUp() {
     System.out.println("Set up");
-    populate(root, new AtomicInteger(0), NODES_COUNT, MAX_CHILDREN_COUNT);
+    new TreeFactory<>(Long::intValue).populate(root,NODES_COUNT, MAX_CHILDREN_COUNT);
   }
 
   @RepeatedTest(TEST_REPEAT)

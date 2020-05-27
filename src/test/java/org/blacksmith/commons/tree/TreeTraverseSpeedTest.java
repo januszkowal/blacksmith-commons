@@ -18,26 +18,12 @@ public class TreeTraverseSpeedTest {
   private static final int TEST_REPEAT = 5;
   private static final int NODES_COUNT = 5_0000_000;
 
-  private static BTreeNode<Integer> root = BTreeNode.of(0);
-
-  private static void populate(TreeNode<Integer> node, AtomicInteger counter, int maxTotalCount, int maxChildrenCount) {
-    final Deque<TreeNode<Integer>> dq = new LinkedList<>();
-    dq.add(node);
-    while (!dq.isEmpty()) {
-      var xnode = dq.pollFirst();
-      if (counter.get() < maxTotalCount) {
-        for (int i = 0; i < maxChildrenCount && counter.get() < maxTotalCount; i++) {
-          var subnode = xnode.addChildWith(counter.incrementAndGet());
-          dq.add(subnode);
-        }
-      }
-    }
-  }
+  private static final BTreeNode<Integer> root = BTreeNode.of(0);
 
   @BeforeAll
   public static void setUp() {
     System.out.println("Set up");
-    populate(root, new AtomicInteger(0), NODES_COUNT, 3);
+    new TreeFactory<>(Long::intValue).populate(root,NODES_COUNT, 3);
   }
 
   @RepeatedTest(TEST_REPEAT)
@@ -77,6 +63,6 @@ public class TreeTraverseSpeedTest {
 
   @RepeatedTest(TEST_REPEAT)
   public void testFindFirst2() {
-    Assertions.assertEquals(null, Optional.ofNullable(root.findDescendantWith(NODES_COUNT+1)).map(TreeNode::getData).orElse(null));
+    Assertions.assertNull(Optional.ofNullable(root.findDescendantWith(NODES_COUNT + 1)).map(TreeNode::getData).orElse(null));
   }
 }
