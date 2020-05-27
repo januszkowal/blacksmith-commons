@@ -25,7 +25,7 @@ public final class PostOrderTreeTraverser implements TreeTraverser {
 
     while (!dq2.isEmpty()) {
       TreeNode<T> n = dq2.pollLast();
-      if (!visitor.onNode(n, callerData)) {
+      if (!visitor.accept(n, callerData)) {
         return false;
       }
     }
@@ -46,7 +46,7 @@ public final class PostOrderTreeTraverser implements TreeTraverser {
 
     while (!dq2.isEmpty()) {
       TreeNode<T> n = dq2.pollLast();
-      visitor.onNode(n, callerData);
+      visitor.accept(n, callerData);
     }
   }
 }

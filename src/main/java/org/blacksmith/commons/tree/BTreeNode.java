@@ -18,7 +18,7 @@ public class BTreeNode<T> implements TreeNode<T> {
     this.data = data;
   }
 
-  public static <T> BTreeNode of(T data) {
+  public static <T> BTreeNode<T> of(T data) {
     return new BTreeNode<>(data);
   }
 

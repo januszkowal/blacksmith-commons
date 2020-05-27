@@ -17,7 +17,7 @@ public final class PreOrderTreeTraverser implements TreeNode.TreeTraverser {
     while (!dq.isEmpty()) {
       TreeNode<T> n = dq.pollLast();
 
-      if (!visitor.onNode(n, callerData)) {
+      if (!visitor.accept(n, callerData)) {
         return false;
       }
       final List<TreeNode<T>> children = n.getChildren();
@@ -34,7 +34,7 @@ public final class PreOrderTreeTraverser implements TreeNode.TreeTraverser {
     while (!dq.isEmpty()) {
       TreeNode<T> n = dq.pollLast();
 
-      visitor.onNode(n, callerData);
+      visitor.accept(n, callerData);
       final List<TreeNode<T>> children = n.getChildren();
       for (int i = children.size() - 1; i >= 0; --i) {
         dq.add(children.get(i));

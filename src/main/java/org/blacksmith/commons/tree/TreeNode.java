@@ -50,7 +50,7 @@ public interface TreeNode<T> {
     traverser.traverse(this, new NodeVisitorNa<>() {
       int index = 0;
       @Override
-      public void onNode(TreeNode<T> node, T[] a) {
+      public void accept(TreeNode<T> node, T[] a) {
         a[index++] = node.getData();
       }
     }, a);
@@ -63,7 +63,7 @@ public interface TreeNode<T> {
     traverser.traverse(this, new NodeVisitorNa<>() {
       int index = 0;
       @Override
-      public void onNode(TreeNode<T> node, Object[] a) {
+      public void accept(TreeNode<T> node, Object[] a) {
         a[index++] = node;
       }
     }, a);
@@ -87,11 +87,11 @@ public interface TreeNode<T> {
   }
 
   interface NodeVisitor<T,U> {
-    boolean onNode(TreeNode<T> node, U caller);
+    boolean accept(TreeNode<T> node, U caller);
   }
 
   interface NodeVisitorNa<T,U> {
-    void onNode(TreeNode<T> node, U caller);
+    void accept(TreeNode<T> node, U caller);
   }
 
   interface TreeTraverser {

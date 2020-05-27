@@ -2,7 +2,6 @@ package org.blacksmith.commons.tree;
 
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
