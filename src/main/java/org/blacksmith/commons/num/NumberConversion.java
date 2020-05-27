@@ -185,7 +185,7 @@ public class NumberConversion
       return new BigDecimal(number.toString());
     }
     else {
-      throwUnsuportedTargetClassException(number,targetClass);
+      throwUnsupportedTargetClassException(number,targetClass);
       return null;
     }
   }
@@ -205,9 +205,8 @@ public class NumberConversion
     return number.longValue();
   }
 
-  private static void throwUnsuportedTargetClassException(Number number, Class<?> targetClass) {
-    throw ConversionException
-        .ofMessageFormat("Could not convert number [{0}] of type [{1}] to unsuported target class [{2}]",number.getClass().getName(),targetClass.getName());
+  private static void throwUnsupportedTargetClassException(Number number, Class<?> targetClass) {
+    throw ConversionException.ofMessageFormat("Could not convert number [{0}] of type [{1}] to unsupported target class [{2}]",number.getClass().getName(),targetClass.getName());
   }
 
   private static void throwOverflowException(Number number, Class<?> targetClass) {

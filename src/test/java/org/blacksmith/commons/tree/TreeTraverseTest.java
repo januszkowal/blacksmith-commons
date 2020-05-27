@@ -40,33 +40,33 @@ public class TreeTraverseTest {
   @Test
   public void testPreOrderTreeTraverser() {
     TreeNode<Integer> tree = createTree();
-    final Integer[] xtree = tree.toDataArray(new Integer[0], new PreOrderTreeTraverser());
-    Assertions.assertArrayEquals(new Integer[]{1,2,4,5,3,6,8,9,7},xtree);
+    final Integer[] arr = tree.toDataArray(new Integer[0], new PreOrderTreeTraverser());
+    Assertions.assertArrayEquals(new Integer[]{1,2,4,5,3,6,8,9,7},arr);
   }
   @Test
   public void testPostOrderTreeTraverser() {
     TreeNode<Integer> tree = createTree();
-    final Integer[] xtree = tree.toDataArray(new Integer[0], new PostOrderTreeTraverser());
-    Assertions.assertArrayEquals(new Integer[]{4, 5, 2, 8, 9, 6, 7, 3, 1},xtree);
+    final Integer[] arr = tree.toDataArray(new Integer[0], new PostOrderTreeTraverser());
+    Assertions.assertArrayEquals(new Integer[]{4, 5, 2, 8, 9, 6, 7, 3, 1},arr);
   }
   @Test
   public void testBreadthOrderTreeTraverser() {
     TreeNode<Integer> tree = createTree();
-    final Integer[] xtree = tree.toDataArray(new Integer[0], new BreadthOrderTreeTraverser());
-    Assertions.assertArrayEquals(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9},xtree);
+    final Integer[] arr = tree.toDataArray(new Integer[0], new BreadthOrderTreeTraverser());
+    Assertions.assertArrayEquals(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9},arr);
   }
   @Test
   public void testPreOrderTreeTraverserStack() {
     TreeNode<Integer> tree = createTree();
-    final Integer[] xtree = tree.toDataArray(new Integer[0], new PreOrderTreeTraverserRecur());
-    Assertions.assertArrayEquals(new Integer[]{1,2,4,5,3,6,8,9,7},xtree);
+    final Integer[] arr = tree.toDataArray(new Integer[0], new PreOrderTreeTraverserRecur());
+    Assertions.assertArrayEquals(new Integer[]{1,2,4,5,3,6,8,9,7},arr);
 
   }
   @Test
   public void testRevOrderTreeTraverserStack2() {
     TreeNode<Integer> tree = createTree();
-    final Integer[] xtree = tree.toDataArray(new Integer[0], new RevOrderTreeTraverserRecur());
-    Assertions.assertArrayEquals(new Integer[]{1,3,7,6,9,8,2,5,4},xtree);
+    final Integer[] arr = tree.toDataArray(new Integer[0], new RevOrderTreeTraverserRecur());
+    Assertions.assertArrayEquals(new Integer[]{1,3,7,6,9,8,2,5,4},arr);
   }
   @Test
   public void testSize() {
