@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public enum TimeUnit implements DateOperation {
   DAY("D", "Day", ChronoUnit.DAYS, 1),
@@ -21,9 +22,11 @@ public enum TimeUnit implements DateOperation {
   private final ChronoUnit chronoUnit;
   private final int chronoUnitCount;
   private static final Map<String, TimeUnit> unitMap =
-      Arrays.stream(TimeUnit.values()).collect(Collectors.toMap(TimeUnit::symbol, e -> e));
+      Stream.of(TimeUnit.values()).collect(Collectors.toMap(TimeUnit::symbol, e -> e));
   private static final Set<ChronoUnit> supportedUnits =
-      Collections.unmodifiableSet(Arrays.stream(TimeUnit.values()).map(TimeUnit::chronoUnit).collect(Collectors.toSet()));
+      Collections.unmodifiableSet(Stream.of(TimeUnit.values())
+          .map(TimeUnit::chronoUnit)
+          .collect(Collectors.toSet()));
 
   TimeUnit(String symbol, String unitName, ChronoUnit chronoUnit, int chronoUnitCount) {
     this.symbol = symbol;
