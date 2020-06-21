@@ -43,7 +43,7 @@ public enum TimeUnit implements DateOperation {
     return this.unitName;
   }
 
-  public TimeUnit of(String symbol) {
+  public static TimeUnit ofSymbol(String symbol) {
     return unitMap.get(symbol);
   }
 
