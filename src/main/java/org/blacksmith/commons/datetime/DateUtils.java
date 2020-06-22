@@ -3,6 +3,8 @@ package org.blacksmith.commons.datetime;
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.Temporal;
+import java.time.temporal.TemporalUnit;
 import java.util.stream.Stream;
 
 public class DateUtils {
@@ -144,5 +146,13 @@ public class DateUtils {
     long numOfDaysBetween = ChronoUnit.DAYS.between(range.getLowerInclusive(),range.getUpperInclusive())+1;
     return Stream.iterate(range.getLowerInclusive(),date->date.plusDays(1))
         .limit(numOfDaysBetween);
+  }
+
+  public static LocalDate min(LocalDate d1, LocalDate d2) {
+    return d1.compareTo(d2)==1 ? d2 : d1;
+  }
+
+  public static LocalDate max(LocalDate d1, LocalDate d2) {
+    return d1.compareTo(d2)==1 ? d1 : d2;
   }
 }
