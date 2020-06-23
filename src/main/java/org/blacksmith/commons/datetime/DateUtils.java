@@ -33,6 +33,16 @@ public class DateUtils {
     return date.getDayOfMonth()==date.lengthOfMonth();
   }
 
+  public static boolean isLeapDayInPeriodCO(LocalDate startInclusive, LocalDate endExclusive) {
+    LocalDate nextLeap = nextOrSameLeapDay(startInclusive);
+    return nextLeap.compareTo(endExclusive)<0;
+  }
+
+  public static boolean isLeapDayInPeriodCC(LocalDate startInclusive, LocalDate endInclusive) {
+    LocalDate nextLeap = nextOrSameLeapDay(startInclusive);
+    return nextLeap.compareTo(endInclusive)<=0;
+  }
+
   public static boolean isLeapDayInPeriod(LocalDate startInclusive, LocalDate endExclusive) {
     LocalDate nextLeap = nextOrSameLeapDay(startInclusive);
     return nextLeap.isBefore(endExclusive);
