@@ -149,12 +149,12 @@ public class DateUtils {
         .limit(numOfDaysBetween);
   }
 
-  public static <T extends Comparable<T>> T min(T d1, T d2) {
-    return d1.compareTo(d2)>0 ? d2 : d1;
+  public static LocalDate min(LocalDate d1, LocalDate d2) {
+    return d1.compareTo(d2)<=0 ? d1 : d2;
   }
 
-  public static <T extends Comparable<T>> T max(T d1, T d2) {
-    return d1.compareTo(d2)>0 ? d1 : d2;
+  public static LocalDate max(LocalDate d1, LocalDate d2) {
+    return d1.compareTo(d2)>=0 ? d1 : d2;
   }
 
   public static boolean isValidDate(int year, int month, int day) {
