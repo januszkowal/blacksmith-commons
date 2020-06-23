@@ -149,10 +149,10 @@ public class DateUtils {
   }
 
   public static LocalDate min(LocalDate d1, LocalDate d2) {
-    return d1.compareTo(d2)==1 ? d2 : d1;
+    return d1.isAfter(d2) ? d2 : d1;
   }
 
   public static LocalDate max(LocalDate d1, LocalDate d2) {
-    return d1.compareTo(d2)==1 ? d1 : d2;
+    return d1.isAfter(d2) ? d1 : d2;
   }
 }
