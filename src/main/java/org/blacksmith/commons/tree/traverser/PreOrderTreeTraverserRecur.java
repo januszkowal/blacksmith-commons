@@ -11,7 +11,7 @@ public final class PreOrderTreeTraverserRecur implements TreeNode.TreeTraverser 
     return new PreOrderTreeTraverserRecur();
   }
   public <T, U> boolean traverse(TreeNode<T> root, NodeVisitor<T, U> visitor, U callerData) {
-    if (!visitor.accept(root, callerData)) {
+    if (visitor.reject(root, callerData)) {
       return false;
     }
     final List<TreeNode<T>> children = root.getChildren();

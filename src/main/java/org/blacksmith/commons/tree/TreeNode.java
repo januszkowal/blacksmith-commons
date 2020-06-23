@@ -88,7 +88,9 @@ public interface TreeNode<T> {
   }
 
   interface NodeVisitor<T,U> {
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     boolean accept(TreeNode<T> node, U caller);
+    default boolean reject(TreeNode<T> node, U caller) {return !accept(node,caller);}
   }
 
   interface NodeVisitorNa<T,U> {
