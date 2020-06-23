@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Set;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class TimeUnitTest {
@@ -17,6 +20,16 @@ class TimeUnitTest {
     assertEquals(TimeUnit.HALF_YEAR,TimeUnit.ofSymbol("H"));
     assertEquals(TimeUnit.YEAR,TimeUnit.ofSymbol("Y"));
     assertNull(TimeUnit.ofSymbol("X"));
+  }
+
+  @Test
+  void symbol() {
+    assertEquals("D",TimeUnit.DAY.symbol());
+    assertEquals("W",TimeUnit.WEEK.symbol());
+    assertEquals("M",TimeUnit.MONTH.symbol());
+    assertEquals("Q",TimeUnit.QUARTER.symbol());
+    assertEquals("H",TimeUnit.HALF_YEAR.symbol());
+    assertEquals("Y",TimeUnit.YEAR.symbol());
   }
 
   @Test
@@ -66,30 +79,28 @@ class TimeUnitTest {
   }
 
   @Test
-  void symbol() {
-  }
-
-  @Test
   void unitName() {
+    assertEquals("Day",TimeUnit.DAY.unitName());
   }
 
   @Test
   void chronoUnit() {
-  }
+    assertEquals(ChronoUnit.DAYS,TimeUnit.DAY.chronoUnit());
+    assertEquals(1,TimeUnit.DAY.chronoUnitCount());
 
-  @Test
-  void getChronoUnitCount() {
-  }
+    assertEquals(ChronoUnit.WEEKS,TimeUnit.WEEK.chronoUnit());
+    assertEquals(1,TimeUnit.WEEK.chronoUnitCount());
 
-  @Test
-  void supportedUnits() {
-  }
+    assertEquals(ChronoUnit.MONTHS,TimeUnit.MONTH.chronoUnit());
+    assertEquals(1,TimeUnit.MONTH.chronoUnitCount());
 
-  @Test
-  void values() {
-  }
+    assertEquals(ChronoUnit.MONTHS,TimeUnit.QUARTER.chronoUnit());
+    assertEquals(3,TimeUnit.QUARTER.chronoUnitCount());
 
-  @Test
-  void valueOf() {
+    assertEquals(ChronoUnit.MONTHS,TimeUnit.HALF_YEAR.chronoUnit());
+    assertEquals(6,TimeUnit.HALF_YEAR.chronoUnitCount());
+
+    assertEquals(ChronoUnit.YEARS,TimeUnit.YEAR.chronoUnit());
+    assertEquals(1,TimeUnit.YEAR.chronoUnitCount());
   }
 }

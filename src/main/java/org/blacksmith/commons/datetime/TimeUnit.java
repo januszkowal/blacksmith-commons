@@ -22,10 +22,6 @@ public enum TimeUnit implements DateOperation {
   private final int chronoUnitCount;
   private static final Map<String, TimeUnit> unitMap =
       Stream.of(TimeUnit.values()).collect(Collectors.toMap(TimeUnit::symbol, e -> e));
-  private static final Set<ChronoUnit> supportedUnits =
-      Collections.unmodifiableSet(Stream.of(TimeUnit.values())
-          .map(TimeUnit::chronoUnit)
-          .collect(Collectors.toSet()));
 
   TimeUnit(String symbol, String unitName, ChronoUnit chronoUnit, int chronoUnitCount) {
     this.symbol = symbol;
@@ -58,11 +54,7 @@ public enum TimeUnit implements DateOperation {
     return this.chronoUnit;
   }
 
-  public int getChronoUnitCount() {
+  public int chronoUnitCount() {
     return this.chronoUnitCount;
-  }
-
-  public Set<ChronoUnit> supportedUnits() {
-    return supportedUnits;
   }
 }
