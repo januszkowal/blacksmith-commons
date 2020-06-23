@@ -48,10 +48,10 @@ public interface TreeNode<T> {
       a = (T[]) Array.newInstance(a.getClass().getComponentType(), size);
     }
 
-    traverser.traverse(this, new NodeVisitorNa<>() {
+    traverser.traverse(this, new NodeVisitor<>() {
       int index = 0;
       @Override
-      public void accept(TreeNode<T> node, T[] a) {
+      public void visit(TreeNode<T> node, T[] a) {
         a[index++] = node.getData();
       }
     }, a);
@@ -61,10 +61,10 @@ public interface TreeNode<T> {
   default Object[] toArray(TreeTraverser traverser) {
     final int size = size();
     Object[] a = new Object[size];
-    traverser.traverse(this, new NodeVisitorNa<>() {
+    traverser.traverse(this, new NodeVisitor<>() {
       int index = 0;
       @Override
-      public void accept(TreeNode<T> node, Object[] a) {
+      public void visit(TreeNode<T> node, Object[] a) {
         a[index++] = node;
       }
     }, a);
@@ -87,19 +87,19 @@ public interface TreeNode<T> {
     return result;
   }
 
-  interface NodeVisitor<T,U> {
+  interface NodeAcceptant<T,U> {
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     boolean accept(TreeNode<T> node, U caller);
     default boolean reject(TreeNode<T> node, U caller) {return !accept(node,caller);}
   }
 
-  interface NodeVisitorNa<T,U> {
-    void accept(TreeNode<T> node, U caller);
+  interface NodeVisitor<T,U> {
+    void visit(TreeNode<T> node, U caller);
   }
 
   interface TreeTraverser {
-	  <T,U> boolean traverse(TreeNode<T> root, NodeVisitor<T, U> visitor, U callerData);
-    <T,U> void traverse(TreeNode<T> root, NodeVisitorNa<T, U> visitor, U callerData);
+	  <T,U> boolean traverse(TreeNode<T> root, NodeAcceptant<T, U> visitor, U callerData);
+    <T,U> void traverse(TreeNode<T> root, NodeVisitor<T, U> visitor, U callerData);
   }
 
 }

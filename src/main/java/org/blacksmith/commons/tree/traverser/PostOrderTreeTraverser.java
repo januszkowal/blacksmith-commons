@@ -3,8 +3,8 @@ package org.blacksmith.commons.tree.traverser;
 import java.util.Deque;
 import java.util.LinkedList;
 import org.blacksmith.commons.tree.TreeNode;
+import org.blacksmith.commons.tree.TreeNode.NodeAcceptant;
 import org.blacksmith.commons.tree.TreeNode.NodeVisitor;
-import org.blacksmith.commons.tree.TreeNode.NodeVisitorNa;
 import org.blacksmith.commons.tree.TreeNode.TreeTraverser;
 
 public final class PostOrderTreeTraverser implements TreeTraverser {
@@ -12,7 +12,7 @@ public final class PostOrderTreeTraverser implements TreeTraverser {
     return new PostOrderTreeTraverser();
   }
 
-  public <T,U> boolean traverse(TreeNode<T> root, NodeVisitor<T, U> visitor, U callerData) {
+  public <T,U> boolean traverse(TreeNode<T> root, NodeAcceptant<T, U> visitor, U callerData) {
     final Deque<TreeNode<T>> dq = new LinkedList<>();
     final Deque<TreeNode<T>> dq2 = new LinkedList<>();
     dq.add(root);
@@ -33,7 +33,7 @@ public final class PostOrderTreeTraverser implements TreeTraverser {
     return true;
   }
 
-  public <T,U> void traverse(TreeNode<T> root, NodeVisitorNa<T, U> visitor, U callerData) {
+  public <T,U> void traverse(TreeNode<T> root, NodeVisitor<T, U> visitor, U callerData) {
     final Deque<TreeNode<T>> dq = new LinkedList<>();
     final Deque<TreeNode<T>> dq2 = new LinkedList<>();
     dq.add(root);
@@ -46,7 +46,7 @@ public final class PostOrderTreeTraverser implements TreeTraverser {
 
     while (!dq2.isEmpty()) {
       TreeNode<T> n = dq2.pollLast();
-      visitor.accept(n, callerData);
+      visitor.visit(n, callerData);
     }
   }
 }
