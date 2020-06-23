@@ -34,24 +34,8 @@ public enum TimeUnit implements DateOperation {
     this.chronoUnitCount = chronoUnitCount;
   }
 
-  public String symbol() {
-    return this.symbol;
-  }
-
-  public String unitName() {
-    return this.unitName;
-  }
-
   public static TimeUnit ofSymbol(String symbol) {
     return unitMap.get(symbol);
-  }
-
-  public ChronoUnit chronoUnit() {
-    return this.chronoUnit;
-  }
-
-  public int getChronoUnitCount() {
-    return this.chronoUnitCount;
   }
 
   @Override
@@ -62,6 +46,20 @@ public enum TimeUnit implements DateOperation {
   @Override
   public <T extends Temporal> T minusFrom(T t, int q) {
     return chronoUnit.addTo(t, -q * chronoUnitCount);
+  }
+
+  public String symbol() {
+    return this.symbol;
+  }
+
+  public String unitName() {return this.unitName; }
+
+  public ChronoUnit chronoUnit() {
+    return this.chronoUnit;
+  }
+
+  public int getChronoUnitCount() {
+    return this.chronoUnitCount;
   }
 
   public Set<ChronoUnit> supportedUnits() {

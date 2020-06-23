@@ -1,5 +1,7 @@
 package org.blacksmith.commons.num;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.math.BigDecimal;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -8,17 +10,18 @@ class NumberConversionTest {
 
   @Test
   void createIntegerFromNumber() {
-    NumberConversion.createInteger(12.1d);
+    assertEquals(12,NumberConversion.createInteger(12.1d));
+    assertEquals(12,NumberConversion.createInteger(12d));
   }
 
   @Test
   void createIntegerFromString() {
-    NumberConversion.createInteger("78");
+    assertEquals(78,NumberConversion.createInteger("78"));
   }
 
   @Test
   void bigDecimalFromDoubleTest() {
-    Assertions.assertEquals(BigDecimal.valueOf(89.999993d),NumberConversion.doubleToBigDecimal(89.999993d));
+    assertEquals(BigDecimal.valueOf(89.999993d),NumberConversion.doubleToBigDecimal(89.999993d));
   }
   @SuppressWarnings("UnnecessaryBoxing")
   @Test

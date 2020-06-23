@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 class ArgCheckerTest {
 
 
+  @SuppressWarnings("ObviousNullCheck")
   @Test()
   void testNotNull() {
     assertThrows(IllegalArgumentException.class,()->{
