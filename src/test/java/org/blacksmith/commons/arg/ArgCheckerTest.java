@@ -23,16 +23,9 @@ class ArgCheckerTest {
     ArgChecker.notEmpty(List.of(""));
     ArgChecker.notEmpty(List.of(""),"empty list");
     ArgChecker.notEmpty(List.of(""),()->"empty list");
-    assertThrows(IllegalArgumentException.class,()->{
-      ArgChecker.notEmpty(List.of());
-    });
-
-    assertThrows(IllegalArgumentException.class,()->{
-      ArgChecker.notEmpty(List.of(),"empty list");
-    });
-    assertThrows(IllegalArgumentException.class,()->{
-      ArgChecker.notEmpty(List.of(),()->"empty list");
-    });
+    assertThrows(IllegalArgumentException.class,()-> ArgChecker.notEmpty(List.of()));
+    assertThrows(IllegalArgumentException.class,()-> ArgChecker.notEmpty(List.of(),"empty list"));
+    assertThrows(IllegalArgumentException.class,()-> ArgChecker.notEmpty(List.of(),()->"empty list"));
   }
 
   @Test
@@ -40,15 +33,9 @@ class ArgCheckerTest {
     ArgChecker.notEmpty(new String[]{""});
     ArgChecker.notEmpty(new String[]{""},"empty array");
     ArgChecker.notEmpty(new String[]{""},()->"empty array");
-    assertThrows(IllegalArgumentException.class,()->{
-      ArgChecker.notEmpty(new String[]{});
-    });
-    assertThrows(IllegalArgumentException.class,()->{
-      ArgChecker.notEmpty(new String[]{},"empty array");
-    });
-    assertThrows(IllegalArgumentException.class,()->{
-      ArgChecker.notEmpty(new String[]{},()->"empty array");
-    });
+    assertThrows(IllegalArgumentException.class,()-> ArgChecker.notEmpty(new String[]{}));
+    assertThrows(IllegalArgumentException.class,()-> ArgChecker.notEmpty(new String[]{},"empty array"));
+    assertThrows(IllegalArgumentException.class,()-> ArgChecker.notEmpty(new String[]{},()->"empty array"));
   }
 
   @Test
