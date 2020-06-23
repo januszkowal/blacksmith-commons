@@ -1,5 +1,6 @@
 package org.blacksmith.commons.datetime;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.temporal.ChronoUnit;
@@ -152,5 +153,15 @@ public class DateUtils {
 
   public static LocalDate max(LocalDate d1, LocalDate d2) {
     return d1.compareTo(d2)==1 ? d1 : d2;
+  }
+
+  public static boolean isValidDate(int year, int month, int day) {
+    try {
+      LocalDate.of(year,month,day);
+      return true;
+    }
+    catch (DateTimeException e) {
+      return false;
+    }
   }
 }
