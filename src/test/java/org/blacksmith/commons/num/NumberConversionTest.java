@@ -8,18 +8,19 @@ class NumberConversionTest {
 
   @Test
   void createIntegerFromNumber() {
-    NumberConversion.createInteger(12.1d);
+    Assertions.assertEquals(12,NumberConversion.createInteger(12.1d));
   }
 
   @Test
   void createIntegerFromString() {
-    NumberConversion.createInteger("78");
+    Assertions.assertEquals(78,NumberConversion.createInteger("78"));
   }
 
   @Test
   void bigDecimalFromDoubleTest() {
     Assertions.assertEquals(BigDecimal.valueOf(89.999993d),NumberConversion.doubleToBigDecimal(89.999993d));
   }
+  @SuppressWarnings("UnnecessaryBoxing")
   @Test
   void isNumberTest() {
     //objects
