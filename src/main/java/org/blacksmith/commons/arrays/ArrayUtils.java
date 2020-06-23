@@ -2,9 +2,9 @@ package org.blacksmith.commons.arrays;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ArrayUtils {
   /**
@@ -53,7 +53,7 @@ public class ArrayUtils {
   
   @SafeVarargs
   public static <T> List<T> varArgsToList(T ... args) {
-    return Arrays.stream(args).collect(Collectors.toList());
+    return Stream.of(args).collect(Collectors.toList());
   }
     
 }

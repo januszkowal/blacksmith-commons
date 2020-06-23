@@ -1,7 +1,6 @@
 package org.blacksmith.commons.arg;
 
 import java.util.Collection;
-import java.util.function.Supplier;
 
 public class ArgChecker {
   private ArgChecker(){}
@@ -21,7 +20,7 @@ public class ArgChecker {
       throw new IllegalArgumentException(message);
     }
   }
-  public static void notNull(Object o, Supplier<String> messageSupplier) {
+  public static void notNull(Object o, StringSupplier messageSupplier) {
     if (o == null) {
       throw new IllegalArgumentException(messageSupplier.get());
     }
@@ -49,14 +48,21 @@ public class ArgChecker {
     }
   }
 
-  public static void notEmpty(Object[] a, Supplier<String> messageSupplier) {
+  public static void notEmpty(Object[] a, StringSupplier messageSupplier) {
     if (a==null || a.length == 0) {
       throw new IllegalArgumentException(messageSupplier.get());
     }
   }
-  public static void notEmpty(Collection<?> c, Supplier<String> messageSupplier) {
+  public static void notEmpty(Collection<?> c, StringSupplier messageSupplier) {
     if (c==null || c.isEmpty()) {
       throw new IllegalArgumentException(messageSupplier.get());
+    }
+  }
+  public static <T extends Comparable<T>> void inOrderOrEqual(T val1, T val2) {
+    notNull(val1);
+    notNull(val2);
+    if (val1.compareTo(val2)>0) {
+      throw new IllegalArgumentException("Arguments 2 must be grater or equal argument 1");
     }
   }
 
@@ -68,7 +74,7 @@ public class ArgChecker {
     }
   }
 
-  public static <T extends Comparable<T>> void inOrderOrEqual(T val1, T val2, Supplier<String> messageSupplier) {
+  public static <T extends Comparable<T>> void inOrderOrEqual(T val1, T val2, StringSupplier messageSupplier) {
     notNull(val1);
     notNull(val2);
     if (val1.compareTo(val2)>0) {
@@ -76,11 +82,19 @@ public class ArgChecker {
     }
   }
 
-  public static <T extends Comparable<T>> void inOrderOrEqual(T val1, T val2, String2ArgSupplier<T> messageSupplier) {
+  public static <T extends Comparable<T>> void inOrderOrEqual(T val1, T val2, String2ParSupplier<T> messageSupplier) {
     notNull(val1);
     notNull(val2);
     if (val1.compareTo(val2)>0) {
       throw new IllegalArgumentException(messageSupplier.get(val1,val2));
+    }
+  }
+
+  public static <T extends Comparable<T>> void inOrderNotEqual(T val1, T val2) {
+    notNull(val1);
+    notNull(val2);
+    if (val1.compareTo(val2)>=0) {
+      throw new IllegalArgumentException("Argument 2 must be greater argument 1");
     }
   }
 
@@ -92,7 +106,7 @@ public class ArgChecker {
     }
   }
 
-  public static <T extends Comparable<T>> void inOrderNotEqual(T val1, T val2, Supplier<String> messageSupplier) {
+  public static <T extends Comparable<T>> void inOrderNotEqual(T val1, T val2, StringSupplier messageSupplier) {
     notNull(val1);
     notNull(val2);
     if (val1.compareTo(val2)>=0) {
@@ -100,7 +114,7 @@ public class ArgChecker {
     }
   }
 
-  public static <T extends Comparable<T>> void inOrderNotEqual(T val1, T val2, String2ArgSupplier<T> messageSupplier) {
+  public static <T extends Comparable<T>> void inOrderNotEqual(T val1, T val2, String2ParSupplier<T> messageSupplier) {
     notNull(val1);
     notNull(val2);
     if (val1.compareTo(val2)>=0) {
@@ -120,7 +134,7 @@ public class ArgChecker {
       throw new IllegalArgumentException(message);
   }
 
-  public static void checkStringLength(String value, int length, Supplier<String> messageSupplier) {
+  public static void checkStringLength(String value, int length, StringSupplier messageSupplier) {
     notNull(value);
     if (value.length()!=length)
       throw new IllegalArgumentException(messageSupplier.get());
@@ -143,7 +157,7 @@ public class ArgChecker {
     if (value.length()<minLength || value.length()>maxLength)
       throw new IllegalArgumentException(message);
   }
-  public static void checkStringLength(String value, int minLength, int maxLength, Supplier<String> messageSupplier) {
+  public static void checkStringLength(String value, int minLength, int maxLength, StringSupplier messageSupplier) {
     notNull(value);
     if (value.length()<minLength || value.length()>maxLength)
       throw new IllegalArgumentException(messageSupplier.get());
@@ -153,6 +167,11 @@ public class ArgChecker {
     notNull(value);
     if (value.length()<minLength || value.length()>maxLength)
       throw new IllegalArgumentException(messageSupplier.get(value,minLength,maxLength));
+  }
+
+  @FunctionalInterface
+  public interface StringSupplier {
+    String get();
   }
 
   @FunctionalInterface
@@ -166,7 +185,7 @@ public class ArgChecker {
   }
 
   @FunctionalInterface
-  public interface String2ArgSupplier<P> {
+  public interface String2ParSupplier<P> {
     String get(P arg1, P arg2);
   }
 

@@ -1,11 +1,13 @@
 package org.blacksmith.commons.arg;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.text.MessageFormat;
 import java.util.List;
 import org.blacksmith.commons.arg.ArgChecker.String1Arg1ParSupplier;
 import org.blacksmith.commons.arg.ArgChecker.String1Arg2ParSupplier;
+import org.blacksmith.commons.arg.ArgChecker.String2ParSupplier;
+import org.blacksmith.commons.arg.ArgChecker.StringSupplier;
 import org.junit.jupiter.api.Test;
 
 class ArgCheckerTest {
@@ -95,5 +97,48 @@ class ArgCheckerTest {
     assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("abcdef",1,5,"Invalid length"));
     assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("abcdef",1,5,()->"Invalid length"));
     assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("abcdef",1,5,stringPar2Supplier));
+  }
+
+  @Test
+  public void inOrderOrEqual() {
+    String message = "Arguments must be in order";
+    StringSupplier ssu1=()->message;
+    String2ParSupplier<Integer> ssu2=(a1,a2)->MessageFormat.format("Arguments {0}, {1} must be in order",a1,a2);
+    Integer a1 = 1;
+    Integer a2 = 3;
+    ArgChecker.inOrderOrEqual(a1,a1);
+    ArgChecker.inOrderOrEqual(a1,a1,message);
+    ArgChecker.inOrderOrEqual(a1,a1,ssu1);
+    ArgChecker.inOrderOrEqual(a1,a1,ssu2);
+
+    ArgChecker.inOrderOrEqual(a1,a2);
+    ArgChecker.inOrderOrEqual(a1,a2,message);
+    ArgChecker.inOrderOrEqual(a1,a2,ssu1);
+    ArgChecker.inOrderOrEqual(a1,a2,ssu2);
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.inOrderOrEqual(a2,a1));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.inOrderOrEqual(a2,a1,message));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.inOrderOrEqual(a2,a1,ssu1));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.inOrderOrEqual(a2,a1,ssu2));
+  }
+  @Test
+  public void inOrderNotEqual() {
+    String message = "Arguments must be in order";
+    StringSupplier ssu1=()->message;
+    String2ParSupplier<Integer> ssu2=(a1,a2)->MessageFormat.format("Arguments {0}, {1} must be in order",a1,a2);
+    Integer a1 = 1;
+    Integer a2 = 3;
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.inOrderNotEqual(a1,a1));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.inOrderNotEqual(a1,a1,message));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.inOrderNotEqual(a1,a1,ssu1));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.inOrderNotEqual(a1,a1,ssu2));
+
+    ArgChecker.inOrderNotEqual(a1,a2);
+    ArgChecker.inOrderNotEqual(a1,a2,message);
+    ArgChecker.inOrderNotEqual(a1,a2,ssu1);
+    ArgChecker.inOrderNotEqual(a1,a2,ssu2);
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.inOrderNotEqual(a2,a1));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.inOrderNotEqual(a2,a1,message));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.inOrderNotEqual(a2,a1,ssu1));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.inOrderNotEqual(a2,a1,ssu2));
   }
 }
