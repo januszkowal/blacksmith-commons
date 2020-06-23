@@ -41,6 +41,7 @@ public interface TreeNode<T> {
   List<TreeNode<T>> toList();
   List<T> toDataList();
 
+  @SuppressWarnings("unchecked")
   default T[] toDataArray(T[] a, TreeTraverser traverser) {
     final int size = size();
     if (a.length < size) {

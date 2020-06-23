@@ -28,12 +28,14 @@ class ArgCheckerTest {
     assertThrows(IllegalArgumentException.class,()-> ArgChecker.notEmpty(List.of(),()->"empty list"));
   }
 
+  @SuppressWarnings("ObviousNullCheck")
   @Test
   void notEmptyArray() {
     ArgChecker.notEmpty(new String[]{""});
     ArgChecker.notEmpty(new String[]{""},"empty array");
     ArgChecker.notEmpty(new String[]{""},()->"empty array");
     assertThrows(IllegalArgumentException.class,()-> ArgChecker.notEmpty(new String[]{}));
+    //noinspection ObviousNullCheck
     assertThrows(IllegalArgumentException.class,()-> ArgChecker.notEmpty(new String[]{},"empty array"));
     assertThrows(IllegalArgumentException.class,()-> ArgChecker.notEmpty(new String[]{},()->"empty array"));
   }

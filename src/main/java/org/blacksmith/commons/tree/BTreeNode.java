@@ -159,11 +159,13 @@ public class BTreeNode<T> implements TreeNode<T> {
     return (TreeNode<T>) found[0];
   }
 
+  @SuppressWarnings("unchecked")
   @Override
   public TreeNode<T>[] findDescendantsWith(T o) {
     return findDescendantsListWith(o).toArray(new TreeNode[0]);
   }
 
+  @SuppressWarnings("unchecked")
   @Override
   public TreeNode<T>[] findDescendantsWith(Predicate<T> p) {
     return findDescendantsListWith(p).toArray(new TreeNode[0]);
