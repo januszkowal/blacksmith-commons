@@ -3,8 +3,8 @@ package org.blacksmith.commons.arg;
 import java.util.Collection;
 import java.util.function.Supplier;
 
-public class Validate {
-  private Validate(){}
+public class ArgChecker {
+  private ArgChecker(){}
   /**
    * Checks that an object is not null.
    *
@@ -60,26 +60,10 @@ public class Validate {
     }
   }
 
-  public static <T extends Comparable<T>> void inOrder(T val1, T val2, String message) {
-    notNull(val1);
-    notNull(val2);
-    if (val1.compareTo(val2)>0) {
-      throw new IllegalArgumentException(message);
-    }
-  }
-
-  public static <T extends Comparable<T>> void inOrder(T val1, T val2, Supplier<String> messageSupplier) {
-    notNull(val1);
-    notNull(val2);
-    if (val1.compareTo(val2)>=0) {
-      throw new IllegalArgumentException(messageSupplier.get());
-    }
-  }
-
   public static <T extends Comparable<T>> void inOrderOrEqual(T val1, T val2, String message) {
     notNull(val1);
     notNull(val2);
-    if (val1.compareTo(val2)>=0) {
+    if (val1.compareTo(val2)>0) {
       throw new IllegalArgumentException(message);
     }
   }
@@ -88,6 +72,22 @@ public class Validate {
     notNull(val1);
     notNull(val2);
     if (val1.compareTo(val2)>0) {
+      throw new IllegalArgumentException(messageSupplier.get());
+    }
+  }
+
+  public static <T extends Comparable<T>> void inOrderNotEqual(T val1, T val2, String message) {
+    notNull(val1);
+    notNull(val2);
+    if (val1.compareTo(val2)>=0) {
+      throw new IllegalArgumentException(message);
+    }
+  }
+
+  public static <T extends Comparable<T>> void inOrderNotEqual(T val1, T val2, Supplier<String> messageSupplier) {
+    notNull(val1);
+    notNull(val2);
+    if (val1.compareTo(val2)>=0) {
       throw new IllegalArgumentException(messageSupplier.get());
     }
   }

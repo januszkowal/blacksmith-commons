@@ -5,38 +5,49 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
-class ValidateTest {
+class ArgCheckerTest {
 
 
   @Test()
   void testNotNull() {
     assertThrows(IllegalArgumentException.class,()->{
-      Validate.notNull(null);
-      Validate.notNull(null,"null value");
-      Validate.notNull(null,()->"null value");
+      ArgChecker.notNull(null);
+      ArgChecker.notNull(null,"null value");
+      ArgChecker.notNull(null,()->"null value");
     });
-    Validate.notNull("");
+    ArgChecker.notNull("");
   }
 
   @Test
-  void notEmpty() {
+  void notEmptyList() {
+    ArgChecker.notEmpty(List.of(""));
+    ArgChecker.notEmpty(List.of(""),"empty list");
+    ArgChecker.notEmpty(List.of(""),()->"empty list");
     assertThrows(IllegalArgumentException.class,()->{
-      Validate.notEmpty(List.of());
+      ArgChecker.notEmpty(List.of());
+    });
+
+    assertThrows(IllegalArgumentException.class,()->{
+      ArgChecker.notEmpty(List.of(),"empty list");
     });
     assertThrows(IllegalArgumentException.class,()->{
-      Validate.notEmpty(List.of(),"empty list");
+      ArgChecker.notEmpty(List.of(),()->"empty list");
+    });
+  }
+
+  @Test
+  void notEmptyArray() {
+    ArgChecker.notEmpty(new String[]{""});
+    ArgChecker.notEmpty(new String[]{""},"empty array");
+    ArgChecker.notEmpty(new String[]{""},()->"empty array");
+    assertThrows(IllegalArgumentException.class,()->{
+      ArgChecker.notEmpty(new String[]{});
     });
     assertThrows(IllegalArgumentException.class,()->{
-      Validate.notEmpty(List.of(),()->"empty list");
+      ArgChecker.notEmpty(new String[]{},"empty array");
     });
     assertThrows(IllegalArgumentException.class,()->{
-      Validate.notEmpty(new String[]{});
-    });
-    assertThrows(IllegalArgumentException.class,()->{
-      Validate.notEmpty(new String[]{},"empty array");
-    });
-    assertThrows(IllegalArgumentException.class,()->{
-      Validate.notEmpty(new String[]{},()->"empty array");
+      ArgChecker.notEmpty(new String[]{},()->"empty array");
     });
   }
 
