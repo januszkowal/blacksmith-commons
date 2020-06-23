@@ -56,7 +56,7 @@ public class DateConversion {
   }
 
   /* java.sql.Date->java.time.LocalDateTime */
-  public static LocalDateTime createLocalDateTimeFromMiLlis(long milLis) {
+  public static LocalDateTime createLocalDateTimeFromMillis(long milLis) {
     return createZonedDateTimeFromMillis(milLis).toLocalDateTime();
   }
 
