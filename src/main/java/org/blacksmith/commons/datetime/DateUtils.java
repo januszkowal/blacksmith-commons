@@ -1,10 +1,9 @@
 package org.blacksmith.commons.datetime;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Year;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.Temporal;
-import java.time.temporal.TemporalUnit;
 import java.util.stream.Stream;
 
 public class DateUtils {
@@ -154,5 +153,15 @@ public class DateUtils {
 
   public static LocalDate max(LocalDate d1, LocalDate d2) {
     return d1.isAfter(d2) ? d1 : d2;
+  }
+
+  public static boolean isValidDate(int year, int month, int day) {
+    try {
+      LocalDate.of(year,month,day);
+      return true;
+    }
+    catch (DateTimeException e) {
+      return false;
+    }
   }
 }
