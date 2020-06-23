@@ -1,7 +1,5 @@
 package org.blacksmith.commons.tree;
 
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.blacksmith.commons.tree.traverser.BreadthOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.PostOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverser;
@@ -12,13 +10,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @DisplayName("TreeTraverseTest")
 @ExtendWith(TimingExtension.class)
 public class TreeTraverseTest {
-  private final static Logger LOGGER = LoggerFactory.getLogger(TreeTraverseTest.class);
   public BTreeNode<Integer> createTree() {
     BTreeNode<Integer> root = new BTreeNode<>(1);
     final TreeNode<Integer> node2 = root.addChildWith(2);
@@ -31,10 +26,6 @@ public class TreeTraverseTest {
     node6.addChildWith(8);
     node6.addChildWith(9);
     return root;
-  }
-
-  public String arrToString(Integer[] array) {
-    return Stream.of(array).map(Object::toString).collect(Collectors.joining(","));
   }
 
   @Test

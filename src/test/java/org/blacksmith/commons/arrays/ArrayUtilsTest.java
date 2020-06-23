@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
+@SuppressWarnings("SpellCheckingInspection")
 class ArrayUtilsTest {
   final String[][] array = {{"ala","ma"},{"bolek","jest"}};
   final String[] flattArray = {"ala","ma","bolek","jest"};

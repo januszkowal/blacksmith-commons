@@ -10,6 +10,7 @@ import org.blacksmith.commons.arg.ArgChecker.String2ParSupplier;
 import org.blacksmith.commons.arg.ArgChecker.StringSupplier;
 import org.junit.jupiter.api.Test;
 
+@SuppressWarnings("SpellCheckingInspection")
 class ArgCheckerTest {
 
 

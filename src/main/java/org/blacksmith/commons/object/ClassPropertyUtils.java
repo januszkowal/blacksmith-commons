@@ -19,8 +19,7 @@ public class ClassPropertyUtils
       return StringUtils.firstLetterToLowerCase(method.getName());
   }
 
-  public static Field getPropertyField(Class<?> type, String name) throws NoSuchFieldException
-  {
+  public static Field getPropertyField(Class<?> type, String name) {
     if (type == null)
       return null;
     try

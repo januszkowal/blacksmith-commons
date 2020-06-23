@@ -36,4 +36,8 @@ class DateUtilsTest {
     assertEquals(LocalDate.parse("2003-07-15"),DateUtils.max(LocalDate.parse("2003-01-10"),LocalDate.parse("2003-07-15")));
     assertEquals(LocalDate.parse("2003-07-15"),DateUtils.max(LocalDate.parse("2003-07-15"),LocalDate.parse("2003-01-10")));
   }
+  @Test
+  public void dayOfYear() {
+    assertEquals(197,DateUtils.dayOfYear(LocalDate.parse("1997-07-16")));
+  }
 }
