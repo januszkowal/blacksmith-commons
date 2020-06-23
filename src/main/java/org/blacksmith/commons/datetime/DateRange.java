@@ -1,7 +1,7 @@
 package org.blacksmith.commons.datetime;
 
 import java.time.LocalDate;
-import org.apache.commons.lang3.Validate;
+import org.blacksmith.commons.arg.ArgChecker;
 
 /*
 *
@@ -35,29 +35,29 @@ public class DateRange {
   }
 
   public static DateRange closed(LocalDate lowerInclusive, LocalDate upperInclusive) {
-    Validate.notNull(lowerInclusive, LOWER_DATE_MUST_BE_NOT_NULL);
-    Validate.notNull(upperInclusive, UPPER_DATE_MUST_BE_NOT_NULL);
+    ArgChecker.notNull(lowerInclusive, LOWER_DATE_MUST_BE_NOT_NULL);
+    ArgChecker.notNull(upperInclusive, UPPER_DATE_MUST_BE_NOT_NULL);
     return create(lowerInclusive, upperInclusive);
   }
   public static DateRange open(LocalDate lowerExclusive, LocalDate upperExclusive) {
-    Validate.notNull(lowerExclusive, LOWER_DATE_MUST_BE_NOT_NULL);
-    Validate.notNull(upperExclusive, UPPER_DATE_MUST_BE_NOT_NULL);
+    ArgChecker.notNull(lowerExclusive, LOWER_DATE_MUST_BE_NOT_NULL);
+    ArgChecker.notNull(upperExclusive, UPPER_DATE_MUST_BE_NOT_NULL);
     return create(lowerExclusive.plusDays(1), upperExclusive.minusDays(1));
   }
   public static DateRange openClosed(LocalDate lowerExclusive, LocalDate upperInclusive) {
-    Validate.notNull(lowerExclusive, LOWER_DATE_MUST_BE_NOT_NULL);
-    Validate.notNull(upperInclusive, UPPER_DATE_MUST_BE_NOT_NULL);
+    ArgChecker.notNull(lowerExclusive, LOWER_DATE_MUST_BE_NOT_NULL);
+    ArgChecker.notNull(upperInclusive, UPPER_DATE_MUST_BE_NOT_NULL);
     return create(lowerExclusive.plusDays(1), upperInclusive);
   }
   public static DateRange closedOpen(LocalDate lowerInclusive, LocalDate upperExclusive) {
-    Validate.notNull(lowerInclusive, LOWER_DATE_MUST_BE_NOT_NULL);
-    Validate.notNull(upperExclusive, UPPER_DATE_MUST_BE_NOT_NULL);
+    ArgChecker.notNull(lowerInclusive, LOWER_DATE_MUST_BE_NOT_NULL);
+    ArgChecker.notNull(upperExclusive, UPPER_DATE_MUST_BE_NOT_NULL);
     return create(lowerInclusive, upperExclusive.minusDays(1));
   }
 
   public static DateRange range(LocalDate lower, BoundType lowerBound, LocalDate upper, BoundType upperBound) {
-    Validate.notNull(lower, LOWER_DATE_MUST_BE_NOT_NULL);
-    Validate.notNull(upper, UPPER_DATE_MUST_BE_NOT_NULL);
+    ArgChecker.notNull(lower, LOWER_DATE_MUST_BE_NOT_NULL);
+    ArgChecker.notNull(upper, UPPER_DATE_MUST_BE_NOT_NULL);
     LocalDate startInclusive = lowerBound==BoundType.OPEN ? lower.plusDays(1) : lower;
     LocalDate endInclusive   = upperBound==BoundType.OPEN ? upper.minusDays(1) : upper;
     return create(startInclusive, endInclusive);
@@ -87,7 +87,7 @@ public class DateRange {
    * @return true if this range contains date
    */
   public boolean contains(LocalDate other) {
-    Validate.notNull(other);
+    ArgChecker.notNull(other);
     return getLowerExclusive().isBefore(other) && getUpperExclusive().isAfter(other);
   }
 
@@ -99,7 +99,7 @@ public class DateRange {
    */
 
   public boolean isRangeAfter(LocalDate other) {
-    Validate.notNull(other);
+    ArgChecker.notNull(other);
     return lowerInclusive.isAfter(other);
   }
   /**
@@ -109,7 +109,7 @@ public class DateRange {
    * @return true if this range is entirely before the specified date
    */
   public boolean isRangeBefore(LocalDate other) {
-    Validate.notNull(other);
+    ArgChecker.notNull(other);
     return upperInclusive.isBefore(other);
   }
   /**
@@ -119,7 +119,7 @@ public class DateRange {
    * @return true if specified date is entirely after this range
    */
   public boolean isDateAfterRange(LocalDate other) {
-    Validate.notNull(other);
+    ArgChecker.notNull(other);
     return upperInclusive.isBefore(other);
   }
   /**
@@ -129,7 +129,7 @@ public class DateRange {
    * @return true if specified date is entirely before this range
    */
   public boolean isDateBeforeRange(LocalDate other) {
-    Validate.notNull(other);
+    ArgChecker.notNull(other);
     return lowerInclusive.isAfter(other);
   }
 }
