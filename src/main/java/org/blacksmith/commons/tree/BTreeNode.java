@@ -8,8 +8,8 @@ import org.blacksmith.commons.tree.traverser.RevOrderTreeTraverserRecur;
 
 public class BTreeNode<T> implements TreeNode<T> {
 
-  public static final TreeNode.TreeTraverser TRAVERSER = RevOrderTreeTraverserRecur.of();
-  public static final TreeNode.TreeTraverser SIZE_TRAVERSER = RevOrderTreeTraverserRecur.of();
+  public static final TreeNode.TreeTraverser TRAVERSER = new RevOrderTreeTraverserRecur();
+  public static final TreeNode.TreeTraverser SIZE_TRAVERSER = new RevOrderTreeTraverserRecur();
   private T data;
   private BTreeNode<T> parent;
   private List<TreeNode<T>> children = Collections.emptyList();

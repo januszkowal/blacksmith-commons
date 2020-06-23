@@ -7,9 +7,7 @@ import org.blacksmith.commons.tree.TreeNode.NodeVisitor;
 import org.blacksmith.commons.tree.TreeNode.NodeAcceptant;
 
 public final class BreadthOrderTreeTraverser implements TreeNode.TreeTraverser {
-  public static BreadthOrderTreeTraverser of () {
-    return new BreadthOrderTreeTraverser();
-  }
+
   public <T,U> boolean traverse(TreeNode<T> root, NodeAcceptant<T, U> visitor, U callerData) {
     final Deque<TreeNode<T>> dq = new LinkedList<>();
     dq.add(root);

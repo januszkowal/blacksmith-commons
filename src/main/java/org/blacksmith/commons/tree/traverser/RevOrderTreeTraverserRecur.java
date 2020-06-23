@@ -6,9 +6,7 @@ import org.blacksmith.commons.tree.TreeNode.NodeAcceptant;
 import org.blacksmith.commons.tree.TreeNode.NodeVisitor;
 
 public final class RevOrderTreeTraverserRecur implements TreeNode.TreeTraverser {
-  public static RevOrderTreeTraverserRecur of () {
-    return new RevOrderTreeTraverserRecur();
-  }
+
   public <T,U> boolean traverse(TreeNode<T> root, NodeAcceptant<T, U> visitor, U callerData) {
     if (visitor.reject(root, callerData)) {
       return false;

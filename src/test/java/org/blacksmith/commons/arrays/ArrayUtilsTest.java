@@ -6,8 +6,8 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class ArrayUtilsTest {
-  String[][] array = {{"ala","ma"},{"bolek","jest"}};
-  String[] flattArray = {"ala","ma","bolek","jest"};
+  final String[][] array = {{"ala","ma"},{"bolek","jest"}};
+  final String[] flattArray = {"ala","ma","bolek","jest"};
 
   @Test
   void flatten() {

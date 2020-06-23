@@ -8,9 +8,7 @@ import org.blacksmith.commons.tree.TreeNode.NodeAcceptant;
 import org.blacksmith.commons.tree.TreeNode.NodeVisitor;
 
 public final class PreOrderTreeTraverser implements TreeNode.TreeTraverser {
-  public static PreOrderTreeTraverser of () {
-    return new PreOrderTreeTraverser();
-  }
+
   public <T,U> boolean traverse(TreeNode<T> root, NodeAcceptant<T, U> visitor, U callerData) {
     final Deque<TreeNode<T>> dq = new LinkedList<>();
     dq.add(root);

@@ -14,7 +14,6 @@ public class TreeFactory<T> {
   }
 
   public void populate(TreeNode<T> node, long maxTotalCount, int maxChildrenCount) {
-    AtomicLong counter = new AtomicLong();
     populateInternal(node, new AtomicLong(0L), maxTotalCount, maxChildrenCount);
   }
 

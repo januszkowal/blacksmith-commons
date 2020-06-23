@@ -1,11 +1,11 @@
 package org.blacksmith.commons.tree;
 
-import java.util.Arrays;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.blacksmith.commons.tree.traverser.BreadthOrderTreeTraverser;
-import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverserRecur;
 import org.blacksmith.commons.tree.traverser.PostOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverser;
+import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverserRecur;
 import org.blacksmith.commons.tree.traverser.RevOrderTreeTraverserRecur;
 import org.blacksmith.test.TimingExtension;
 import org.junit.jupiter.api.Assertions;
@@ -34,7 +34,7 @@ public class TreeTraverseTest {
   }
 
   public String arrToString(Integer[] array) {
-    return Arrays.stream(array).map(Object::toString).collect(Collectors.joining(","));
+    return Stream.of(array).map(Object::toString).collect(Collectors.joining(","));
   }
 
   @Test

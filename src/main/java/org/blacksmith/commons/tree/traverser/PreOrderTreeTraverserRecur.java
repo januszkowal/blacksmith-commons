@@ -7,9 +7,7 @@ import org.blacksmith.commons.tree.TreeNode.NodeVisitor;
 
 @SuppressWarnings("ForLoopReplaceableByForEach")
 public final class PreOrderTreeTraverserRecur implements TreeNode.TreeTraverser {
-  public static PreOrderTreeTraverserRecur of() {
-    return new PreOrderTreeTraverserRecur();
-  }
+
   public <T, U> boolean traverse(TreeNode<T> root, NodeAcceptant<T, U> visitor, U callerData) {
     if (visitor.reject(root, callerData)) {
       return false;
