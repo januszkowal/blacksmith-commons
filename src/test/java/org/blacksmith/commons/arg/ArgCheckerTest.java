@@ -42,7 +42,7 @@ class ArgCheckerTest {
   }
 
   @Test
-  public void checkStringLength() {
+  public void checkStringLength1() {
     ArgChecker.checkStringLength("abcde",5);
     ArgChecker.checkStringLength("abcde",5,"Invalid length");
     ArgChecker.checkStringLength("abcde",5,()->"Invalid length");
@@ -54,8 +54,30 @@ class ArgCheckerTest {
     assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("",5,()->"Invalid length"));
     assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("abcd",5));
     assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("abcd",5,"Invalid length"));
-    assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("abcd",5,()->"Invalid length"));assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("abcdef",5));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("abcd",5,()->"Invalid length"));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("abcdef",5));
     assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("abcdef",5,"Invalid length"));
     assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("abcdef",5,()->"Invalid length"));
+  }
+  @Test
+  public void checkStringLength2() {
+    ArgChecker.checkStringLength("abcde",1,5);
+    ArgChecker.checkStringLength("abcde",1,5,"Invalid length");
+    ArgChecker.checkStringLength("abcde",1,5,()->"Invalid length");
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength(null,1,5));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength(null,1,5,"Invalid length"));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength(null,1,5,()->"Invalid length"));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("",1,5));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("",1,5,"Invalid length"));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("",1,5,()->"Invalid length"));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("",1,5));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("",1,5,"Invalid length"));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("",1,5,()->"Invalid length"));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("a",2,5));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("a",2,5,"Invalid length"));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("a",2,5,()->"Invalid length"));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("abcdef",1,5));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("abcdef",1,5,"Invalid length"));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.checkStringLength("abcdef",1,5,()->"Invalid length"));
   }
 }
