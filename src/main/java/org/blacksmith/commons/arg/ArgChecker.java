@@ -76,6 +76,14 @@ public class ArgChecker {
     }
   }
 
+  public static <T extends Comparable<T>> void inOrderOrEqual(T val1, T val2, String2ArgSupplier<T> messageSupplier) {
+    notNull(val1);
+    notNull(val2);
+    if (val1.compareTo(val2)>0) {
+      throw new IllegalArgumentException(messageSupplier.get(val1,val2));
+    }
+  }
+
   public static <T extends Comparable<T>> void inOrderNotEqual(T val1, T val2, String message) {
     notNull(val1);
     notNull(val2);
@@ -89,6 +97,14 @@ public class ArgChecker {
     notNull(val2);
     if (val1.compareTo(val2)>=0) {
       throw new IllegalArgumentException(messageSupplier.get());
+    }
+  }
+
+  public static <T extends Comparable<T>> void inOrderNotEqual(T val1, T val2, String2ArgSupplier<T> messageSupplier) {
+    notNull(val1);
+    notNull(val2);
+    if (val1.compareTo(val2)>=0) {
+      throw new IllegalArgumentException(messageSupplier.get(val1,val2));
     }
   }
 
@@ -110,6 +126,12 @@ public class ArgChecker {
       throw new IllegalArgumentException(messageSupplier.get());
   }
 
+  public static void checkStringLength(String value, int length, String1Arg1ParSupplier<Integer> messageSupplier) {
+    notNull(value);
+    if (value.length()!=length)
+      throw new IllegalArgumentException(messageSupplier.get(value,length));
+  }
+
   public static void checkStringLength(String value, int minLength, int maxLength) {
     notNull(value);
     if (value.length()<minLength || value.length()>maxLength)
@@ -125,6 +147,27 @@ public class ArgChecker {
     notNull(value);
     if (value.length()<minLength || value.length()>maxLength)
       throw new IllegalArgumentException(messageSupplier.get());
+  }
+
+  public static void checkStringLength(String value, int minLength, int maxLength, String1Arg2ParSupplier<Integer> messageSupplier) {
+    notNull(value);
+    if (value.length()<minLength || value.length()>maxLength)
+      throw new IllegalArgumentException(messageSupplier.get(value,minLength,maxLength));
+  }
+
+  @FunctionalInterface
+  public interface String1Arg1ParSupplier<P> {
+    String get(String arg,P par);
+  }
+
+  @FunctionalInterface
+  public interface String1Arg2ParSupplier<P> {
+    String get(String arg,P par1, P par2);
+  }
+
+  @FunctionalInterface
+  public interface String2ArgSupplier<P> {
+    String get(P arg1, P arg2);
   }
 
 }
