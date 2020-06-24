@@ -78,4 +78,17 @@ class DateUtilsTest {
     assertEquals(1,DateUtils.yearsBetween(LocalDate.parse("2020-01-10"),LocalDate.parse("2021-01-10")));
     assertEquals(0,DateUtils.yearsBetween(LocalDate.parse("2020-02-29"),LocalDate.parse("2021-02-28")));
   }
+
+  @Test
+  public void isLeapDay() {
+    assertFalse(DateUtils.isLeapDay(LocalDate.parse("2019-02-27")));
+    assertFalse(DateUtils.isLeapDay(LocalDate.parse("2019-02-28")));
+    assertFalse(DateUtils.isLeapDay(LocalDate.parse("2019-03-30")));
+    assertFalse(DateUtils.isLeapDay(LocalDate.parse("2019-03-31")));
+    //
+    assertFalse(DateUtils.isLeapDay(LocalDate.parse("2020-02-28")));
+    assertTrue(DateUtils.isLeapDay(LocalDate.parse("2020-02-29")));
+    assertFalse(DateUtils.isLeapDay(LocalDate.parse("2020-03-30")));
+    assertFalse(DateUtils.isLeapDay(LocalDate.parse("2020-03-31")));
+  }
 }
