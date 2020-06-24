@@ -5,7 +5,12 @@ import java.time.LocalDate;
 import java.time.Year;
 import java.time.temporal.ChronoUnit;
 import java.util.stream.Stream;
-
+/*
+  Methods designed to use for financial periods calculations
+  Methods with date range as parameters:
+  -  most methods with use closedOpen convention (inclusive,exclusive)
+  -  methods *CC use closedClosed convention (inclusive, exclusive)
+* */
 public class DateUtils {
   private DateUtils() {}
 
@@ -33,19 +38,14 @@ public class DateUtils {
     return date.getDayOfMonth()==date.lengthOfMonth();
   }
 
-  public static boolean isLeapDayInPeriodCO(LocalDate startInclusive, LocalDate endExclusive) {
+  public static boolean isLeapDayInPeriod(LocalDate startInclusive, LocalDate endExclusive) {
     LocalDate nextLeap = nextOrSameLeapDay(startInclusive);
-    return nextLeap.compareTo(endExclusive)<0;
+    return nextLeap.isBefore(endExclusive);
   }
 
   public static boolean isLeapDayInPeriodCC(LocalDate startInclusive, LocalDate endInclusive) {
     LocalDate nextLeap = nextOrSameLeapDay(startInclusive);
     return nextLeap.compareTo(endInclusive)<=0;
-  }
-
-  public static boolean isLeapDayInPeriod(LocalDate startInclusive, LocalDate endExclusive) {
-    LocalDate nextLeap = nextOrSameLeapDay(startInclusive);
-    return nextLeap.isBefore(endExclusive);
   }
 
   /**
@@ -67,11 +67,11 @@ public class DateUtils {
       }
       else {
         //february 29 or after - return next leap year
-        return ensureLeapDay(input.getYear() + 4);
+        return nextLeapDay(input.getYear());
       }
     }
     else {
-      return ensureLeapDay(((input.getYear() / 4) * 4) + 4);
+      return nextLeapDay(input.getYear());
     }
   }
 
@@ -92,11 +92,11 @@ public class DateUtils {
         return LocalDate.of(input.getYear(), 2, 29);
       }
       else {
-        return ensureLeapDay(input.getYear() + 4);
+        return nextLeapDay(input.getYear());
       }
     }
     else {
-      return ensureLeapDay(((input.getYear() / 4) * 4) + 4);
+      return nextLeapDay(input.getYear());
     }
   }
 
@@ -107,10 +107,20 @@ public class DateUtils {
   /**
    * Calculates number of leap days in period
    * @param startInclusive period start date
+   * @param endExclusive period start date
+   * @return the true if period contains leap year
+   */
+  public static int numberOfLeapDays(LocalDate startInclusive, LocalDate endExclusive) {
+    return numberOfLeapDaysCC(startInclusive,endExclusive.minusDays(1));
+  }
+
+  /**
+   * Calculates number of leap days in period
+   * @param startInclusive period start date
    * @param endInclusive period start date
    * @return the true if period contains leap year
    */
-  public static int numberOfLeapDays(LocalDate startInclusive, LocalDate endInclusive) {
+  public static int numberOfLeapDaysCC(LocalDate startInclusive, LocalDate endInclusive) {
     int count = 0;
     for (int y=startInclusive.getYear(); y<=endInclusive.getYear();y++) {
       if (Year.isLeap(y)) {
@@ -123,26 +133,15 @@ public class DateUtils {
     return count;
   }
 
-  public static int numberOfLeapDays2(LocalDate startInclusive, LocalDate endInclusive) {
-    int count = isLeapDay(startInclusive) ? 1 : 0;
-    LocalDate temp = nextLeapDay(startInclusive);
-    while (!temp.isAfter(endInclusive)) {
-      count++;
-      temp = nextLeapDay(temp);
+  public static LocalDate nextLeapDay(int year) {
+    int possibleLeapYear = year + 4 - year%4;
+    if (Year.isLeap(possibleLeapYear)) {
+      return LocalDate.of(possibleLeapYear, 2, 29);
+    } else {
+      return LocalDate.of(possibleLeapYear + 4, 2, 29);
     }
-    return count;
-  }
-  /**
-   * Checks if period contains leap year
-   * @param startInclusive period start date
-   * @param endInclusive period start date
-   * @return the true if period contains leap year
-   */
-  public static boolean periodContainsLeapYear(LocalDate startInclusive, LocalDate endInclusive) {
-    return numberOfLeapDays(startInclusive,endInclusive)>0;
   }
 
-  // handle 2100, which is not a leap year
   private static LocalDate ensureLeapDay(int possibleLeapYear) {
     if (Year.isLeap(possibleLeapYear)) {
       return LocalDate.of(possibleLeapYear, 2, 29);
@@ -151,8 +150,8 @@ public class DateUtils {
     }
   }
 
-  public static Stream<LocalDate> stream(DateRange range) {
-    long numOfDaysBetween = ChronoUnit.DAYS.between(range.getLowerInclusive(),range.getUpperInclusive())+1;
+  public static Stream<LocalDate> streamOfDates(DateRange range) {
+    long numOfDaysBetween = range.numberOfDays();
     return Stream.iterate(range.getLowerInclusive(),date->date.plusDays(1))
         .limit(numOfDaysBetween);
   }
