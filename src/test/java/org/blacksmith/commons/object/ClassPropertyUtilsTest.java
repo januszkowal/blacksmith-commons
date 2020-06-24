@@ -26,7 +26,7 @@ class ClassPropertyUtilsTest {
   }
 
   @Test
-  void getPropertyFromMethod() throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+  void getPropertyFromMethod() throws NoSuchMethodException {
     Method ms1 = Dummy2.class.getMethod("getS1");
     assertEquals("s1",ClassPropertyUtils.getPropertyFromMethod(ms1));
     assertTrue(ClassPropertyUtils.isGetter(ms1));
