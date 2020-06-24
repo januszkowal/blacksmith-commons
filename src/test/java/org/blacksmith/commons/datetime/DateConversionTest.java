@@ -10,8 +10,8 @@ import java.util.Date;
 import org.junit.jupiter.api.Test;
 
 class DateConversionTest {
-  LocalDate d1= LocalDate.of(2020,6,15);
-  LocalDateTime dt1= LocalDateTime.of(2020,6,15,12,35,14,123);
+  final LocalDate d1= LocalDate.of(2020,6,15);
+  final LocalDateTime dt1= LocalDateTime.of(2020,6,15,12,35,14,123);
   @Test
   void convertLocalDateToDate() {
     assertEquals(createDate(d1),
