@@ -149,14 +149,22 @@ class DateUtilsTest {
   public void numberOfLeapDays() {
     assertEquals(0,DateUtils.numberOfLeapDaysCC(LocalDate.parse("2020-01-01"),LocalDate.parse("2020-01-01")));
     assertEquals(0,DateUtils.numberOfLeapDaysCC(LocalDate.parse("2020-01-01"),LocalDate.parse("2020-02-28")));
+    assertEquals(0,DateUtils.numberOfLeapDays(LocalDate.parse("2020-01-01"),LocalDate.parse("2020-02-29")));
     //
     assertEquals(1,DateUtils.numberOfLeapDaysCC(LocalDate.parse("2020-02-28"),LocalDate.parse("2020-02-29")));
+    assertEquals(1,DateUtils.numberOfLeapDays(LocalDate.parse("2020-02-28"),LocalDate.parse("2020-03-01")));
     assertEquals(1,DateUtils.numberOfLeapDaysCC(LocalDate.parse("2020-02-29"),LocalDate.parse("2020-02-29")));
+    assertEquals(1,DateUtils.numberOfLeapDays(LocalDate.parse("2020-02-29"),LocalDate.parse("2020-03-01")));
     assertEquals(1,DateUtils.numberOfLeapDaysCC(LocalDate.parse("2020-01-01"),LocalDate.parse("2020-02-29")));
+    assertEquals(1,DateUtils.numberOfLeapDays(LocalDate.parse("2020-01-01"),LocalDate.parse("2020-03-01")));
     assertEquals(1,DateUtils.numberOfLeapDaysCC(LocalDate.parse("2020-01-01"),LocalDate.parse("2020-03-01")));
+    assertEquals(1,DateUtils.numberOfLeapDays(LocalDate.parse("2020-01-01"),LocalDate.parse("2020-03-02")));
     assertEquals(1,DateUtils.numberOfLeapDaysCC(LocalDate.parse("2020-01-01"),LocalDate.parse("2024-02-28")));
+    assertEquals(1,DateUtils.numberOfLeapDays(LocalDate.parse("2020-01-01"),LocalDate.parse("2024-02-29")));
     assertEquals(2,DateUtils.numberOfLeapDaysCC(LocalDate.parse("2020-01-01"),LocalDate.parse("2024-02-29")));
+    assertEquals(2,DateUtils.numberOfLeapDays(LocalDate.parse("2020-01-01"),LocalDate.parse("2024-03-01")));
     assertEquals(2,DateUtils.numberOfLeapDaysCC(LocalDate.parse("2020-01-01"),LocalDate.parse("2024-03-01")));
+    assertEquals(2,DateUtils.numberOfLeapDays(LocalDate.parse("2020-01-01"),LocalDate.parse("2024-03-02")));
   }
 
   @Test
@@ -177,5 +185,10 @@ class DateUtilsTest {
     assertTrue(DateUtils.isLeapDay(LocalDate.parse("2020-02-29")));
     assertFalse(DateUtils.isLeapDay(LocalDate.parse("2020-03-30")));
     assertFalse(DateUtils.isLeapDay(LocalDate.parse("2020-03-31")));
+  }
+
+  @Test
+  public void streamOfDateRange() {
+    assertEquals(3,DateUtils.streamOfDates(DateRange.closed(LocalDate.parse("2020-06-01"),LocalDate.parse("2020-06-03"))).count());
   }
 }
