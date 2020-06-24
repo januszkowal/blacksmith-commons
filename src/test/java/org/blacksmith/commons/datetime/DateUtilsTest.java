@@ -73,6 +73,93 @@ class DateUtilsTest {
   }
 
   @Test
+  public void daysBetween() {
+    assertEquals(0,DateUtils.daysBetween(LocalDate.parse("2019-01-01"),LocalDate.parse("2019-01-01")));
+    assertEquals(0,DateUtils.daysBetween2(LocalDate.parse("2019-01-01"),LocalDate.parse("2019-01-01")));
+    assertEquals(1,DateUtils.daysBetween(LocalDate.parse("2019-01-01"),LocalDate.parse("2019-01-02")));
+    assertEquals(1,DateUtils.daysBetween2(LocalDate.parse("2019-01-01"),LocalDate.parse("2019-01-02")));
+    assertEquals(365,DateUtils.daysBetween(LocalDate.parse("2019-01-01"),LocalDate.parse("2020-01-01")));
+    assertEquals(365,DateUtils.daysBetween2(LocalDate.parse("2019-01-01"),LocalDate.parse("2020-01-01")));
+    assertEquals(0,DateUtils.daysBetween(LocalDate.parse("2020-01-01"),LocalDate.parse("2020-01-01")));
+    assertEquals(0,DateUtils.daysBetween2(LocalDate.parse("2020-01-01"),LocalDate.parse("2020-01-01")));
+    assertEquals(1,DateUtils.daysBetween(LocalDate.parse("2020-01-01"),LocalDate.parse("2020-01-02")));
+    assertEquals(1,DateUtils.daysBetween2(LocalDate.parse("2020-01-01"),LocalDate.parse("2020-01-02")));
+    assertEquals(366,DateUtils.daysBetween(LocalDate.parse("2020-01-01"),LocalDate.parse("2021-01-01")));
+    assertEquals(366,DateUtils.daysBetween2(LocalDate.parse("2020-01-01"),LocalDate.parse("2021-01-01")));
+  }
+
+  @Test
+  public void nextLeapDay() {
+    LocalDate d01 = LocalDate.parse("2019-01-14");
+    LocalDate d02 = LocalDate.parse("2019-02-01");
+    LocalDate d03 = LocalDate.parse("2019-02-28");
+    LocalDate d04 = LocalDate.parse("2019-03-01");
+    LocalDate d05 = LocalDate.parse("2019-03-02");
+    LocalDate d11 = LocalDate.parse("2020-01-14");
+    LocalDate d12 = LocalDate.parse("2020-02-01");
+    LocalDate d13 = LocalDate.parse("2020-02-28");
+    LocalDate d14 = LocalDate.parse("2020-02-29");
+    LocalDate d15 = LocalDate.parse("2020-03-01");
+    LocalDate d16 = LocalDate.parse("2020-03-02");
+    LocalDate d21 = LocalDate.parse("2021-01-14");
+    LocalDate d22 = LocalDate.parse("2021-02-01");
+    LocalDate d23 = LocalDate.parse("2021-02-28");
+    LocalDate d24 = LocalDate.parse("2021-03-01");
+    LocalDate d25 = LocalDate.parse("2021-03-02");
+    LocalDate leap1 = LocalDate.parse("2020-02-29");
+    LocalDate leap2 = LocalDate.parse("2024-02-29");
+    assertEquals(leap1,DateUtils.nextLeapDay(d01));
+    assertEquals(leap1,DateUtils.nextLeapDay(d02));
+    assertEquals(leap1,DateUtils.nextLeapDay(d03));
+    assertEquals(leap1,DateUtils.nextLeapDay(d04));
+    assertEquals(leap1,DateUtils.nextLeapDay(d05));
+    assertEquals(leap1,DateUtils.nextOrSameLeapDay(d01));
+    assertEquals(leap1,DateUtils.nextOrSameLeapDay(d02));
+    assertEquals(leap1,DateUtils.nextOrSameLeapDay(d03));
+    assertEquals(leap1,DateUtils.nextOrSameLeapDay(d04));
+    assertEquals(leap1,DateUtils.nextOrSameLeapDay(d05));
+
+    //
+    assertEquals(leap1,DateUtils.nextLeapDay(d11));
+    assertEquals(leap1,DateUtils.nextLeapDay(d12));
+    assertEquals(leap1,DateUtils.nextLeapDay(d13));
+    assertEquals(leap2,DateUtils.nextLeapDay(d14));
+    assertEquals(leap2,DateUtils.nextLeapDay(d15));
+    assertEquals(leap2,DateUtils.nextLeapDay(d16));
+    assertEquals(leap1,DateUtils.nextLeapDay(d11));
+    assertEquals(leap1,DateUtils.nextOrSameLeapDay(d12));
+    assertEquals(leap1,DateUtils.nextOrSameLeapDay(d13));
+    assertEquals(leap1,DateUtils.nextOrSameLeapDay(d14));
+    assertEquals(leap2,DateUtils.nextOrSameLeapDay(d15));
+    assertEquals(leap2,DateUtils.nextOrSameLeapDay(d16));
+    //
+    assertEquals(leap2,DateUtils.nextLeapDay(d21));
+    assertEquals(leap2,DateUtils.nextLeapDay(d22));
+    assertEquals(leap2,DateUtils.nextLeapDay(d23));
+    assertEquals(leap2,DateUtils.nextLeapDay(d24));
+    assertEquals(leap2,DateUtils.nextLeapDay(d25));
+    assertEquals(leap2,DateUtils.nextOrSameLeapDay(d21));
+    assertEquals(leap2,DateUtils.nextOrSameLeapDay(d22));
+    assertEquals(leap2,DateUtils.nextOrSameLeapDay(d23));
+    assertEquals(leap2,DateUtils.nextOrSameLeapDay(d24));
+    assertEquals(leap2,DateUtils.nextOrSameLeapDay(d25));
+  }
+
+  @Test
+  public void numberOfLeapDays() {
+    assertEquals(0,DateUtils.numberOfLeapDaysCC(LocalDate.parse("2020-01-01"),LocalDate.parse("2020-01-01")));
+    assertEquals(0,DateUtils.numberOfLeapDaysCC(LocalDate.parse("2020-01-01"),LocalDate.parse("2020-02-28")));
+    //
+    assertEquals(1,DateUtils.numberOfLeapDaysCC(LocalDate.parse("2020-02-28"),LocalDate.parse("2020-02-29")));
+    assertEquals(1,DateUtils.numberOfLeapDaysCC(LocalDate.parse("2020-02-29"),LocalDate.parse("2020-02-29")));
+    assertEquals(1,DateUtils.numberOfLeapDaysCC(LocalDate.parse("2020-01-01"),LocalDate.parse("2020-02-29")));
+    assertEquals(1,DateUtils.numberOfLeapDaysCC(LocalDate.parse("2020-01-01"),LocalDate.parse("2020-03-01")));
+    assertEquals(1,DateUtils.numberOfLeapDaysCC(LocalDate.parse("2020-01-01"),LocalDate.parse("2024-02-28")));
+    assertEquals(2,DateUtils.numberOfLeapDaysCC(LocalDate.parse("2020-01-01"),LocalDate.parse("2024-02-29")));
+    assertEquals(2,DateUtils.numberOfLeapDaysCC(LocalDate.parse("2020-01-01"),LocalDate.parse("2024-03-01")));
+  }
+
+  @Test
   public void yearsBetween() {
     assertEquals(0,DateUtils.yearsBetween(LocalDate.parse("2020-01-10"),LocalDate.parse("2021-01-09")));
     assertEquals(1,DateUtils.yearsBetween(LocalDate.parse("2020-01-10"),LocalDate.parse("2021-01-10")));

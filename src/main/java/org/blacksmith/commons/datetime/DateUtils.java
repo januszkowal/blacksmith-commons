@@ -133,15 +133,18 @@ public class DateUtils {
     return count;
   }
 
+  /*
+  * Works both for leap year and common year
+  * */
   public static LocalDate nextLeapDay(int year) {
     int possibleLeapYear = year + 4 - year%4;
-    if (Year.isLeap(possibleLeapYear)) {
-      return LocalDate.of(possibleLeapYear, 2, 29);
-    } else {
-      return LocalDate.of(possibleLeapYear + 4, 2, 29);
-    }
+    return ensureLeapDay(possibleLeapYear);
   }
 
+  /*
+   * It is necessary to ensure that calculated year is leap
+   * e.g. 2100 is not leap, and then +4 year is always leap
+   * */
   private static LocalDate ensureLeapDay(int possibleLeapYear) {
     if (Year.isLeap(possibleLeapYear)) {
       return LocalDate.of(possibleLeapYear, 2, 29);
