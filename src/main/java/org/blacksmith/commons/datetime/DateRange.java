@@ -1,6 +1,7 @@
 package org.blacksmith.commons.datetime;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import org.blacksmith.commons.arg.ArgChecker;
 
 /*
@@ -131,5 +132,14 @@ public class DateRange {
   public boolean isDateBeforeRange(LocalDate other) {
     ArgChecker.notNull(other);
     return lowerInclusive.isAfter(other);
+  }
+
+  /**
+   * Number of days in range.
+   *
+   * @return number of days in range
+   */
+  public int numberOfDays() {
+    return Math.toIntExact(ChronoUnit.DAYS.between(lowerInclusive,upperInclusive))+1;
   }
 }
