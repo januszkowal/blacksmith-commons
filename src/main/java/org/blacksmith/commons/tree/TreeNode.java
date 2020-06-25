@@ -17,10 +17,10 @@ public interface TreeNode<T> {
   boolean isParentOf(TreeNode<T> n);
   TreeNode<T> removeDescendantWith(T o);
   TreeNode<T> findDescendantWith(final T o);
-  TreeNode<T>[] findDescendantsWith(final T o);
-  TreeNode<T>[] findDescendantsWith(Predicate<T> p);
-  List<TreeNode<T>> findDescendantsListWith(final T o);
-  List<TreeNode<T>> findDescendantsListWith(Predicate<T> p);
+  TreeNode<T>[] findDescendantsArrayWith(final T o);
+  TreeNode<T>[] findDescendantsArrayWith(Predicate<T> p);
+  List<TreeNode<T>> findDescendantsWith(final T o);
+  List<TreeNode<T>> findDescendantsWith(Predicate<T> p);
   boolean contains(T o);
   void clear();
   boolean isLeaf();

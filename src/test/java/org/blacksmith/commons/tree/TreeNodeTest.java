@@ -59,7 +59,10 @@ class TreeNodeTest {
   public void shouldDelete() {
     setUp1();
     assertEquals(9,treeRoot.size());
-    treeRoot.removeDescendantWith(9);
+    var removed9 = treeRoot.removeDescendantWith(9);
+    assertNotNull(removed9);
+    assertEquals(9,removed9.getData());
+    assertNull(removed9.getParent());
     assertEquals(8,treeRoot.size());
     treeRoot.removeDescendantWith(3);
     assertEquals(4,treeRoot.size());
@@ -227,15 +230,24 @@ class TreeNodeTest {
     assertNotNull(root.findDescendantWith(20));
     assertNull(root.findDescendantWith(25));
     assertNotNull(root.findDescendantWith(6));
-    assertEquals(4,root.findDescendantsListWith(20).size());
-    assertEquals(4,root.findDescendantsListWith((nd)->nd==20).size());
-    assertEquals(4,root.findDescendantsWith((nd)->nd==20).length);
-    assertEquals(2,root.findDescendantsListWith(6).size());
-    assertEquals(2,root.findDescendantsListWith((nd)->nd==6).size());
-    assertEquals(2,root.findDescendantsWith((nd)->nd==6).length);
-    assertEquals(1,root.findDescendantsListWith(7).size());
-    assertEquals(1,root.findDescendantsListWith((nd)->nd==7).size());
-    assertEquals(1,root.findDescendantsWith((nd)->nd==7).length);
+    assertEquals(4,root.findDescendantsWith(20).size());
+    assertEquals(4,root.findDescendantsWith((nd)->nd==20).size());
+    assertEquals(4,root.findDescendantsArrayWith((nd)->nd==20).length);
+    assertEquals(2,root.findDescendantsWith(6).size());
+    assertEquals(2,root.findDescendantsWith((nd)->nd==6).size());
+    assertEquals(2,root.findDescendantsArrayWith((nd)->nd==6).length);
+    assertEquals(1,root.findDescendantsWith(7).size());
+    assertEquals(1,root.findDescendantsWith((nd)->nd==7).size());
+    assertEquals(1,root.findDescendantsArrayWith((nd)->nd==7).length);
+  }
+
+  @Test
+  public void nodeSetData() {
+    setUp1();
+    assertEquals(0,treeRoot.findDescendantsArrayWith(25).length);
+    var node = treeRoot.findDescendantWith(7);
+    node.setData(25);
+    assertEquals(1,treeRoot.findDescendantsArrayWith(25).length);
   }
 
 

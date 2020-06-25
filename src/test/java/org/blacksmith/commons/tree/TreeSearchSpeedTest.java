@@ -32,11 +32,11 @@ public class TreeSearchSpeedTest {
   @Test
   public void testSingleFound2() {
     Assertions.assertArrayEquals(new Long[]{3L},
-        Arrays.stream(root.findDescendantsWith(3L)).map(TreeNode::getData).toArray());
+        Arrays.stream(root.findDescendantsArrayWith(3L)).map(TreeNode::getData).toArray());
   }
 
   @Test
   public void testPredicateFound() {
-    Assertions.assertArrayEquals(new Long[]{7L,8L,9L}, root.findDescendantsListWith((d)->d>6&&d<10).stream().map(TreeNode::getData).sorted().toArray());
+    Assertions.assertArrayEquals(new Long[]{7L,8L,9L}, root.findDescendantsWith((d)->d>6&&d<10).stream().map(TreeNode::getData).sorted().toArray());
   }
 }

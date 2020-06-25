@@ -161,19 +161,19 @@ public class BTreeNode<T> implements TreeNode<T> {
 
   @SuppressWarnings("unchecked")
   @Override
-  public TreeNode<T>[] findDescendantsWith(T o) {
-    return findDescendantsListWith(o).toArray(new TreeNode[0]);
+  public TreeNode<T>[] findDescendantsArrayWith(T o) {
+    return findDescendantsWith(o).toArray(new TreeNode[0]);
   }
 
   @SuppressWarnings("unchecked")
   @Override
-  public TreeNode<T>[] findDescendantsWith(Predicate<T> p) {
-    return findDescendantsListWith(p).toArray(new TreeNode[0]);
+  public TreeNode<T>[] findDescendantsArrayWith(Predicate<T> p) {
+    return findDescendantsWith(p).toArray(new TreeNode[0]);
   }
 
   @SuppressWarnings("unchecked")
   @Override
-  public List<TreeNode<T>> findDescendantsListWith(T o) {
+  public List<TreeNode<T>> findDescendantsWith(T o) {
     final List<TreeNode<T>> found = new ArrayList<>();
     TRAVERSER.traverse(this, (node, f) -> {
       if (node.getData().equals(o)) {
@@ -184,7 +184,7 @@ public class BTreeNode<T> implements TreeNode<T> {
   }
 
   @Override
-  public List<TreeNode<T>> findDescendantsListWith(Predicate<T> p) {
+  public List<TreeNode<T>> findDescendantsWith(Predicate<T> p) {
     final List<TreeNode<T>> found = new ArrayList<>();
     TRAVERSER.traverse(this, (node, f) -> {
       if (p.test(node.getData())) {
