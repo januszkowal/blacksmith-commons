@@ -3,8 +3,7 @@ package org.blacksmith.commons.datetime;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import org.blacksmith.commons.enums.EnumUtils;
 
 public enum TimeUnit implements DateOperation {
   DAY("D", "Day", ChronoUnit.DAYS, 1),
@@ -18,8 +17,7 @@ public enum TimeUnit implements DateOperation {
   private final String unitName;
   private final ChronoUnit chronoUnit;
   private final int chronoUnitCount;
-  private static final Map<String, TimeUnit> unitMap =
-      Stream.of(TimeUnit.values()).collect(Collectors.toMap(TimeUnit::symbol, e -> e));
+  private static final Map<String, TimeUnit> unitMap = EnumUtils.getEnumAttrMap(TimeUnit.class,TimeUnit::symbol);
 
   TimeUnit(String symbol, String unitName, ChronoUnit chronoUnit, int chronoUnitCount) {
     this.symbol = symbol;

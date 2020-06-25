@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
+import org.assertj.core.util.Arrays;
 import org.blacksmith.commons.tree.traverser.RevOrderTreeTraverserRecur;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -268,7 +269,7 @@ class TreeNodeTest {
   @Test
   public void treeConversionTest() {
       TreeNode<Integer> tree = StdTraverseTreeFactory.createTree();
-      final Integer[] expected = new Integer[]{1, 3, 7, 6, 9, 8, 2, 5, 4};
+      final Integer[] expected = Arrays.array(1, 3, 7, 6, 9, 8, 2, 5, 4);
       Assertions.assertArrayEquals(expected,tree.toDataArray(new Integer[0], new RevOrderTreeTraverserRecur()));
       Assertions.assertIterableEquals(List.of(expected),tree.toDataList(new RevOrderTreeTraverserRecur()));
       Assertions.assertArrayEquals(expected,tree.toDataArray(new Integer[0]));

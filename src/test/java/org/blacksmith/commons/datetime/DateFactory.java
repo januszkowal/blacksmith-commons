@@ -73,7 +73,6 @@ public class DateFactory {
     cal.set(Calendar.HOUR_OF_DAY,dt.getHour());
     cal.set(Calendar.MINUTE,dt.getMinute());
     cal.set(Calendar.SECOND,dt.getSecond());
-    Timestamp result = new Timestamp(cal.toInstant().toEpochMilli());
-    return result;
+    return new Timestamp(cal.toInstant().toEpochMilli());
   }
 }

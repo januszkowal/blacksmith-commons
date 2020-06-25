@@ -2,10 +2,14 @@ package org.blacksmith.commons.enums;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.EnumMap;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class EnumUtils {
   private EnumUtils() {}
@@ -31,13 +35,19 @@ public class EnumUtils {
     }
   }
 
-  public static <E extends Enum<E>> Map<String, E> getEnumMap(Class<E> enumClass) {
-    return Arrays.stream(enumClass.getEnumConstants()).collect(Collectors.toMap(E::name,e->e));
+  public static <K,E extends Enum<E>> Map<K, E> getEnumAttrMap(Class<E> enumClass, Function<E,K> keyExtractor) {
+    return Stream.of(enumClass.getEnumConstants()).collect(Collectors.toMap(keyExtractor::apply,e->e));
   }
 
-  public static <E extends Enum<E>> EnumMap<E,String> getEnumNameMap(Class<E> enumClass)
+  public static <E extends Enum<E>> EnumMap<E,String> getEnumMap(Class<E> enumClass)
   {
-    return new EnumMap<>(enumClass);
+    return Stream.of(enumClass.getEnumConstants())
+        .collect(Collectors.toMap(e->e, Enum::name,(e1,e2)->e1,()->new EnumMap<>(enumClass)));
+  }
+
+  public static <E extends Enum<E>> EnumSet<E> getEnumSet(Class<E> enumClass)
+  {
+    return EnumSet.allOf(enumClass);
   }
 
 
@@ -46,20 +56,19 @@ public class EnumUtils {
     return new ArrayList<>(Arrays.asList(enumClass.getEnumConstants()));
   }
 
-  public static <E extends Enum<E>> List<String> getEnumNames(List<E> enums)
+  public static <E extends Enum<E>> List<String> getEnumNames(Collection<E> enums)
   {
     return enums.stream().map(Enum::name).collect(Collectors.toList());
   }
 
   public static <E extends Enum<E>> List<String> getEnumNamesList(Class<E> enumClass)
   {
-    return Arrays.stream(enumClass.getEnumConstants()).map(Enum::name).collect(Collectors.toList());
+    return Stream.of(enumClass.getEnumConstants()).map(Enum::name).collect(Collectors.toList());
   }
 
   public static <E extends Enum<E>> String[] getEnumNamesArray(Class<E> enumClass)
   {
-    List<String> lst = getEnumNamesList(enumClass);
-    return lst.toArray(new String[0]);
+    return getEnumNamesList(enumClass).toArray(new String[0]);
   }
 
   public static <E extends Enum<E>> boolean isValidEnum(Class<E> enumClass,

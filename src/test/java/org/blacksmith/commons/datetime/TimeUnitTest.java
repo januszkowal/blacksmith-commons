@@ -101,4 +101,50 @@ class TimeUnitTest {
     assertEquals(ChronoUnit.YEARS,TimeUnit.YEAR.chronoUnit());
     assertEquals(1,TimeUnit.YEAR.chronoUnitCount());
   }
+
+  @Test
+  void operationsTest() {
+    LocalDate date = LocalDate.parse("2020-01-10");
+    assertEquals(date.plusDays(1), TimeUnit.DAY.addTo(date));
+    assertEquals(date.plusDays(5), TimeUnit.DAY.addTo(date,5));
+    assertEquals(date.plusDays(-5),TimeUnit.DAY.addTo(date,-5));
+    assertEquals(date.minusDays(1),TimeUnit.DAY.minusFrom(date));
+    assertEquals(date.minusDays(5),TimeUnit.DAY.minusFrom(date,5));
+    assertEquals(date.minusDays(-5),TimeUnit.DAY.minusFrom(date,-5));
+
+    assertEquals(date.plusWeeks(1), TimeUnit.WEEK.addTo(date));
+    assertEquals(date.plusWeeks(2), TimeUnit.WEEK.addTo(date,2));
+    assertEquals(date.plusWeeks(-2),TimeUnit.WEEK.addTo(date,-2));
+    assertEquals(date.minusWeeks(1),TimeUnit.WEEK.minusFrom(date));
+    assertEquals(date.minusWeeks(2),TimeUnit.WEEK.minusFrom(date,2));
+    assertEquals(date.minusWeeks(-2),TimeUnit.WEEK.minusFrom(date,-2));
+
+    assertEquals(date.plusMonths(1), TimeUnit.MONTH.addTo(date));
+    assertEquals(date.plusMonths(2), TimeUnit.MONTH.addTo(date,2));
+    assertEquals(date.plusMonths(-2),TimeUnit.MONTH.addTo(date,-2));
+    assertEquals(date.minusMonths(1),TimeUnit.MONTH.minusFrom(date));
+    assertEquals(date.minusMonths(2),TimeUnit.MONTH.minusFrom(date,2));
+    assertEquals(date.minusMonths(-2),TimeUnit.MONTH.minusFrom(date,-2));
+
+    assertEquals(date.plusMonths(3), TimeUnit.QUARTER.addTo(date));
+    assertEquals(date.plusMonths(6), TimeUnit.QUARTER.addTo(date,2));
+    assertEquals(date.plusMonths(-6),TimeUnit.QUARTER.addTo(date,-2));
+    assertEquals(date.minusMonths(3),TimeUnit.QUARTER.minusFrom(date));
+    assertEquals(date.minusMonths(6),TimeUnit.QUARTER.minusFrom(date,2));
+    assertEquals(date.minusMonths(-6),TimeUnit.QUARTER.minusFrom(date,-2));
+
+    assertEquals(date.plusMonths(6), TimeUnit.HALF_YEAR.addTo(date));
+    assertEquals(date.plusMonths(18), TimeUnit.HALF_YEAR.addTo(date,3));
+    assertEquals(date.plusMonths(-18),TimeUnit.HALF_YEAR.addTo(date,-3));
+    assertEquals(date.minusMonths(6),TimeUnit.HALF_YEAR.minusFrom(date));
+    assertEquals(date.minusMonths(18),TimeUnit.HALF_YEAR.minusFrom(date,3));
+    assertEquals(date.minusMonths(-18),TimeUnit.HALF_YEAR.minusFrom(date,-3));
+
+    assertEquals(date.plusYears(1), TimeUnit.YEAR.addTo(date));
+    assertEquals(date.plusYears(3), TimeUnit.YEAR.addTo(date,3));
+    assertEquals(date.plusYears(-3),TimeUnit.YEAR.addTo(date,-3));
+    assertEquals(date.minusYears(1),TimeUnit.YEAR.minusFrom(date));
+    assertEquals(date.minusYears(3),TimeUnit.YEAR.minusFrom(date,3));
+    assertEquals(date.minusYears(-3),TimeUnit.YEAR.minusFrom(date,-3));
+  }
 }

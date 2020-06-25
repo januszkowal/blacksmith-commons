@@ -75,7 +75,7 @@ public interface TreeNode<T> {
   }
 
   default boolean isChildOf(TreeNode<T> node) {
-    return (this.getParent()==null) ? false : this.getParent()==node;
+    return (this.getParent() != null) && this.getParent() == node;
   }
 
   T[] toDataArray(T[] a);
