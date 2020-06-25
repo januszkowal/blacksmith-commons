@@ -250,6 +250,18 @@ class TreeNodeTest {
     assertEquals(1,treeRoot.findDescendantsArrayWith(25).length);
   }
 
+  @Test
+  public void nodeAddChild() {
+    setUp1();
+    var n3 = treeRoot.findDescendantWith(3);
+    assertEquals(0,n3.findDescendantsWith(33).size());
+    assertEquals(0,n3.findDescendantsWith(36).size());
+    n3.addChildWith(33);
+    n3.addChild(new BTreeNode<>(36));
+    assertEquals(1,n3.findDescendantsWith(33).size());
+    assertEquals(1,n3.findDescendantsWith(36).size());
+  }
+
 
 
   @SuppressWarnings("rawtypes")
