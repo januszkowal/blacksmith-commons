@@ -75,6 +75,11 @@ public class DateConversion {
     return (date == null) ? null : createZonedDateTimeFromMillis(date.getTime());
   }
 
+  /* java.util.Date->java.time.LocalDate */
+  public static ZonedDateTime convertDateToZonedDateTime(java.util.Date date, ZoneId zone) {
+    return (date == null) ? null : createZonedDateTimeFromMillis(date.getTime(),zone);
+  }
+
 
   public static ZonedDateTime createZonedDateTimeFromLocalDate(LocalDate localDate) {
     return localDate.atStartOfDay(ZoneId.systemDefault());
@@ -87,12 +92,13 @@ public class DateConversion {
   /* Via Instant */
   public static ZonedDateTime createZonedDateTimeFromDateViaInstant(java.util.Date date) {
     /* don't pass java.sql.Date - it violates Liskov Substitution Principle */
-    return date.toInstant().atZone(ZoneId.systemDefault());
+    return createZonedDateTimeFromDateViaInstant(date,ZoneId.systemDefault());
   }
 
-  /* Via Miliseconds */
-  public static ZonedDateTime createZonedDateFromMillis(long millis) {
-    return Instant.ofEpochMilli(millis).atZone(ZoneId.systemDefault());
+  /* Via Instant */
+  public static ZonedDateTime createZonedDateTimeFromDateViaInstant(java.util.Date date, ZoneId zone) {
+    /* don't pass java.sql.Date - it violates Liskov Substitution Principle */
+    return date.toInstant().atZone(zone);
   }
 
   public static java.sql.Timestamp createSqlTimestampFromDateViaMillis(java.util.Date date) {
@@ -104,6 +110,10 @@ public class DateConversion {
   }
   
   public static ZonedDateTime createZonedDateTimeFromMillis(long milis) {
-    return Instant.ofEpochMilli(milis).atZone(ZoneId.systemDefault());
+    return createZonedDateTimeFromMillis(milis,ZoneId.systemDefault());
+  }
+
+  public static ZonedDateTime createZonedDateTimeFromMillis(long milis, ZoneId zone) {
+    return Instant.ofEpochMilli(milis).atZone(zone);
   }
 }
