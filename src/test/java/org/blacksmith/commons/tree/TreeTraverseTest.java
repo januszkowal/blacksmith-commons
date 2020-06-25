@@ -1,5 +1,6 @@
 package org.blacksmith.commons.tree;
 
+import java.util.List;
 import org.blacksmith.commons.tree.traverser.BreadthOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.PostOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverser;
@@ -14,54 +15,47 @@ import org.junit.jupiter.api.extension.ExtendWith;
 @DisplayName("TreeTraverseTest")
 @ExtendWith(TimingExtension.class)
 public class TreeTraverseTest {
-  public BTreeNode<Integer> createTree() {
-    BTreeNode<Integer> root = new BTreeNode<>(1);
-    final TreeNode<Integer> node2 = root.addChildWith(2);
-    node2.addChildWith(4);
-    node2.addChildWith(5);
-
-    final TreeNode<Integer> node3 = root.addChildWith(3);
-    final TreeNode<Integer> node6 = node3.addChildWith(6);
-    node3.addChildWith(7);
-    node6.addChildWith(8);
-    node6.addChildWith(9);
-    return root;
-  }
 
   @Test
   public void testPreOrderTreeTraverser() {
-    TreeNode<Integer> tree = createTree();
-    final Integer[] arr = tree.toDataArray(new Integer[0], new PreOrderTreeTraverser());
-    Assertions.assertArrayEquals(new Integer[]{1,2,4,5,3,6,8,9,7},arr);
+    TreeNode<Integer> tree = StdTraverseTreeFactory.createTree();
+    var expected = List.of(1,2,4,5,3,6,8,9,7);
+    Assertions.assertIterableEquals(expected,tree.toDataList(new PreOrderTreeTraverser()));
+    Assertions.assertEquals(expected.size(),tree.size(new PreOrderTreeTraverser()));
   }
   @Test
   public void testPostOrderTreeTraverser() {
-    TreeNode<Integer> tree = createTree();
-    final Integer[] arr = tree.toDataArray(new Integer[0], new PostOrderTreeTraverser());
-    Assertions.assertArrayEquals(new Integer[]{4, 5, 2, 8, 9, 6, 7, 3, 1},arr);
+    TreeNode<Integer> tree = StdTraverseTreeFactory.createTree();
+    var expected = List.of(4, 5, 2, 8, 9, 6, 7, 3, 1);
+    Assertions.assertIterableEquals(expected,tree.toDataList(new PostOrderTreeTraverser()));
+    Assertions.assertEquals(expected.size(),tree.size(new PostOrderTreeTraverser()));
   }
   @Test
   public void testBreadthOrderTreeTraverser() {
-    TreeNode<Integer> tree = createTree();
-    final Integer[] arr = tree.toDataArray(new Integer[0], new BreadthOrderTreeTraverser());
-    Assertions.assertArrayEquals(new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9},arr);
+    TreeNode<Integer> tree = StdTraverseTreeFactory.createTree();
+    var expected = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9);
+    Assertions.assertIterableEquals(expected,tree.toDataList(new BreadthOrderTreeTraverser()));
+    Assertions.assertEquals(expected.size(),tree.size(new BreadthOrderTreeTraverser()));
   }
   @Test
   public void testPreOrderTreeTraverserStack() {
-    TreeNode<Integer> tree = createTree();
-    final Integer[] arr = tree.toDataArray(new Integer[0], new PreOrderTreeTraverserRecur());
-    Assertions.assertArrayEquals(new Integer[]{1,2,4,5,3,6,8,9,7},arr);
+    TreeNode<Integer> tree = StdTraverseTreeFactory.createTree();
+    var expected = List.of(1,2,4,5,3,6,8,9,7);
+    Assertions.assertIterableEquals(expected,tree.toDataList(new PreOrderTreeTraverserRecur()));
+    Assertions.assertEquals(expected.size(),tree.size(new PreOrderTreeTraverserRecur()));
 
   }
   @Test
   public void testRevOrderTreeTraverserStack2() {
-    TreeNode<Integer> tree = createTree();
-    final Integer[] arr = tree.toDataArray(new Integer[0], new RevOrderTreeTraverserRecur());
-    Assertions.assertArrayEquals(new Integer[]{1,3,7,6,9,8,2,5,4},arr);
+    TreeNode<Integer> tree = StdTraverseTreeFactory.createTree();
+    var expected = List.of(1,3,7,6,9,8,2,5,4);
+    Assertions.assertIterableEquals(expected,tree.toDataList(new RevOrderTreeTraverserRecur()));
+    Assertions.assertEquals(expected.size(),tree.size(new RevOrderTreeTraverserRecur()));
   }
+
   @Test
   public void testSize() {
-    TreeNode<Integer> tree = createTree();
+    TreeNode<Integer> tree = StdTraverseTreeFactory.createTree();
     Assertions.assertEquals(9,tree.size());
   }
 }

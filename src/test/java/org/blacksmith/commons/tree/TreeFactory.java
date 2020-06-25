@@ -2,11 +2,11 @@ package org.blacksmith.commons.tree;
 
 import java.util.Deque;
 import java.util.LinkedList;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 
 public class TreeFactory<T> {
 
+  private long counter = 0;
   private final Function<Long,T> dataSupplier;
 
   public TreeFactory(Function<Long,T> dataSupplier) {
@@ -14,20 +14,27 @@ public class TreeFactory<T> {
   }
 
   public void populate(TreeNode<T> node, long maxTotalCount, int maxChildrenCount) {
-    populateInternal(node, new AtomicLong(0L), maxTotalCount, maxChildrenCount);
+    this.counter = 0;
+    populateInternal(node, maxTotalCount, maxChildrenCount);
   }
 
-  private void populateInternal(TreeNode<T> node, AtomicLong counter, long maxTotalCount, int maxChildrenCount) {
+  private void populateInternal(TreeNode<T> node, long maxTotalCount, int maxChildrenCount) {
     final Deque<TreeNode<T>> dq = new LinkedList<>();
     dq.add(node);
     while (!dq.isEmpty()) {
       var pNode = dq.pollFirst();
-      if (counter.get() < maxTotalCount) {
-        for (int i = 0; i < maxChildrenCount && counter.get() < maxTotalCount; i++) {
-          var subNode = pNode.addChildWith(dataSupplier.apply(counter.incrementAndGet()));
+      if (counter < maxTotalCount) {
+        for (int i = 0; i < maxChildrenCount && counter < maxTotalCount; i++) {
+          ++counter;
+          var subNode = pNode.addChildWith(dataSupplier.apply(counter));
           dq.add(subNode);
         }
       }
     }
   }
+
+  public static Function<Long,Long> createLongSupplier() {
+    return t -> t;
+  }
+
 }

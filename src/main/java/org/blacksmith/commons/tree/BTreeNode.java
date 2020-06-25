@@ -103,7 +103,7 @@ public class BTreeNode<T> implements TreeNode<T> {
 
   @Override
   public boolean isLeaf() {
-    return this.children.isEmpty();
+    return (this.parent!=null) && this.children.isEmpty();
   }
 
   @Override

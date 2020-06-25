@@ -28,12 +28,26 @@ public interface TreeNode<T> {
   int size();
   int size(TreeTraverser traverser);
 
-  default boolean isDescendantOf(TreeNode<T> n) {
-    if (n == null) {
+  default boolean hasChildren() {
+    return !getChildren().isEmpty();
+  }
+
+  default boolean isDescendantOf(TreeNode<T> node) {
+    if (node == null) {
       return false;
     }
-    TreeNode<T> tmp = findDescendantWith(n.getData());
-    return this.equals(tmp);
+    TreeNode<T> n = this;
+    TreeNode<T> parent;
+    while ((parent=n.getParent())!=null) {
+      if (parent==node) return
+        true;
+      n = parent;
+    }
+    return false;
+  }
+
+  default boolean isChildOf(TreeNode<T> node) {
+    return (this.getParent()==null) ? false : this.getParent()==node;
   }
 
   T[] toDataArray(T[] a);
