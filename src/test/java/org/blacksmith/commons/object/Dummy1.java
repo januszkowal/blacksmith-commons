@@ -1,5 +1,6 @@
 package org.blacksmith.commons.object;
 
+@SuppressWarnings("unused")
 public class Dummy1 {
   private String s1;
   private final String s2;

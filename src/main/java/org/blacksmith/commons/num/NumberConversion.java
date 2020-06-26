@@ -126,8 +126,8 @@ public class NumberConversion
   }
 
   @SuppressWarnings("unchecked")
-  public static Number convertNumberObjectToTargetClass(Object number, Class<?> targetClass) {
-    return (number==null) ? null : convertNumberToTargetClassInternal((Number)number, (Class<Number>)targetClass);
+  public static Number convertNumberObjectToTargetClass(Object number, Class<? extends Number> targetClass) {
+    return (number==null) ? null : convertNumberToTargetClassInternal((Number)number, targetClass);
   }
 
   @SuppressWarnings("unchecked")

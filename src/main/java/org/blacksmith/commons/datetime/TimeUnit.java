@@ -17,7 +17,7 @@ public enum TimeUnit implements DateOperation {
   private final String unitName;
   private final ChronoUnit chronoUnit;
   private final int chronoUnitCount;
-  private static final Map<String, TimeUnit> unitMap = EnumUtils.getEnumAttrMap(TimeUnit.class,TimeUnit::symbol);
+  private static final Map<String, TimeUnit> unitMap = EnumUtils.getAttrEnumMap(TimeUnit.class,TimeUnit::symbol);
 
   TimeUnit(String symbol, String unitName, ChronoUnit chronoUnit, int chronoUnitCount) {
     this.symbol = symbol;

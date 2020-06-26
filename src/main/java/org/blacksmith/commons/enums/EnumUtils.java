@@ -35,11 +35,27 @@ public class EnumUtils {
     }
   }
 
-  public static <K,E extends Enum<E>> Map<K, E> getEnumAttrMap(Class<E> enumClass, Function<E,K> keyExtractor) {
-    return Stream.of(enumClass.getEnumConstants()).collect(Collectors.toMap(keyExtractor::apply,e->e));
+  /*
+  * Returns map containing:
+  * key - value returned by keyExtractor
+  * value - enum
+  * */
+  public static <K,E extends Enum<E>> Map<K, E> getAttrEnumMap(Class<E> enumClass, Function<E,K> keyExtractor) {
+    return Stream.of(enumClass.getEnumConstants()).collect(Collectors.toMap(keyExtractor,e->e));
   }
 
-  public static <E extends Enum<E>> EnumMap<E,String> getEnumMap(Class<E> enumClass)
+  /*
+   * Returns map containing:
+   * key - enum
+   * value - value returned by valueExtractor
+   * */
+  public static <E extends Enum<E>,K> EnumMap<E,K> getEnumAttrMap(Class<E> enumClass, Function<E,K> valueExtractor)
+  {
+    return Stream.of(enumClass.getEnumConstants())
+        .collect(Collectors.toMap(e->e, valueExtractor,(e1,e2)->e1,()->new EnumMap<>(enumClass)));
+  }
+
+  public static <E extends Enum<E>> EnumMap<E,String> getEnumNameMap(Class<E> enumClass)
   {
     return Stream.of(enumClass.getEnumConstants())
         .collect(Collectors.toMap(e->e, Enum::name,(e1,e2)->e1,()->new EnumMap<>(enumClass)));

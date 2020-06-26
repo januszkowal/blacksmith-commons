@@ -20,8 +20,8 @@ class EnumUtilsTest {
   }
 
   @Test
-  void getEnumMap() {
-    assertThat(EnumUtils.getEnumMap(TimeUnit.class))
+  void getEnumNameMap() {
+    assertThat(EnumUtils.getEnumNameMap(TimeUnit.class))
         .containsAllEntriesOf(Map.of(TimeUnit.DAY,TimeUnit.DAY.name(),
             TimeUnit.WEEK,TimeUnit.WEEK.name(),
             TimeUnit.MONTH,TimeUnit.MONTH.name(),
@@ -31,15 +31,25 @@ class EnumUtilsTest {
   }
 
   @Test
-  void getEnumAttrMap() {
-    Map<String, TimeUnit> x = EnumUtils.getEnumAttrMap(TimeUnit.class, TimeUnit::symbol);
-    assertThat(EnumUtils.getEnumAttrMap(TimeUnit.class,TimeUnit::symbol))
+  void getAttrEnumMap() {
+    assertThat(EnumUtils.getAttrEnumMap(TimeUnit.class, TimeUnit::symbol))
         .containsAllEntriesOf(Map.of(TimeUnit.DAY.symbol(),TimeUnit.DAY,
             TimeUnit.WEEK.symbol(),TimeUnit.WEEK,
             TimeUnit.MONTH.symbol(),TimeUnit.MONTH,
             TimeUnit.QUARTER.symbol(),TimeUnit.QUARTER,
             TimeUnit.HALF_YEAR.symbol(),TimeUnit.HALF_YEAR,
             TimeUnit.YEAR.symbol(),TimeUnit.YEAR));
+  }
+
+  @Test
+  void getEnumAttrMap() {
+    assertThat(EnumUtils.getEnumAttrMap(TimeUnit.class,TimeUnit::symbol))
+        .containsAllEntriesOf(Map.of(TimeUnit.DAY,TimeUnit.DAY.symbol(),
+            TimeUnit.WEEK,TimeUnit.WEEK.symbol(),
+            TimeUnit.MONTH,TimeUnit.MONTH.symbol(),
+            TimeUnit.QUARTER,TimeUnit.QUARTER.symbol(),
+            TimeUnit.HALF_YEAR,TimeUnit.HALF_YEAR.symbol(),
+            TimeUnit.YEAR,TimeUnit.YEAR.symbol()));
   }
 
   @Test
@@ -92,10 +102,10 @@ class EnumUtilsTest {
 
   @Test
   void inArray() {
-    assertTrue(EnumUtils.inArray(TimeUnit.DAY,new TimeUnit[]{TimeUnit.DAY}));
-    assertTrue(EnumUtils.inArray(TimeUnit.DAY,new TimeUnit[]{TimeUnit.MONTH, TimeUnit.DAY}));
-    assertTrue(EnumUtils.inArray(TimeUnit.DAY,new TimeUnit[]{TimeUnit.WEEK, TimeUnit.DAY}));
-    assertFalse(EnumUtils.inArray(TimeUnit.DAY,new TimeUnit[]{TimeUnit.MONTH}));
-    assertFalse(EnumUtils.inArray(TimeUnit.DAY,new TimeUnit[]{}));
+    assertTrue(EnumUtils.inArray(TimeUnit.DAY,Arrays.array(TimeUnit.DAY)));
+    assertTrue(EnumUtils.inArray(TimeUnit.DAY,Arrays.array(TimeUnit.MONTH, TimeUnit.DAY)));
+    assertTrue(EnumUtils.inArray(TimeUnit.DAY,Arrays.array(TimeUnit.WEEK, TimeUnit.DAY)));
+    assertFalse(EnumUtils.inArray(TimeUnit.DAY,Arrays.array(TimeUnit.MONTH)));
+    assertFalse(EnumUtils.inArray(TimeUnit.DAY,Arrays.array()));
   }
 }

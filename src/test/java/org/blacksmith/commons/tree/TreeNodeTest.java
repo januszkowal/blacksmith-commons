@@ -70,7 +70,8 @@ class TreeNodeTest {
     setUp1();
     assertEquals(9,treeRoot.size());
     var n9 = treeRoot.findDescendantWith(9);
-    n9.getParent().removeChild(n9);
+    var n9Removed = n9.getParent().removeChild(n9);
+    assertNull(n9Removed.getParent());
     assertEquals(8,treeRoot.size());
     var n3 = treeRoot.findDescendantWith(3);
     n3.getParent().removeChild(n3);

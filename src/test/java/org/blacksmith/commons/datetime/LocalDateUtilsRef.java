@@ -7,6 +7,7 @@ import java.util.Spliterators;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+@SuppressWarnings({"SameParameterValue", "unused"})
 public class LocalDateUtilsRef {
   // First day-of-month minus one for a standard year
   // array length 13 with element zero ignored, so month 1 to 12 can be queried directly
