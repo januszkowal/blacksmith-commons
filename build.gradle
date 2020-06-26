@@ -18,6 +18,7 @@ targetCompatibility = JavaVersion.VERSION_11
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
 
+apply from: 'dependencies.gradle'
 
 repositories {
     mavenLocal()
@@ -25,15 +26,13 @@ repositories {
 }
 
 dependencies {
-    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
-    compile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.3'
-    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.28'
-    testCompile group: 'org.assertj', name: 'assertj-core', version: '3.15.0'
-    testCompile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
-    testCompile group: 'ch.qos.logback', name: 'logback-core', version: '1.2.3'
-    testImplementation 'org.blacksmith:blacksmith-test:0.1.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.2'
-    testImplementation 'org.hamcrest:hamcrest-library:2.1'
+    compile libs.apacheCommons
+    compile libs.commonsBeanutils
+    compile libs.slf4jApi
+    testCompile libs.assertjTest
+    testCompile libs.logback
+    testImplementation libs.blacksmithTest
+    testImplementation libs.junitTest
 }
 
 
