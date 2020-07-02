@@ -95,6 +95,22 @@ public class ArgChecker {
     }
   }
 
+  public static void isFalse(boolean value) {
+    if (value) {
+      throw new IllegalArgumentException("Argument must be false");
+    }
+  }
+  public static void isFalse(boolean value, String message) {
+    if (value) {
+      throw new IllegalArgumentException(message);
+    }
+  }
+  public static void isFalse(boolean value, StringSupplier messageSupplier) {
+    if (value) {
+      throw new IllegalArgumentException(messageSupplier.get());
+    }
+  }
+
   public static <T extends Comparable<T>> void inOrderOrEqual(T val1, T val2) {
     notNull(val1);
     notNull(val2);
