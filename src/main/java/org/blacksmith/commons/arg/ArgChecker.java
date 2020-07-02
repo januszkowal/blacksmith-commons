@@ -1,6 +1,7 @@
 package org.blacksmith.commons.arg;
 
 import java.util.Collection;
+import org.apache.commons.lang3.StringUtils;
 
 public class ArgChecker {
   private ArgChecker(){}
@@ -25,6 +26,25 @@ public class ArgChecker {
       throw new IllegalArgumentException(messageSupplier.get());
     }
   }
+
+  public static void notEmpty(String o) {
+    if (StringUtils.isEmpty(o)) {
+      throw new IllegalArgumentException("Argument can't be empty or null");
+    }
+  }
+
+  public static void notEmpty(String o, String message) {
+    if (StringUtils.isEmpty(o)) {
+      throw new IllegalArgumentException(message);
+    }
+  }
+
+  public static void notEmpty(String o, StringSupplier messageSupplier) {
+    if (o == null) {
+      throw new IllegalArgumentException(messageSupplier.get());
+    }
+  }
+
 
   public static void notEmpty(Object[] a) {
     if (a==null || a.length == 0) {
@@ -58,6 +78,23 @@ public class ArgChecker {
       throw new IllegalArgumentException(messageSupplier.get());
     }
   }
+
+  public static void isTrue(boolean value) {
+    if (!value) {
+      throw new IllegalArgumentException("Argument must be true");
+    }
+  }
+  public static void isTrue(boolean value, String message) {
+    if (!value) {
+      throw new IllegalArgumentException(message);
+    }
+  }
+  public static void isTrue(boolean value, StringSupplier messageSupplier) {
+    if (!value) {
+      throw new IllegalArgumentException(messageSupplier.get());
+    }
+  }
+
   public static <T extends Comparable<T>> void inOrderOrEqual(T val1, T val2) {
     notNull(val1);
     notNull(val2);

@@ -101,6 +101,16 @@ class ArgCheckerTest {
   }
 
   @Test
+  void isTrue() {
+    ArgChecker.isTrue(true);
+    ArgChecker.isTrue(true,"is false");
+    ArgChecker.isTrue(true,()->"is false");
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.isTrue(false));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.isTrue(false,"is false"));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.isTrue(false,()->"is false"));
+  }
+
+  @Test
   public void inOrderOrEqual() {
     String message = "Arguments must be in order";
     StringSupplier ssu1=()->message;
