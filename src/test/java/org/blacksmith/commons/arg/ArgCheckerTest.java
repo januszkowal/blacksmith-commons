@@ -41,10 +41,26 @@ class ArgCheckerTest {
     ArgChecker.notEmpty(new String[]{""});
     ArgChecker.notEmpty(new String[]{""},"empty array");
     ArgChecker.notEmpty(new String[]{""},()->"empty array");
-    assertThrows(IllegalArgumentException.class,()-> ArgChecker.notEmpty(new String[]{}));
+    assertThrows(IllegalArgumentException.class,
+        ()-> ArgChecker.notEmpty(new String[]{}));
     //noinspection ObviousNullCheck
-    assertThrows(IllegalArgumentException.class,()-> ArgChecker.notEmpty(new String[]{},"empty array"));
-    assertThrows(IllegalArgumentException.class,()-> ArgChecker.notEmpty(new String[]{},()->"empty array"));
+    assertThrows(IllegalArgumentException.class,
+        ()-> ArgChecker.notEmpty(new String[]{},"empty array"));
+    assertThrows(IllegalArgumentException.class,
+        ()-> ArgChecker.notEmpty(new String[]{},()->"empty array"));
+  }
+
+  @Test
+  void notEmptyString() {
+    ArgChecker.notEmpty("x");
+    ArgChecker.notEmpty("x","empty array");
+    ArgChecker.notEmpty("x",()->"empty array");
+    assertThrows(IllegalArgumentException.class,
+        ()-> ArgChecker.notEmpty(""));
+    assertThrows(IllegalArgumentException.class,
+        ()-> ArgChecker.notEmpty("","empty astring"));
+    assertThrows(IllegalArgumentException.class,
+        ()-> ArgChecker.notEmpty("",()->"empty string"));
   }
 
   @Test
@@ -108,6 +124,16 @@ class ArgCheckerTest {
     assertThrows(IllegalArgumentException.class,()->ArgChecker.isTrue(false));
     assertThrows(IllegalArgumentException.class,()->ArgChecker.isTrue(false,"is false"));
     assertThrows(IllegalArgumentException.class,()->ArgChecker.isTrue(false,()->"is false"));
+  }
+
+  @Test
+  void isFalse() {
+    ArgChecker.isFalse(false);
+    ArgChecker.isFalse(false,"is true");
+    ArgChecker.isFalse(false,()->"is true");
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.isFalse(true));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.isFalse(true,"is false"));
+    assertThrows(IllegalArgumentException.class,()->ArgChecker.isFalse(true,()->"is false"));
   }
 
   @Test

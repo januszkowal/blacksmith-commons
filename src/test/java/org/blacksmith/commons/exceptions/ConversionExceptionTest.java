@@ -8,7 +8,7 @@ class ConversionExceptionTest {
   @Test
   public void exceptionOfMessageFormat() {
     try {
-      ConversionException.ofMessageFormat("Wrong arguments: %s, %d","Qaz",123);
+      throw ConversionException.ofMessageFormat("Wrong arguments: {0}, {1}","Qaz",123);
     }
     catch (ConversionException e) {
       assertEquals("Wrong arguments: Qaz, 123",e.getMessage());
@@ -19,7 +19,7 @@ class ConversionExceptionTest {
   public void exceptionOfThrowableMessageFormat() {
     try {
       Throwable t = new IllegalArgumentException("Value to large");
-      ConversionException.ofThrowableMessageFormat(t,"Wrong arguments: {0}, {1}","Qaz",123);
+      throw ConversionException.ofThrowableMessageFormat(t,"Wrong arguments: {0}, {1}","Qaz",123);
     }
     catch (ConversionException e) {
       assertEquals("Wrong arguments: Qaz, 123",e.getMessage());

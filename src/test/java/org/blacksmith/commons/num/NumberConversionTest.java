@@ -11,6 +11,7 @@ import java.math.BigInteger;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
+@SuppressWarnings("ConstantConditions")
 class NumberConversionTest {
 
   @Test

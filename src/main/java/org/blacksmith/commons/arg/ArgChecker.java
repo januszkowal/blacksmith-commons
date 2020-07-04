@@ -40,7 +40,7 @@ public class ArgChecker {
   }
 
   public static void notEmpty(String o, StringSupplier messageSupplier) {
-    if (o == null) {
+    if (StringUtils.isEmpty(o)) {
       throw new IllegalArgumentException(messageSupplier.get());
     }
   }
