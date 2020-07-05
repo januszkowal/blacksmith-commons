@@ -6,24 +6,27 @@ import java.util.Map;
 import org.blacksmith.commons.enums.EnumUtils;
 
 public enum TimeUnit implements DateOperation {
-  DAY("D", "Day", ChronoUnit.DAYS, 1),
-  WEEK("W", "Week", ChronoUnit.WEEKS, 1),
-  MONTH("M", "Month", ChronoUnit.MONTHS,1),
-  QUARTER("Q", "Quarter", ChronoUnit.MONTHS, 3),
-  HALF_YEAR("H", "Half-Year", ChronoUnit.MONTHS, 6),
-  YEAR("Y", "Year", ChronoUnit.YEARS,1);
+  DAY("D", "Day", ChronoUnit.DAYS, 1, false),
+  WEEK("W", "Week", ChronoUnit.WEEKS, 1, false),
+  MONTH("M", "Month", ChronoUnit.MONTHS,1, true),
+  QUARTER("Q", "Quarter", ChronoUnit.MONTHS, 3, true),
+  HALF_YEAR("H", "Half-Year", ChronoUnit.MONTHS, 6, true),
+  YEAR("Y", "Year", ChronoUnit.YEARS,1, true);
 
   private final String symbol;
   private final String unitName;
   private final ChronoUnit chronoUnit;
   private final int chronoUnitCount;
+  private final boolean isEomAdjustAvailable;
   private static final Map<String, TimeUnit> unitMap = EnumUtils.getAttrEnumMap(TimeUnit.class,TimeUnit::symbol);
 
-  TimeUnit(String symbol, String unitName, ChronoUnit chronoUnit, int chronoUnitCount) {
+  TimeUnit(String symbol, String unitName, ChronoUnit chronoUnit, int chronoUnitCount,
+      boolean isEomAdjustAvailable) {
     this.symbol = symbol;
     this.unitName = unitName;
     this.chronoUnit = chronoUnit;
     this.chronoUnitCount = chronoUnitCount;
+    this.isEomAdjustAvailable = isEomAdjustAvailable;
   }
 
   public static TimeUnit ofSymbol(String symbol) {
@@ -33,6 +36,19 @@ public enum TimeUnit implements DateOperation {
   @Override
   public <T extends Temporal> T addTo(T t, int q) {
     return chronoUnit.addTo(t, q * chronoUnitCount);
+  }
+
+  @Override
+  public <T extends Temporal> T addToWithEomAdjust(T t, int q, boolean eomAdjust) {
+    if (eomAdjust && isEomAdjustAvailable) {
+      T x = t;
+      x = eomAdjust ? (T)t.plus(1,ChronoUnit.DAYS) : t;
+      x = chronoUnit.addTo(x, q * chronoUnitCount);
+      x = eomAdjust ? (T)x.minus(1,ChronoUnit.DAYS) : t;
+      return x;
+    }
+    else
+      return chronoUnit.addTo(t, q * chronoUnitCount);
   }
 
   @Override
