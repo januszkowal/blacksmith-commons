@@ -15,14 +15,14 @@ public class PropertyUpdater<O,P> {
 
   public boolean set(O object, P newValue) {
     P oldValue = getter.apply(object);
-    if (oldValue==null && newValue==null) {
+    if (oldValue==newValue) {
       return false;
     }
-    else if (oldValue==null || newValue==null) {
+    if (oldValue==null || newValue==null) {
       setter.accept(object,newValue);
       return true;
     }
-    else if (!oldValue.equals(newValue)){
+    if (!oldValue.equals(newValue)){
       setter.accept(object,newValue);
       return true;
     }
