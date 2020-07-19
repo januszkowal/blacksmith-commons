@@ -12,7 +12,6 @@ class PropertyUpdaterTest {
     PropertyUpdater<Dummy,Long> updater = new PropertyUpdater<>(Dummy::getProp1,Dummy::setProp1);
     assertTrue(updater.set(obj,7L));
     assertEquals(7L,obj.getProp1());
-    assertFalse(updater.set(obj,7L));
 
     assertTrue(updater.set(obj,3L));
     assertEquals(3L,obj.getProp1());
