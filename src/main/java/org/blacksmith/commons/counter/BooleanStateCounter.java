@@ -15,6 +15,14 @@ public class BooleanStateCounter {
     }
   }
 
+  public void updateTrue() {
+    trueCounter.incrementAndGet();
+  }
+
+  public void updateFalse() {
+    falseCounter.incrementAndGet();
+  }
+
   public boolean hasTrue() {
     return trueCounter.get()>0;
   }
