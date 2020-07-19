@@ -10,12 +10,17 @@ class PropertyUpdaterTest {
   public void update1() {
     Dummy obj = new Dummy();
     PropertyUpdater<Dummy,Long> updater = new PropertyUpdater<>(Dummy::getProp1,Dummy::setProp1);
-    updater.set(obj,7L);
+    assertTrue(updater.set(obj,7L));
     assertEquals(7L,obj.getProp1());
-    updater.set(obj,3L);
+    assertFalse(updater.set(obj,7L));
+
+    assertTrue(updater.set(obj,3L));
     assertEquals(3L,obj.getProp1());
-    updater.set(obj,null);
+    assertFalse(updater.set(obj,3L));
+
+    assertTrue(updater.set(obj,null));
     assertNull(obj.getProp1());
+    assertFalse(updater.set(obj,null));
   }
 
   @Test
