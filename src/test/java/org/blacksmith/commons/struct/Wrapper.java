@@ -1,10 +1,10 @@
 package org.blacksmith.commons.struct;
 
-public class Holder<E> {
+public class Wrapper<E> {
   private final boolean isChanged;
   private final E value;
 
-  public Holder(E value, boolean isChanged) {
+  public Wrapper(E value, boolean isChanged) {
     this.value = value;
     this.isChanged = isChanged;
   }
