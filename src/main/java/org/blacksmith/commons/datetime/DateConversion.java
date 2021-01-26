@@ -117,15 +117,16 @@ public class DateConversion {
     return Instant.ofEpochMilli(milis).atZone(zone);
   }
 
-  public static ZonedDateTime createZonedDateTimeFromLocalTime(Timestamp dateTime, ZoneId zone) {
+  public static ZonedDateTime createZonedDateTimeFromTimestamp(Timestamp dateTime, ZoneId zone) {
     return ZonedDateTime.of(dateTime.toLocalDateTime(), zone);
   }
 
   public static ZonedDateTime createZonedDateTimeFromLocalTime(LocalDateTime dateTime, ZoneId zone) {
-    return ZonedDateTime.of(dateTime, zone);
+    // eq ZoneDateTime.of
+    return dateTime.atZone(zone);
   }
 
-  public static Timestamp createTimestampFromZonedDateTime(ZonedDateTime dateTime, ZoneId zone) {
-    return Timestamp.valueOf(dateTime.withZoneSameInstant(zone).toLocalDateTime());
+  public static Timestamp createTimestampFromZonedDateTime(ZonedDateTime zonedDateTime, ZoneId zone) {
+    return Timestamp.valueOf(zonedDateTime.withZoneSameInstant(zone).toLocalDateTime());
   }
 }
