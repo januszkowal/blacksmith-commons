@@ -1,5 +1,6 @@
 package org.blacksmith.commons.datetime;
 
+import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -75,11 +76,10 @@ public class DateConversion {
     return (date == null) ? null : createZonedDateTimeFromMillis(date.getTime());
   }
 
-  /* java.util.Date->java.time.LocalDate */
+  /* java.util.Date->java.time.ZonedDateTime */
   public static ZonedDateTime convertDateToZonedDateTime(java.util.Date date, ZoneId zone) {
     return (date == null) ? null : createZonedDateTimeFromMillis(date.getTime(),zone);
   }
-
 
   public static ZonedDateTime createZonedDateTimeFromLocalDate(LocalDate localDate) {
     return localDate.atStartOfDay(ZoneId.systemDefault());
@@ -115,5 +115,17 @@ public class DateConversion {
 
   public static ZonedDateTime createZonedDateTimeFromMillis(long milis, ZoneId zone) {
     return Instant.ofEpochMilli(milis).atZone(zone);
+  }
+
+  public static ZonedDateTime createZonedDateTimeFromLocalTime(Timestamp dateTime, ZoneId zone) {
+    return ZonedDateTime.of(dateTime.toLocalDateTime(), zone);
+  }
+
+  public static ZonedDateTime createZonedDateTimeFromLocalTime(LocalDateTime dateTime, ZoneId zone) {
+    return ZonedDateTime.of(dateTime, zone);
+  }
+
+  public static Timestamp createTimestampFromZonedDateTime(ZonedDateTime dateTime, ZoneId zone) {
+    return Timestamp.valueOf(dateTime.withZoneSameInstant(zone).toLocalDateTime());
   }
 }
