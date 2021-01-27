@@ -68,6 +68,8 @@ class DateConversionTest {
         DateConversion.convertSqlDateToLocalDateTime(DateFactory.createSqlDate(d1)));
     assertEquals(dt1n,
         DateConversion.convertSqlDateToLocalDateTime(DateFactory.createSqlDate(dt1)));
+    assertEquals(dt1n,
+        DateConversion.convertSqlDateToLocalDateTime(DateFactory.createSqlDate(dt1n)));
   }
 
   @Test
