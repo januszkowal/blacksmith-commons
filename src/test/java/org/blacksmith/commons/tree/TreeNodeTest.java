@@ -48,34 +48,35 @@ class TreeNodeTest {
   @Test
   public void shouldClearTree() {
     setUp1();
-    assertEquals(9,treeRoot.size());
-    assertEquals(2,treeRoot.getChildren().size());
+    assertEquals(9, treeRoot.size());
+    assertEquals(2, treeRoot.getChildren().size());
     assertFalse(treeRoot.getChildren().isEmpty());
     treeRoot.clear();
-    assertEquals(1,treeRoot.size());
-    assertEquals(0,treeRoot.getChildren().size());
+    assertEquals(1, treeRoot.size());
+    assertEquals(0, treeRoot.getChildren().size());
     assertTrue(treeRoot.getChildren().isEmpty());
   }
+
   @Test
   public void shouldDelete() {
     setUp1();
-    assertEquals(9,treeRoot.size());
+    assertEquals(9, treeRoot.size());
     var removed9 = treeRoot.removeDescendantWith(9);
     assertNotNull(removed9);
-    assertEquals(9,removed9.getData());
+    assertEquals(9, removed9.getData());
     assertNull(removed9.getParent());
-    assertEquals(8,treeRoot.size());
+    assertEquals(8, treeRoot.size());
     treeRoot.removeDescendantWith(3);
-    assertEquals(4,treeRoot.size());
+    assertEquals(4, treeRoot.size());
     setUp1();
-    assertEquals(9,treeRoot.size());
+    assertEquals(9, treeRoot.size());
     var n9 = treeRoot.findDescendantWith(9);
     var n9Removed = n9.getParent().removeChild(n9);
     assertNull(n9Removed.getParent());
-    assertEquals(8,treeRoot.size());
+    assertEquals(8, treeRoot.size());
     var n3 = treeRoot.findDescendantWith(3);
     n3.getParent().removeChild(n3);
-    assertEquals(4,treeRoot.size());
+    assertEquals(4, treeRoot.size());
   }
 
   @Test
@@ -102,7 +103,7 @@ class TreeNodeTest {
   @Test
   public void nodeSize() {
     setUp1();
-    assertEquals(9,treeRoot.size());
+    assertEquals(9, treeRoot.size());
     assertEquals(3, node2.size());
     assertEquals(5, node3.size());
     assertEquals(1, node4.size());
@@ -232,54 +233,53 @@ class TreeNodeTest {
     assertNotNull(root.findDescendantWith(20));
     assertNull(root.findDescendantWith(25));
     assertNotNull(root.findDescendantWith(6));
-    assertEquals(4,root.findDescendantsWith(20).size());
-    assertEquals(4,root.findDescendantsWith((nd)->nd==20).size());
-    assertEquals(4,root.findDescendantsArrayWith((nd)->nd==20).length);
-    assertEquals(2,root.findDescendantsWith(6).size());
-    assertEquals(2,root.findDescendantsWith((nd)->nd==6).size());
-    assertEquals(2,root.findDescendantsArrayWith((nd)->nd==6).length);
-    assertEquals(1,root.findDescendantsWith(7).size());
-    assertEquals(1,root.findDescendantsWith((nd)->nd==7).size());
-    assertEquals(1,root.findDescendantsArrayWith((nd)->nd==7).length);
+    assertEquals(4, root.findDescendantsWith(20).size());
+    assertEquals(4, root.findDescendantsWith((nd) -> nd == 20).size());
+    assertEquals(4, root.findDescendantsArrayWith((nd) -> nd == 20).length);
+    assertEquals(2, root.findDescendantsWith(6).size());
+    assertEquals(2, root.findDescendantsWith((nd) -> nd == 6).size());
+    assertEquals(2, root.findDescendantsArrayWith((nd) -> nd == 6).length);
+    assertEquals(1, root.findDescendantsWith(7).size());
+    assertEquals(1, root.findDescendantsWith((nd) -> nd == 7).size());
+    assertEquals(1, root.findDescendantsArrayWith((nd) -> nd == 7).length);
   }
 
   @Test
   public void nodeSetData() {
     setUp1();
-    assertEquals(0,treeRoot.findDescendantsArrayWith(25).length);
+    assertEquals(0, treeRoot.findDescendantsArrayWith(25).length);
     var node = treeRoot.findDescendantWith(7);
     node.setData(25);
-    assertEquals(1,treeRoot.findDescendantsArrayWith(25).length);
+    assertEquals(1, treeRoot.findDescendantsArrayWith(25).length);
   }
 
   @Test
   public void nodeAddChild() {
     setUp1();
     var n3 = treeRoot.findDescendantWith(3);
-    assertEquals(0,n3.findDescendantsWith(33).size());
-    assertEquals(0,n3.findDescendantsWith(36).size());
+    assertEquals(0, n3.findDescendantsWith(33).size());
+    assertEquals(0, n3.findDescendantsWith(36).size());
     n3.addChildWith(33);
     n3.addChild(new BTreeNode<>(36));
-    assertEquals(1,n3.findDescendantsWith(33).size());
-    assertEquals(1,n3.findDescendantsWith(36).size());
+    assertEquals(1, n3.findDescendantsWith(33).size());
+    assertEquals(1, n3.findDescendantsWith(36).size());
   }
-
 
 
   @SuppressWarnings("rawtypes")
   @Test
   public void treeConversionTest() {
-      TreeNode<Integer> tree = StdTraverseTreeFactory.createTree();
-      final Integer[] expected = Arrays.array(1, 3, 7, 6, 9, 8, 2, 5, 4);
-      Assertions.assertArrayEquals(expected,tree.toDataArray(new Integer[0], new RevOrderTreeTraverserRecur()));
-      Assertions.assertIterableEquals(List.of(expected),tree.toDataList(new RevOrderTreeTraverserRecur()));
-      Assertions.assertArrayEquals(expected,tree.toDataArray(new Integer[0]));
-      Assertions.assertIterableEquals(List.of(expected),tree.toDataList());
-      assertThat(tree.toList()).extracting(TreeNode::getData).containsExactly(expected);
-      var nodeArray = tree.toArray();
-      Assertions.assertEquals(expected.length,nodeArray.length);
-      for (int i=0; i<expected.length; i++) {
-        assertEquals(expected[i],((TreeNode)nodeArray[i]).getData());
-      }
+    TreeNode<Integer> tree = StdTraverseTreeFactory.createTree();
+    final Integer[] expected = Arrays.array(1, 3, 7, 6, 9, 8, 2, 5, 4);
+    Assertions.assertArrayEquals(expected, tree.toDataArray(new Integer[0], new RevOrderTreeTraverserRecur()));
+    Assertions.assertIterableEquals(List.of(expected), tree.toDataList(new RevOrderTreeTraverserRecur()));
+    Assertions.assertArrayEquals(expected, tree.toDataArray(new Integer[0]));
+    Assertions.assertIterableEquals(List.of(expected), tree.toDataList());
+    assertThat(tree.toList()).extracting(TreeNode::getData).containsExactly(expected);
+    var nodeArray = tree.toArray();
+    Assertions.assertEquals(expected.length, nodeArray.length);
+    for (int i = 0; i < expected.length; i++) {
+      assertEquals(expected[i], ((TreeNode) nodeArray[i]).getData());
+    }
   }
 }

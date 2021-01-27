@@ -15,8 +15,8 @@ public class TreeSearchSpeedTest {
   @BeforeAll
   public static void setUp() {
     System.out.println("Set up");
-    new TreeFactory<>(TreeFactory.createLongSupplier()).populate(root,NODES_COUNT, 3);
-    System.out.println("Initialized with size: "+root.size());
+    new TreeFactory<>(TreeFactory.createLongSupplier()).populate(root, NODES_COUNT, 3);
+    System.out.println("Initialized with size: " + root.size());
   }
 
   @Test
@@ -26,7 +26,8 @@ public class TreeSearchSpeedTest {
 
   @Test
   public void testSingleNotFound() {
-    Assertions.assertNull(Optional.ofNullable(root.findDescendantWith(NODES_COUNT + 1L)).map(TreeNode::getData).orElse(null));
+    Assertions
+        .assertNull(Optional.ofNullable(root.findDescendantWith(NODES_COUNT + 1L)).map(TreeNode::getData).orElse(null));
   }
 
   @Test
@@ -37,6 +38,7 @@ public class TreeSearchSpeedTest {
 
   @Test
   public void testPredicateFound() {
-    Assertions.assertArrayEquals(new Long[]{7L,8L,9L}, root.findDescendantsWith((d)->d>6&&d<10).stream().map(TreeNode::getData).sorted().toArray());
+    Assertions.assertArrayEquals(new Long[]{7L, 8L, 9L},
+        root.findDescendantsWith((d) -> d > 6 && d < 10).stream().map(TreeNode::getData).sorted().toArray());
   }
 }

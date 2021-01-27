@@ -7,17 +7,18 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class ArrayUtils {
+
   /**
    * Class contains only static methods.
    */
-  private ArrayUtils() {}
+  private ArrayUtils() {
+  }
 
   /**
    * Transform a multidimensional array into a one-dimensional list.
    *
    * @param array Array (possibly multidimensional).
-   * @return an array of all the {@code Object} instances contained in
-   * {@code array}.
+   * @return an array of all the {@code Object} instances contained in {@code array}.
    */
   public static Object[] flatten(Object[] array) {
     return flattenArrayToList(array).toArray();
@@ -27,8 +28,7 @@ public class ArrayUtils {
    * Transform a multidimensional array into a one-dimensional list.
    *
    * @param array Array (possibly multidimensional).
-   * @return a list of all the {@code Object} instances contained in
-   * {@code array}.
+   * @return a list of all the {@code Object} instances contained in {@code array}.
    */
   public static List<Object> flattenArrayToList(Object[] array) {
     final List<Object> list = new ArrayList<>();
@@ -50,10 +50,10 @@ public class ArrayUtils {
     C[] array = (C[]) Array.newInstance(componentType, 0);
     return list.toArray(array);
   }
-  
+
   @SafeVarargs
-  public static <T> List<T> varArgsToList(T ... args) {
+  public static <T> List<T> varArgsToList(T... args) {
     return Stream.of(args).collect(Collectors.toList());
   }
-    
+
 }

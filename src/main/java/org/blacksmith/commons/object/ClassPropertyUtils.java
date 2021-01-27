@@ -6,64 +6,64 @@ import java.lang.reflect.Method;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.blacksmith.commons.string.StringUtils;
 
-public class ClassPropertyUtils
-{
-  private ClassPropertyUtils() {}
-  public static String getPropertyFromMethod(Method method)
-  {
-    if (method.getName().startsWith("is"))
+public class ClassPropertyUtils {
+
+  private ClassPropertyUtils() {
+  }
+
+  public static String getPropertyFromMethod(Method method) {
+    if (method.getName().startsWith("is")) {
       return StringUtils.firstLetterToLowerCase(method.getName().substring(2));
-    else if (method.getName().startsWith("get"))
+    } else if (method.getName().startsWith("get")) {
       return StringUtils.firstLetterToLowerCase(method.getName().substring(3));
-    else
+    } else {
       return StringUtils.firstLetterToLowerCase(method.getName());
+    }
   }
 
   public static Field getPropertyField(Class<?> type, String name) {
-    if (type == null)
+    if (type == null) {
       return null;
-    try
-    {
+    }
+    try {
       return type.getDeclaredField(name);
-    }
-    catch (NoSuchFieldException nf)
-    {
+    } catch (NoSuchFieldException nf) {
       return getPropertyField(type.getSuperclass(), name);
-    }
-    catch (SecurityException se)
-    {
+    } catch (SecurityException se) {
       return null;
     }
   }
 
-  public static boolean isGetter(Method method)
-  {
-    if (!(method.getName().startsWith("get") || method.getName().startsWith("is")))
+  public static boolean isGetter(Method method) {
+    if (!(method.getName().startsWith("get") || method.getName().startsWith("is"))) {
       return false;
-    else if (method.getParameterTypes().length != 0)
+    } else if (method.getParameterTypes().length != 0) {
       return false;
-    else if (void.class.equals(method.getReturnType()))
+    } else if (void.class.equals(method.getReturnType())) {
       return false;
-    else
+    } else {
       return true;
+    }
   }
 
-  public static boolean isSetter(Method method)
-  {
-    if (!method.getName().startsWith("set"))
+  public static boolean isSetter(Method method) {
+    if (!method.getName().startsWith("set")) {
       return false;
-    else
+    } else {
       return method.getParameterTypes().length == 1;
+    }
   }
 
-  public static Object getProperty(Object object, String path) throws IllegalAccessException, InvocationTargetException, NoSuchMethodException
-  {
+  public static Object getProperty(Object object, String path)
+      throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
     String[] paths = path.split("\\.");
     Object o = object;
-    for (String p: paths)//Splitter.on(".").splitToList(path))
+    for (String p : paths)//Splitter.on(".").splitToList(path))
     {
       o = PropertyUtils.getSimpleProperty(o, p);
-      if (o==null) break;
+      if (o == null) {
+        break;
+      }
     }
     return o;
   }

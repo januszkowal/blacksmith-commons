@@ -20,7 +20,7 @@ public class TreeTraverseSpeedTest {
   @BeforeAll
   public static void setUp() {
     System.out.println("Set up");
-    new TreeFactory<>(Long::intValue).populate(root,NODES_COUNT, 3);
+    new TreeFactory<>(Long::intValue).populate(root, NODES_COUNT, 3);
   }
 
   @RepeatedTest(TEST_REPEAT)
@@ -60,6 +60,7 @@ public class TreeTraverseSpeedTest {
 
   @RepeatedTest(TEST_REPEAT)
   public void testFindFirst2() {
-    Assertions.assertNull(Optional.ofNullable(root.findDescendantWith(NODES_COUNT + 1)).map(TreeNode::getData).orElse(null));
+    Assertions
+        .assertNull(Optional.ofNullable(root.findDescendantWith(NODES_COUNT + 1)).map(TreeNode::getData).orElse(null));
   }
 }

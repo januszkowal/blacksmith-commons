@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class KVSplitter {
+
   private final Pattern pattern;
   private final boolean trimResults;
 
@@ -20,33 +21,33 @@ public class KVSplitter {
     return new KVSplitterBuilder();
   }
 
-  public Map<String,String> splitToMap(String text) {
+  public Map<String, String> splitToMap(String text) {
     Matcher m = pattern.matcher(text);
-    Map<String,String> result = new HashMap<>();
+    Map<String, String> result = new HashMap<>();
     while (m.find()) {
-      String key = trimResults?m.group(1).trim():m.group(1);
-      String value = trimResults?m.group(2).trim():m.group(2);
-      result.put(key,value);
+      String key = trimResults ? m.group(1).trim() : m.group(1);
+      String value = trimResults ? m.group(2).trim() : m.group(2);
+      result.put(key, value);
     }
     return result;
   }
 
-  public List<Pair<String,String>> splitToList(String text) {
+  public List<Pair<String, String>> splitToList(String text) {
     Matcher m = pattern.matcher(text);
-    List<Pair<String,String>> result = new ArrayList<>();
+    List<Pair<String, String>> result = new ArrayList<>();
     while (m.find()) {
-      String key = trimResults?m.group(1).trim():m.group(1);
-      String value = trimResults?m.group(2).trim():m.group(2);
-      result.add(Pair.of(key,value));
+      String key = trimResults ? m.group(1).trim() : m.group(1);
+      String value = trimResults ? m.group(2).trim() : m.group(2);
+      result.add(Pair.of(key, value));
     }
     return result;
   }
 
   public static class KVSplitterBuilder {
 
-    private String keyValueSeparator="=";
-    private String pairSeparator=";";
-    private boolean trimResults=false;
+    private String keyValueSeparator = "=";
+    private String pairSeparator = ";";
+    private boolean trimResults = false;
 
     public KVSplitterBuilder() {
     }
@@ -83,11 +84,12 @@ public class KVSplitter {
 
     public KVSplitter build() {
       String pattern;
-      if (keyValueSeparator.equals(" ") || keyValueSeparator.equals("\\s+"))
-        pattern = "(?:(\\w*)" + keyValueSeparator + "(\\w*\\s*))(?=" + pairSeparator +"|$)";
-      else
-        pattern = "(?:(\\s*\\w*\\s*)" + keyValueSeparator + "(\\s*\\w*\\s*))(?=" + pairSeparator +"|$)";
-      return new KVSplitter(Pattern.compile(pattern),trimResults);
+      if (keyValueSeparator.equals(" ") || keyValueSeparator.equals("\\s+")) {
+        pattern = "(?:(\\w*)" + keyValueSeparator + "(\\w*\\s*))(?=" + pairSeparator + "|$)";
+      } else {
+        pattern = "(?:(\\s*\\w*\\s*)" + keyValueSeparator + "(\\s*\\w*\\s*))(?=" + pairSeparator + "|$)";
+      }
+      return new KVSplitter(Pattern.compile(pattern), trimResults);
     }
   }
 }

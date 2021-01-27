@@ -65,19 +65,19 @@ class NumberConversionTest {
 
   @Test
   void createBoolean() {
-    assertEquals(Boolean.TRUE,NumberConversion.createBoolean(1));
-    assertEquals(Boolean.FALSE,NumberConversion.createBoolean(2));
-    assertEquals(Boolean.FALSE,NumberConversion.createBoolean(0));
+    assertEquals(Boolean.TRUE, NumberConversion.createBoolean(1));
+    assertEquals(Boolean.FALSE, NumberConversion.createBoolean(2));
+    assertEquals(Boolean.FALSE, NumberConversion.createBoolean(0));
     Number num = null;
     assertNull(NumberConversion.createBoolean(num));
   }
 
   @Test
   void createLong() {
-    assertEquals(56L,NumberConversion.createLong(56L));
-    assertEquals(56L,NumberConversion.createLong(BigDecimal.valueOf(56L)));
-    assertEquals(56L,NumberConversion.createLong("56"));
-    assertEquals(56L,NumberConversion.createLong("56"));
+    assertEquals(56L, NumberConversion.createLong(56L));
+    assertEquals(56L, NumberConversion.createLong(BigDecimal.valueOf(56L)));
+    assertEquals(56L, NumberConversion.createLong("56"));
+    assertEquals(56L, NumberConversion.createLong("56"));
     Number num = null;
     String str = null;
     assertNull(NumberConversion.createLong(num));
@@ -95,31 +95,32 @@ class NumberConversionTest {
 
   @Test
   void toBoolean() {
-    assertTrue(NumberConversion.toBoolean(1L,Boolean.FALSE));
-    assertTrue(NumberConversion.toBoolean(null,Boolean.TRUE));
-    assertFalse(NumberConversion.toBoolean(null,Boolean.FALSE));
+    assertTrue(NumberConversion.toBoolean(1L, Boolean.FALSE));
+    assertTrue(NumberConversion.toBoolean(null, Boolean.TRUE));
+    assertFalse(NumberConversion.toBoolean(null, Boolean.FALSE));
   }
 
   @Test
   void toInt() {
-    assertEquals(1,NumberConversion.toInt(1L));
-    assertEquals(18,NumberConversion.toInt(18L));
-    assertEquals(18,NumberConversion.toInt("18"));
-    assertEquals(0,NumberConversion.toInt(""));
+    assertEquals(1, NumberConversion.toInt(1L));
+    assertEquals(18, NumberConversion.toInt(18L));
+    assertEquals(18, NumberConversion.toInt("18"));
+    assertEquals(0, NumberConversion.toInt(""));
   }
 
   @Test
   void toLong() {
-    assertEquals(1,NumberConversion.toLong(1d));
-    assertEquals(18,NumberConversion.toLong(18d));
-    assertEquals(18,NumberConversion.toLong("18"));
-    assertEquals(0,NumberConversion.toLong(""));
+    assertEquals(1, NumberConversion.toLong(1d));
+    assertEquals(18, NumberConversion.toLong(18d));
+    assertEquals(18, NumberConversion.toLong("18"));
+    assertEquals(0, NumberConversion.toLong(""));
   }
 
   @Test
   void toListLongTest() {
-    assertThat(NumberConversion.toListLong(List.of(BigInteger.valueOf(1L),BigInteger.valueOf(2),BigInteger.valueOf(3L))))
-        .containsAll(List.of(1L,2L,3L));
+    assertThat(
+        NumberConversion.toListLong(List.of(BigInteger.valueOf(1L), BigInteger.valueOf(2), BigInteger.valueOf(3L))))
+        .containsAll(List.of(1L, 2L, 3L));
   }
 
   @Test

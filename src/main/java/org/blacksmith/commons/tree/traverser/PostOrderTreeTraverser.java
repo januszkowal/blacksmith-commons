@@ -9,7 +9,7 @@ import org.blacksmith.commons.tree.TreeNode.TreeTraverser;
 
 public final class PostOrderTreeTraverser implements TreeTraverser {
 
-  public <T,U> boolean traverse(TreeNode<T> root, NodeAcceptant<T, U> visitor, U callerData) {
+  public <T, U> boolean traverse(TreeNode<T> root, NodeAcceptant<T, U> visitor, U callerData) {
     final Deque<TreeNode<T>> dq = new LinkedList<>();
     final Deque<TreeNode<T>> dq2 = new LinkedList<>();
     dq.add(root);
@@ -30,7 +30,7 @@ public final class PostOrderTreeTraverser implements TreeTraverser {
     return true;
   }
 
-  public <T,U> void traverse(TreeNode<T> root, NodeVisitor<T, U> visitor, U callerData) {
+  public <T, U> void traverse(TreeNode<T> root, NodeVisitor<T, U> visitor, U callerData) {
     final Deque<TreeNode<T>> dq = new LinkedList<>();
     final Deque<TreeNode<T>> dq2 = new LinkedList<>();
     dq.add(root);

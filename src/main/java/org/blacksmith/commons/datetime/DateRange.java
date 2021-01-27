@@ -5,7 +5,7 @@ import java.time.temporal.ChronoUnit;
 import org.blacksmith.commons.arg.ArgChecker;
 
 /*
-*
+ *
  * <blockquote>
  *
  * <table>
@@ -23,8 +23,9 @@ import org.blacksmith.commons.arg.ArgChecker;
  * </table>
  *
  * </blockquote>
-* */
+ * */
 public class DateRange {
+
   public static final String LOWER_DATE_MUST_BE_NOT_NULL = "Lower date must be not null";
   public static final String UPPER_DATE_MUST_BE_NOT_NULL = "Upper date must be not null";
   private final LocalDate lowerInclusive;
@@ -40,16 +41,19 @@ public class DateRange {
     ArgChecker.notNull(upperInclusive, UPPER_DATE_MUST_BE_NOT_NULL);
     return create(lowerInclusive, upperInclusive);
   }
+
   public static DateRange open(LocalDate lowerExclusive, LocalDate upperExclusive) {
     ArgChecker.notNull(lowerExclusive, LOWER_DATE_MUST_BE_NOT_NULL);
     ArgChecker.notNull(upperExclusive, UPPER_DATE_MUST_BE_NOT_NULL);
     return create(lowerExclusive.plusDays(1), upperExclusive.minusDays(1));
   }
+
   public static DateRange openClosed(LocalDate lowerExclusive, LocalDate upperInclusive) {
     ArgChecker.notNull(lowerExclusive, LOWER_DATE_MUST_BE_NOT_NULL);
     ArgChecker.notNull(upperInclusive, UPPER_DATE_MUST_BE_NOT_NULL);
     return create(lowerExclusive.plusDays(1), upperInclusive);
   }
+
   public static DateRange closedOpen(LocalDate lowerInclusive, LocalDate upperExclusive) {
     ArgChecker.notNull(lowerInclusive, LOWER_DATE_MUST_BE_NOT_NULL);
     ArgChecker.notNull(upperExclusive, UPPER_DATE_MUST_BE_NOT_NULL);
@@ -59,8 +63,8 @@ public class DateRange {
   public static DateRange range(LocalDate lower, BoundType lowerBound, LocalDate upper, BoundType upperBound) {
     ArgChecker.notNull(lower, LOWER_DATE_MUST_BE_NOT_NULL);
     ArgChecker.notNull(upper, UPPER_DATE_MUST_BE_NOT_NULL);
-    LocalDate startInclusive = lowerBound==BoundType.OPEN ? lower.plusDays(1) : lower;
-    LocalDate endInclusive   = upperBound==BoundType.OPEN ? upper.minusDays(1) : upper;
+    LocalDate startInclusive = lowerBound == BoundType.OPEN ? lower.plusDays(1) : lower;
+    LocalDate endInclusive = upperBound == BoundType.OPEN ? upper.minusDays(1) : upper;
     return create(startInclusive, endInclusive);
   }
 
@@ -71,12 +75,15 @@ public class DateRange {
   public LocalDate getLowerInclusive() {
     return this.lowerInclusive;
   }
+
   public LocalDate getLowerExclusive() {
     return this.lowerInclusive.minusDays(1);
   }
+
   public LocalDate getUpperInclusive() {
     return this.upperInclusive;
   }
+
   public LocalDate getUpperExclusive() {
     return this.upperInclusive.plusDays(1);
   }
@@ -84,7 +91,7 @@ public class DateRange {
   /**
    * Checks whether this range contains specified date.
    *
-   * @param other  the other date to compare to, not null
+   * @param other the other date to compare to, not null
    * @return true if this range contains date
    */
   public boolean contains(LocalDate other) {
@@ -95,7 +102,7 @@ public class DateRange {
   /**
    * Checks whether this range is after the specified date.
    *
-   * @param other  the other date to compare to, not null
+   * @param other the other date to compare to, not null
    * @return true if this range is entirely after the specified date
    */
 
@@ -103,30 +110,33 @@ public class DateRange {
     ArgChecker.notNull(other);
     return lowerInclusive.isAfter(other);
   }
+
   /**
    * Checks whether specified date is before range.
    *
-   * @param other  the other date to compare to, not null
+   * @param other the other date to compare to, not null
    * @return true if this range is entirely before the specified date
    */
   public boolean isRangeBefore(LocalDate other) {
     ArgChecker.notNull(other);
     return upperInclusive.isBefore(other);
   }
+
   /**
    * Checks whether specified date is after range.
    *
-   * @param other  the other date to compare to, not null
+   * @param other the other date to compare to, not null
    * @return true if specified date is entirely after this range
    */
   public boolean isDateAfterRange(LocalDate other) {
     ArgChecker.notNull(other);
     return upperInclusive.isBefore(other);
   }
+
   /**
    * Checks whether specified date is before range.
    *
-   * @param other  the other date to compare to, not null
+   * @param other the other date to compare to, not null
    * @return true if specified date is entirely before this range
    */
   public boolean isDateBeforeRange(LocalDate other) {
@@ -140,6 +150,6 @@ public class DateRange {
    * @return number of days in range
    */
   public int numberOfDays() {
-    return Math.toIntExact(ChronoUnit.DAYS.between(lowerInclusive,upperInclusive))+1;
+    return Math.toIntExact(ChronoUnit.DAYS.between(lowerInclusive, upperInclusive)) + 1;
   }
 }

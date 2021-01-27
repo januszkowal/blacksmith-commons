@@ -1,6 +1,7 @@
 package org.blacksmith.commons.struct;
 
 public class Wrapper<E> {
+
   private final boolean isChanged;
   private final E value;
 

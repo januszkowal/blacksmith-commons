@@ -6,11 +6,15 @@ import java.util.function.Function;
 
 public class TreeFactory<T> {
 
+  private final Function<Long, T> dataSupplier;
   private long counter = 0;
-  private final Function<Long,T> dataSupplier;
 
-  public TreeFactory(Function<Long,T> dataSupplier) {
+  public TreeFactory(Function<Long, T> dataSupplier) {
     this.dataSupplier = dataSupplier;
+  }
+
+  public static Function<Long, Long> createLongSupplier() {
+    return t -> t;
   }
 
   public void populate(TreeNode<T> node, long maxTotalCount, int maxChildrenCount) {
@@ -31,10 +35,6 @@ public class TreeFactory<T> {
         }
       }
     }
-  }
-
-  public static Function<Long,Long> createLongSupplier() {
-    return t -> t;
   }
 
 }

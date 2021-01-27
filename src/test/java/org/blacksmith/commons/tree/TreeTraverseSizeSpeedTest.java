@@ -19,7 +19,7 @@ public class TreeTraverseSizeSpeedTest {
   @BeforeAll
   public static void setUp() {
     System.out.println("Set up");
-    new TreeFactory<>(Long::intValue).populate(root,NODES_COUNT, MAX_CHILDREN_COUNT);
+    new TreeFactory<>(Long::intValue).populate(root, NODES_COUNT, MAX_CHILDREN_COUNT);
   }
 
   @RepeatedTest(TEST_REPEAT)

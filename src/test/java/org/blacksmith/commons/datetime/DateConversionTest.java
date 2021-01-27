@@ -1,6 +1,6 @@
 package org.blacksmith.commons.datetime;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -9,9 +9,11 @@ import java.time.ZonedDateTime;
 import org.junit.jupiter.api.Test;
 
 class DateConversionTest {
-  final LocalDate d1= LocalDate.of(2020,6,15);
-  final LocalDateTime dt1= LocalDateTime.of(2020,6,15,12,35,14,123);
-  final LocalDateTime dt1n = LocalDateTime.of(2020,6,15,12,35,14);
+
+  final LocalDate d1 = LocalDate.of(2020, 6, 15);
+  final LocalDateTime dt1 = LocalDateTime.of(2020, 6, 15, 12, 35, 14, 123);
+  final LocalDateTime dt1n = LocalDateTime.of(2020, 6, 15, 12, 35, 14);
+
   @Test
   void convertLocalDateToDate() {
     assertEquals(DateFactory.createDate(d1),
@@ -96,24 +98,24 @@ class DateConversionTest {
   void convertDateToZonedDateTime() {
     ZoneId defaultZone = ZoneId.systemDefault();
     ZoneId warsawZone = ZoneId.of("Europe/Warsaw");
-    assertEquals(ZonedDateTime.of(dt1n,defaultZone),
+    assertEquals(ZonedDateTime.of(dt1n, defaultZone),
         DateConversion.convertDateToZonedDateTime(DateFactory.createDate(dt1n)));
-    assertEquals(ZonedDateTime.of(dt1n,defaultZone),
+    assertEquals(ZonedDateTime.of(dt1n, defaultZone),
         DateConversion.convertDateToZonedDateTime(DateFactory.createDate(dt1n), defaultZone));
-    assertEquals(ZonedDateTime.of(dt1n,warsawZone),
-        DateConversion.convertDateToZonedDateTime(DateFactory.createDate(dt1n),warsawZone));
+    assertEquals(ZonedDateTime.of(dt1n, warsawZone),
+        DateConversion.convertDateToZonedDateTime(DateFactory.createDate(dt1n), warsawZone));
   }
 
   @Test
   void createZonedDateTimeFromDateViaInstant() {
     ZoneId defaultZone = ZoneId.systemDefault();
     ZoneId warsawZone = ZoneId.of("Europe/Warsaw");
-    assertEquals(ZonedDateTime.of(dt1n,defaultZone),
+    assertEquals(ZonedDateTime.of(dt1n, defaultZone),
         DateConversion.createZonedDateTimeFromDateViaInstant(DateFactory.createDate(dt1n)));
-    assertEquals(ZonedDateTime.of(dt1n,defaultZone),
+    assertEquals(ZonedDateTime.of(dt1n, defaultZone),
         DateConversion.createZonedDateTimeFromDateViaInstant(DateFactory.createDate(dt1n), defaultZone));
-    assertEquals(ZonedDateTime.of(dt1n,warsawZone),
-        DateConversion.createZonedDateTimeFromDateViaInstant(DateFactory.createDate(dt1n),warsawZone));
+    assertEquals(ZonedDateTime.of(dt1n, warsawZone),
+        DateConversion.createZonedDateTimeFromDateViaInstant(DateFactory.createDate(dt1n), warsawZone));
   }
 
 }

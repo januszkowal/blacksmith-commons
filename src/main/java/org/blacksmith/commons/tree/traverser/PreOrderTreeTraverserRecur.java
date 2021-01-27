@@ -13,7 +13,7 @@ public final class PreOrderTreeTraverserRecur implements TreeNode.TreeTraverser 
       return false;
     }
     final List<TreeNode<T>> children = root.getChildren();
-    for (int i=0; i<children.size(); i++) {
+    for (int i = 0; i < children.size(); i++) {
       if (!traverse(children.get(i), visitor, callerData)) {
         return false;
       }
@@ -24,7 +24,7 @@ public final class PreOrderTreeTraverserRecur implements TreeNode.TreeTraverser 
   public <T, U> void traverse(TreeNode<T> root, NodeVisitor<T, U> visitor, U callerData) {
     visitor.visit(root, callerData);
     final List<TreeNode<T>> children = root.getChildren();
-    for (int i=0; i<children.size(); i++) {
+    for (int i = 0; i < children.size(); i++) {
       traverse(children.get(i), visitor, callerData);
     }
   }

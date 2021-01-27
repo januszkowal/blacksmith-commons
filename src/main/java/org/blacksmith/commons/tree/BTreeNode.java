@@ -61,7 +61,7 @@ public class BTreeNode<T> implements TreeNode<T> {
   public BTreeNode<T> removeChild(TreeNode<T> child) {
     if (child != null && children.remove(child)) {
       child.setParent(null);
-      return (BTreeNode<T>)child;
+      return (BTreeNode<T>) child;
     }
     return null;
   }
@@ -81,8 +81,8 @@ public class BTreeNode<T> implements TreeNode<T> {
 
   @Override
   public BTreeNode<T> removeDescendantWith(T o) {
-    var node = (BTreeNode<T>)findDescendantWith(o);
-    if (node!=null && node.parent!=null) {
+    var node = (BTreeNode<T>) findDescendantWith(o);
+    if (node != null && node.parent != null) {
       node.getParent().removeChild(node);
       node.setParent(null);
     }
@@ -91,7 +91,7 @@ public class BTreeNode<T> implements TreeNode<T> {
 
   @Override
   public boolean contains(T o) {
-    return findDescendantWith(o)!=null;
+    return findDescendantWith(o) != null;
   }
 
   @Override
@@ -103,7 +103,7 @@ public class BTreeNode<T> implements TreeNode<T> {
 
   @Override
   public boolean isLeaf() {
-    return (this.parent!=null) && this.children.isEmpty();
+    return (this.parent != null) && this.children.isEmpty();
   }
 
   @Override
@@ -132,7 +132,7 @@ public class BTreeNode<T> implements TreeNode<T> {
 
   @Override
   public T[] toDataArray(T[] a) {
-    return toDataArray(a,TRAVERSER);
+    return toDataArray(a, TRAVERSER);
   }
 
   @Override
@@ -149,13 +149,13 @@ public class BTreeNode<T> implements TreeNode<T> {
   @Override
   public TreeNode<T> findDescendantWith(final T o) {
     final Object[] found = {null};
-    TRAVERSER.traverse(this,(node,found1)->{
+    TRAVERSER.traverse(this, (node, found1) -> {
       if (node.getData().equals(o)) {
         found1[0] = node;
         return false;
       }
       return true;
-    },found);
+    }, found);
     return (TreeNode<T>) found[0];
   }
 
