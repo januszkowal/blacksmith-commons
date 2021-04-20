@@ -32,6 +32,24 @@ public class ArgChecker {
     }
   }
 
+  public static void oneOfTwoNotNull(Object o1, Object o2) {
+    if (o1 == null && o2 == null) {
+      throw new IllegalArgumentException("One of argument mustn't be null");
+    }
+  }
+
+  public static void oneOfTwoNotNull(Object o1, Object o2, String message) {
+    if (o1 == null && o2 == null) {
+      throw new IllegalArgumentException(message);
+    }
+  }
+
+  public static void oneOfTwoNotNull(Object o1, Object o2, StringSupplier messageSupplier) {
+    if (o1 == null && o2 == null) {
+      throw new IllegalArgumentException(messageSupplier.get());
+    }
+  }
+
   public static void notEmpty(String o) {
     if (StringUtils.isEmpty(o)) {
       throw new IllegalArgumentException("Argument can't be empty or null");
