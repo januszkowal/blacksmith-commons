@@ -28,11 +28,11 @@ repositories {
 }
 
 dependencies {
-    compile libs.apacheCommons
-    compile libs.commonsBeanutils
-    compile libs.slf4jApi
-    testCompile libs.assertj
-    testCompile libs.logback
+    implementation libs.apacheCommons
+    implementation libs.commonsBeanutils
+    implementation libs.slf4jApi
+    testImplementation libs.assertj
+    testImplementation libs.logback
     testImplementation libs.blacksmithTest
     testImplementation libs.junit
 }
