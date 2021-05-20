@@ -17,9 +17,11 @@ class DateRangeTest {
     DateRange range = DateRange.closed(d1, d2);
     assertEquals(d1, range.getLowerInclusive());
     assertEquals(d2, range.getUpperInclusive());
+    assertEquals(range.numberOfDays(), 10);
     range = DateRange.range(d1, BoundType.CLOSED, d2, BoundType.CLOSED);
     assertEquals(d1, range.getLowerInclusive());
     assertEquals(d2, range.getUpperInclusive());
+    assertEquals(range.numberOfDays(), 10);
   }
 
   @Test
@@ -27,9 +29,11 @@ class DateRangeTest {
     DateRange range = DateRange.open(d1, d2);
     assertEquals(d1.plusDays(1), range.getLowerInclusive());
     assertEquals(d2.minusDays(1), range.getUpperInclusive());
+    assertEquals(range.numberOfDays(), 8);
     range = DateRange.range(d1, BoundType.OPEN, d2, BoundType.OPEN);
     assertEquals(d1.plusDays(1), range.getLowerInclusive());
     assertEquals(d2.minusDays(1), range.getUpperInclusive());
+    assertEquals(range.numberOfDays(), 8);
   }
 
   @Test
@@ -37,9 +41,11 @@ class DateRangeTest {
     DateRange range = DateRange.openClosed(d1, d2);
     assertEquals(d1.plusDays(1), range.getLowerInclusive());
     assertEquals(d2, range.getUpperInclusive());
+    assertEquals(range.numberOfDays(), 9);
     range = DateRange.range(d1, BoundType.OPEN, d2, BoundType.CLOSED);
     assertEquals(d1.plusDays(1), range.getLowerInclusive());
     assertEquals(d2, range.getUpperInclusive());
+    assertEquals(range.numberOfDays(), 9);
   }
 
   @Test
@@ -47,9 +53,11 @@ class DateRangeTest {
     DateRange range = DateRange.closedOpen(d1, d2);
     assertEquals(d1, range.getLowerInclusive());
     assertEquals(d2.minusDays(1), range.getUpperInclusive());
+    assertEquals(range.numberOfDays(), 9);
     range = DateRange.range(d1, BoundType.CLOSED, d2, BoundType.OPEN);
     assertEquals(d1, range.getLowerInclusive());
     assertEquals(d2.minusDays(1), range.getUpperInclusive());
+    assertEquals(range.numberOfDays(), 9);
   }
 
   @Test

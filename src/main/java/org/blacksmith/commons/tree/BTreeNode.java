@@ -23,13 +23,13 @@ public class BTreeNode<T> implements TreeNode<T> {
   }
 
   @Override
-  public void setData(T data) {
-    this.data = data;
+  public T getData() {
+    return data;
   }
 
   @Override
-  public T getData() {
-    return data;
+  public void setData(T data) {
+    this.data = data;
   }
 
   @Override

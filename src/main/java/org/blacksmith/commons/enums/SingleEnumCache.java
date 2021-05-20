@@ -10,9 +10,9 @@ import org.blacksmith.commons.arg.ArgChecker;
 
 public class SingleEnumCache<V, E extends Enum<E>> {
 
-  private Map<V, E> cache;
   private final Function<E, V> getter;
   private final Function<V, E> outputGetter;
+  private Map<V, E> cache;
 
   public SingleEnumCache(Class<E> enumClass, Function<E, V> getter, boolean lazyInit) {
     this.getter = getter;

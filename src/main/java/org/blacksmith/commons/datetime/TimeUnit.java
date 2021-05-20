@@ -13,12 +13,12 @@ public enum TimeUnit implements DateOperation {
   HALF_YEAR("H", "Half-Year", ChronoUnit.MONTHS, 6, true),
   YEAR("Y", "Year", ChronoUnit.YEARS, 1, true);
 
+  private static final Map<String, TimeUnit> unitMap = EnumUtils.getAttrEnumMap(TimeUnit.class, TimeUnit::symbol);
   private final String symbol;
   private final String unitName;
   private final ChronoUnit chronoUnit;
   private final int chronoUnitCount;
   private final boolean isEomAdjustAvailable;
-  private static final Map<String, TimeUnit> unitMap = EnumUtils.getAttrEnumMap(TimeUnit.class, TimeUnit::symbol);
 
   TimeUnit(String symbol, String unitName, ChronoUnit chronoUnit, int chronoUnitCount,
       boolean isEomAdjustAvailable) {

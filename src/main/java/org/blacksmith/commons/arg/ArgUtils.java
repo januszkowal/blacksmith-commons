@@ -2,7 +2,9 @@ package org.blacksmith.commons.arg;
 
 
 public class ArgUtils {
-  private ArgUtils() {}
+
+  private ArgUtils() {
+  }
 
   public static <T> T firstNotNull(T arg1, T arg2) {
     return arg1 != null ? arg1 : arg2;

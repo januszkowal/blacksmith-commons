@@ -149,7 +149,7 @@ public class DateRange {
    *
    * @return number of days in range
    */
-  public int numberOfDays() {
-    return Math.toIntExact(ChronoUnit.DAYS.between(lowerInclusive, upperInclusive)) + 1;
+  public long numberOfDays() {
+    return ChronoUnit.DAYS.between(lowerInclusive, upperInclusive) + 1;
   }
 }

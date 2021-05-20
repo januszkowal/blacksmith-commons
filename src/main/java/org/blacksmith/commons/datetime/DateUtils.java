@@ -17,16 +17,20 @@ public class DateUtils {
   private DateUtils() {
   }
 
-  public static int daysBetween2(LocalDate startInclusive, LocalDate endExclusive) {
-    return Math.toIntExact(ChronoUnit.DAYS.between(startInclusive, endExclusive));
+  public static boolean isAfterOrEqual(LocalDate thisDate, LocalDate otherDate) {
+    return thisDate.compareTo(otherDate) >= 0;
   }
 
-  public static int daysBetween(LocalDate startInclusive, LocalDate endExclusive) {
-    return Math.toIntExact(endExclusive.toEpochDay() - startInclusive.toEpochDay());
+  public static long daysBetween(LocalDate startInclusive, LocalDate endExclusive) {
+    return ChronoUnit.DAYS.between(startInclusive, endExclusive);
   }
 
-  public static int yearsBetween(LocalDate startInclusive, LocalDate endExclusive) {
-    return Math.toIntExact(ChronoUnit.YEARS.between(startInclusive, endExclusive));
+  public static long daysBetween2(LocalDate startInclusive, LocalDate endExclusive) {
+    return endExclusive.toEpochDay() - startInclusive.toEpochDay();
+  }
+
+  public static long yearsBetween(LocalDate startInclusive, LocalDate endExclusive) {
+    return ChronoUnit.YEARS.between(startInclusive, endExclusive);
   }
 
   public static int dayOfYear(LocalDate date) {
