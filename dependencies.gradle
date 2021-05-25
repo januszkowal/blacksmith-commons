@@ -31,7 +31,5 @@ ext.libs = [
                 'org.junit.jupiter:junit-jupiter:' + junitVersion],
         mockito: [
                 'org.mockito:mockito-core:' + mockitoVersion
-        ],
-        blacksmithTest: [
-                'org.blacksmith:blacksmith-test:' + blacksmithTestVersion]
+        ]
 ]

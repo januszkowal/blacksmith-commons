@@ -6,14 +6,11 @@ import org.blacksmith.commons.tree.traverser.PostOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverserRecur;
 import org.blacksmith.commons.tree.traverser.RevOrderTreeTraverserRecur;
-import org.blacksmith.test.TimingExtension;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 @DisplayName("TreeTraverseTest")
-@ExtendWith(TimingExtension.class)
 public class TreeTraverseTest {
 
   @Test
