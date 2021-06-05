@@ -6,7 +6,7 @@ public enum XEnum implements ValueEnum {
   B("By"),
   c("CU");
 
-  private static SingleEnumCache<String, XEnum> cache1 = new SingleEnumCache<>(XEnum.class, XEnum::getValue, false);
+  private static EnumCache<String, XEnum> cache1 = new EnumCache<>(XEnum.class, XEnum::getValue, false);
   private final String value;
 
   XEnum(String value) {

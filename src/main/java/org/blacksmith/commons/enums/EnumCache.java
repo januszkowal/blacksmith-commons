@@ -8,13 +8,13 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import org.blacksmith.commons.arg.ArgChecker;
 
-public class SingleEnumCache<V, E extends Enum<E>> {
+public class EnumCache<V, E extends Enum<E>> {
 
   private final Function<E, V> getter;
   private final Function<V, E> outputGetter;
   private Map<V, E> cache;
 
-  public SingleEnumCache(Class<E> enumClass, Function<E, V> getter, boolean lazyInit) {
+  public EnumCache(Class<E> enumClass, Function<E, V> getter, boolean lazyInit) {
     this.getter = getter;
     if (lazyInit) {
       this.cache = new ConcurrentHashMap<>();

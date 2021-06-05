@@ -9,14 +9,15 @@ class ValueEnumCache {
 
   private final static Map<Class, Map<String, Object>> cache = new ConcurrentHashMap<>();
 
-  static <E extends ValueEnum> E forCode(Class<E> enumType, String code) {
+  static <E extends ValueEnum> E forValue(Class<E> enumType, String value) {
     return (E) cache.computeIfAbsent(enumType, clazz -> new ConcurrentHashMap<>())
-        .computeIfAbsent(code, convertToEnum(enumType, code));
+        .computeIfAbsent(value, convertToEnum(enumType, value));
   }
 
   private static <E extends ValueEnum> Function<String, E> convertToEnum(Class<E> enumType, String code) {
     return input -> Arrays.stream(enumType.getEnumConstants())
-        .filter(enumConstant -> enumConstant.getValue().equals(code)).findFirst()
+        .filter(enumConstant -> enumConstant.getValue().equals(code))
+        .findFirst()
         .orElseThrow(() -> new EnumConversionException(enumType, code));
   }
 }
