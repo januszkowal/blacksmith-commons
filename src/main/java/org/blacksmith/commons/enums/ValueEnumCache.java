@@ -14,10 +14,10 @@ class ValueEnumCache {
         .computeIfAbsent(value, convertToEnum(enumType, value));
   }
 
-  private static <E extends ValueEnum> Function<String, E> convertToEnum(Class<E> enumType, String code) {
+  private static <E extends ValueEnum> Function<String, E> convertToEnum(Class<E> enumType, String value) {
     return input -> Arrays.stream(enumType.getEnumConstants())
-        .filter(enumConstant -> enumConstant.getValue().equals(code))
+        .filter(enumConstant -> enumConstant.getValue().equals(value))
         .findFirst()
-        .orElseThrow(() -> new EnumConversionException(enumType, code));
+        .orElseThrow(() -> new EnumConversionException(enumType, value));
   }
 }

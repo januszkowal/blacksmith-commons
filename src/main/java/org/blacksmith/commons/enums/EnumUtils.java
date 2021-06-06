@@ -43,8 +43,8 @@ public class EnumUtils {
    * key - value returned by keyExtractor
    * value - enum
    * */
-  public static <K, E extends Enum<E>> Map<K, E> getAttrEnumMap(Class<E> enumClass, Function<E, K> keyExtractor) {
-    return Stream.of(enumClass.getEnumConstants()).collect(Collectors.toMap(keyExtractor, e -> e));
+  public static <K, V extends Enum<V>> Map<K, V> getAttrEnumMap(Class<V> enumClass, Function<V, K> attrExtractor) {
+    return Stream.of(enumClass.getEnumConstants()).collect(Collectors.toMap(attrExtractor, e -> e));
   }
 
   /*
@@ -52,9 +52,9 @@ public class EnumUtils {
    * key - enum
    * value - value returned by valueExtractor
    * */
-  public static <E extends Enum<E>, K> EnumMap<E, K> getEnumAttrMap(Class<E> enumClass, Function<E, K> valueExtractor) {
+  public static <K extends Enum<K>, V> EnumMap<K, V> getEnumAttrMap(Class<K> enumClass, Function<K, V> attrExtractor) {
     return Stream.of(enumClass.getEnumConstants())
-        .collect(Collectors.toMap(e -> e, valueExtractor, (e1, e2) -> e1, () -> new EnumMap<>(enumClass)));
+        .collect(Collectors.toMap(e -> e, attrExtractor, (e1, e2) -> e1, () -> new EnumMap<>(enumClass)));
   }
 
   public static <E extends Enum<E>> EnumMap<E, String> getEnumNameMap(Class<E> enumClass) {
