@@ -11,10 +11,10 @@ public class EnumValueConverter<K, E extends Enum<E>> implements EnumConverter<K
   private final Class<E> enumClass;
   private final Map<K, E> attrMap;
 
-  public EnumValueConverter(Class<E> enumClass, Function<E, K> attrExtractor) {
+  public EnumValueConverter(Class<E> enumClass, Function<E, K> valueExtractor) {
     this.enumClass = enumClass;
     this.attrMap = Stream.of(enumClass.getEnumConstants())
-        .collect(Collectors.toUnmodifiableMap(attrExtractor, e -> e));
+        .collect(Collectors.toUnmodifiableMap(valueExtractor, e -> e));
   }
 
   public static <K, E extends Enum<E>> EnumValueConverter<K, E> of(Class<E> enumType, Function<E, K> valueExtractor) {
