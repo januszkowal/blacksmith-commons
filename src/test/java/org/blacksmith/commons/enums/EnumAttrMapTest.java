@@ -13,7 +13,7 @@ class EnumAttrMapTest {
 
     private final String value;
 
-    private static final EnumValueConverter<String, Eat> attrMap = EnumValueConverter.of(Eat.class, Eat::getValue);
+    private static final EnumValueConverter<String, Eat> enumConverter = EnumValueConverter.of(Eat.class, Eat::getValue);
 
     Eat(String value) {
       this.value = value;
@@ -24,7 +24,7 @@ class EnumAttrMapTest {
     }
 
     public static Eat fromValue(String value) {
-      return attrMap.fromValue(value);
+      return enumConverter.convert(value);
     }
   }
 

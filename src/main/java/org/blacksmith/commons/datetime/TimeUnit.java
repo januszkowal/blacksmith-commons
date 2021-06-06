@@ -3,7 +3,9 @@ package org.blacksmith.commons.datetime;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 import java.util.Map;
+import org.blacksmith.commons.enums.EnumConverter;
 import org.blacksmith.commons.enums.EnumUtils;
+import org.blacksmith.commons.enums.EnumValueConverter;
 
 public enum TimeUnit implements DateOperation {
   DAY("D", "Day", ChronoUnit.DAYS, 1, false),
@@ -13,7 +15,7 @@ public enum TimeUnit implements DateOperation {
   HALF_YEAR("H", "Half-Year", ChronoUnit.MONTHS, 6, true),
   YEAR("Y", "Year", ChronoUnit.YEARS, 1, true);
 
-  private static final Map<String, TimeUnit> unitMap = EnumUtils.getAttrEnumMap(TimeUnit.class, TimeUnit::symbol);
+  private static final EnumConverter<String, TimeUnit> unitConverter = EnumValueConverter.of(TimeUnit.class, TimeUnit::symbol);
   private final String symbol;
   private final String unitName;
   private final ChronoUnit chronoUnit;
@@ -30,7 +32,7 @@ public enum TimeUnit implements DateOperation {
   }
 
   public static TimeUnit ofSymbol(String symbol) {
-    return unitMap.get(symbol);
+    return unitConverter.convert(symbol);
   }
 
   @Override

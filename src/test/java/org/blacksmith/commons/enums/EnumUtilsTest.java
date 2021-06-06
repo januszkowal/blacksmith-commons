@@ -37,7 +37,7 @@ class EnumUtilsTest {
 
   @Test
   void getAttrEnumMap() {
-    assertThat(EnumUtils.getAttrEnumMap(TimeUnit.class, TimeUnit::symbol))
+    assertThat(EnumUtils.getValueEnumMap(TimeUnit.class, TimeUnit::symbol))
         .containsAllEntriesOf(Map.of(TimeUnit.DAY.symbol(), TimeUnit.DAY,
             TimeUnit.WEEK.symbol(), TimeUnit.WEEK,
             TimeUnit.MONTH.symbol(), TimeUnit.MONTH,
@@ -48,7 +48,7 @@ class EnumUtilsTest {
 
   @Test
   void getEnumAttrMap() {
-    assertThat(EnumUtils.getEnumAttrMap(TimeUnit.class, TimeUnit::symbol))
+    assertThat(EnumUtils.getEnumValueMap(TimeUnit.class, TimeUnit::symbol))
         .containsAllEntriesOf(Map.of(TimeUnit.DAY, TimeUnit.DAY.symbol(),
             TimeUnit.WEEK, TimeUnit.WEEK.symbol(),
             TimeUnit.MONTH, TimeUnit.MONTH.symbol(),

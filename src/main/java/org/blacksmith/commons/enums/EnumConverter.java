@@ -1,5 +1,6 @@
 package org.blacksmith.commons.enums;
 
-public interface EnumConverter<K, E extends Enum<E>>{
-  E fromValue(K value);
+public interface EnumConverter<V, E extends Enum<E>> {
+
+  E convert(V value);
 }

@@ -1,36 +1,25 @@
 package org.blacksmith.commons.enums;
 
-import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
-import java.util.stream.Stream;
 import org.blacksmith.commons.arg.ArgChecker;
 
-public class EnumValueConverterLazy<K, E extends Enum<E>> implements EnumConverter<K, E> {
+public class EnumValueConverterLazy<V, E extends Enum<E>> extends AbstractEnumValueConverter<V, E>
+    implements EnumConverter<V, E> {
 
-  private final Class<E> enumClass;
-  private final Map<K, E> attrMap = new ConcurrentHashMap<>();
-  private final Function<E, K> attrExtractor;
-
-  public EnumValueConverterLazy(Class<E> enumClass, Function<E, K> attrExtractor) {
-    this.enumClass = enumClass;
-    this.attrExtractor = attrExtractor;
+  public EnumValueConverterLazy(Class<E> enumClass, Function<E, V> attrExtractor) {
+    super(enumClass, attrExtractor);
+    this.valueMap = new ConcurrentHashMap<>();
   }
 
-  public static <K, E extends Enum<E>> EnumValueConverterLazy<K, E> of(Class<E> enumType, Function<E, K> valueExtractor) {
+  public static <V, E extends Enum<E>> EnumValueConverterLazy<V, E> of(Class<E> enumType,
+      Function<E, V> valueExtractor) {
     return new EnumValueConverterLazy<>(enumType, valueExtractor);
   }
 
   @Override
-  public E fromValue(K value) {
+  public E convert(V value) {
     ArgChecker.notNull(value);
-    return attrMap.computeIfAbsent(value, this::fromEnumValue);
-  }
-
-  private E fromEnumValue(K key) {
-    return Stream.of(enumClass.getEnumConstants())
-        .filter(enumConstant -> attrExtractor.apply(enumConstant).equals(key))
-        .findFirst()
-        .orElseThrow(() -> new EnumConversionException(enumClass, null));
+    return valueMap.computeIfAbsent(value, this::valueToEnum);
   }
 }

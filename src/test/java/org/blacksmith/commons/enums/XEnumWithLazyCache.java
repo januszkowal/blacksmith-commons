@@ -6,7 +6,7 @@ public enum XEnumWithLazyCache {
   B("By"),
   c("CU");
 
-  private static EnumConverter<String, XEnumWithLazyCache> cache = EnumConverterFactory.of(XEnumWithLazyCache.class, XEnumWithLazyCache::getValue, true);
+  private static EnumConverter<String, XEnumWithLazyCache> enumConverter = EnumConverterFactory.of(XEnumWithLazyCache.class, XEnumWithLazyCache::getValue, true);
   private final String value;
 
   XEnumWithLazyCache(String value) {
@@ -14,7 +14,7 @@ public enum XEnumWithLazyCache {
   }
 
   public static XEnumWithLazyCache fromValue(String value) {
-    return cache.fromValue(value);
+    return enumConverter.convert(value);
   }
 
 //  @Override
