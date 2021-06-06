@@ -33,6 +33,10 @@ public class DateUtils {
     return ChronoUnit.YEARS.between(startInclusive, endExclusive);
   }
 
+  public static double yearsFractionalBetween(LocalDate startInclusive, LocalDate endExclusive, double yearLength) {
+    return ChronoUnit.DAYS.between(startInclusive, endExclusive) / yearLength;
+  }
+
   public static int dayOfYear(LocalDate date) {
     return date.getDayOfYear();
   }
