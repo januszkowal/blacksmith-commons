@@ -23,7 +23,7 @@ public class EnumUtils {
     try {
       return Enum.valueOf(enumClass, enumName.trim().toUpperCase());
     } catch (IllegalArgumentException ex) {
-      return null;
+      throw new EnumConversionException(enumClass, enumName);
     }
   }
 
