@@ -2,8 +2,11 @@ package org.blacksmith.commons.datetime;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.Year;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.IsoFields;
+import java.time.temporal.TemporalUnit;
 import java.util.stream.Stream;
 
 /*
@@ -13,6 +16,11 @@ import java.util.stream.Stream;
   -  methods *CC use closedClosed convention (inclusive, exclusive)
 * */
 public class DateUtils {
+
+  public final static double DAYS_360 = 360d;
+  public final static double DAYS_365 = 365d;
+  public final static double DAYS_365_2425 = 365.2425d;
+  public final static double DAYS_365_25 = 365.25d;
 
   private DateUtils() {
   }
