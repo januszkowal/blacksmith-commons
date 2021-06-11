@@ -43,10 +43,9 @@ public enum TimeUnit implements DateOperation {
   @Override
   public <T extends Temporal> T addToWithEomAdjust(T t, int q, boolean eomAdjust) {
     if (eomAdjust && isEomAdjustAvailable) {
-      T x = t;
-      x = eomAdjust ? (T) t.plus(1, ChronoUnit.DAYS) : t;
+      T x = (T) t.plus(1, ChronoUnit.DAYS);
       x = chronoUnit.addTo(x, q * chronoUnitCount);
-      x = eomAdjust ? (T) x.minus(1, ChronoUnit.DAYS) : t;
+      x = (T) x.minus(1, ChronoUnit.DAYS);
       return x;
     } else {
       return chronoUnit.addTo(t, q * chronoUnitCount);
