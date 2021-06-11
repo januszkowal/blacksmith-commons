@@ -2,8 +2,11 @@ package org.blacksmith.commons.datetime;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.Year;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.IsoFields;
+import java.time.temporal.TemporalUnit;
 import java.util.stream.Stream;
 
 /*
@@ -13,6 +16,11 @@ import java.util.stream.Stream;
   -  methods *CC use closedClosed convention (inclusive, exclusive)
 * */
 public class DateUtils {
+
+  public final static double DAYS_360 = 360d;
+  public final static double DAYS_365 = 365d;
+  public final static double DAYS_365_2425 = 365.2425d;
+  public final static double DAYS_365_25 = 365.25d;
 
   private DateUtils() {
   }
@@ -33,6 +41,10 @@ public class DateUtils {
     return ChronoUnit.YEARS.between(startInclusive, endExclusive);
   }
 
+  public static double yearsFractionalBetween(LocalDate startInclusive, LocalDate endExclusive, double yearLength) {
+    return ChronoUnit.DAYS.between(startInclusive, endExclusive) / yearLength;
+  }
+
   public static int dayOfYear(LocalDate date) {
     return date.getDayOfYear();
   }
@@ -45,14 +57,14 @@ public class DateUtils {
     return date.getDayOfMonth() == date.lengthOfMonth();
   }
 
-  public static boolean isLeapDayInPeriod(LocalDate startInclusive, LocalDate endExclusive) {
+  public static boolean isLeapDayInPeriodExcl(LocalDate startInclusive, LocalDate endExclusive) {
     LocalDate nextLeap = nextOrSameLeapDay(startInclusive);
     return nextLeap.isBefore(endExclusive);
   }
 
-  public static boolean isLeapDayInPeriodCC(LocalDate startInclusive, LocalDate endInclusive) {
+  public static boolean isLeapDayInPeriod(LocalDate startInclusive, LocalDate endInclusive) {
     LocalDate nextLeap = nextOrSameLeapDay(startInclusive);
-    return nextLeap.compareTo(endInclusive) <= 0;
+    return !nextLeap.isAfter(endInclusive);
   }
 
   /**
