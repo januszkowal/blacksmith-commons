@@ -4,7 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import org.junit.jupiter.api.Test;
 
 class DateUtilsTest {
@@ -206,5 +209,12 @@ class DateUtilsTest {
     assertEquals(3,
         DateUtils.streamOfDates(DateRange.closed(LocalDate.parse("2020-06-01"), LocalDate.parse("2020-06-03")))
             .count());
+  }
+
+  @Test
+  public void toPeriod() {
+    LocalDate d1 = LocalDate.of(2020, 4, 30);
+    LocalDate d2 = d1.plusMonths(2).minusDays(1);
+    assertEquals("P1M30D", DateUtils.periodBetween(d1, d2).toString());
   }
 }

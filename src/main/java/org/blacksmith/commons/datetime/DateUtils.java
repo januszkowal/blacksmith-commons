@@ -1,6 +1,7 @@
 package org.blacksmith.commons.datetime;
 
 import java.time.DateTimeException;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.Year;
@@ -41,8 +42,8 @@ public class DateUtils {
     return ChronoUnit.YEARS.between(startInclusive, endExclusive);
   }
 
-  public static double yearsFractionalBetween(LocalDate startInclusive, LocalDate endExclusive, double yearLength) {
-    return ChronoUnit.DAYS.between(startInclusive, endExclusive) / yearLength;
+  public static Period periodBetween(LocalDate d1, LocalDate d2) {
+    return Period.between(d1, d2);
   }
 
   public static int dayOfYear(LocalDate date) {
