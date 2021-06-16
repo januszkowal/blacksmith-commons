@@ -105,6 +105,24 @@ public class ArgChecker {
     }
   }
 
+  public static void notBlank(String o) {
+    if (StringUtils.isBlank(o)) {
+      throw new IllegalArgumentException("Argument can't be blank or null");
+    }
+  }
+
+  public static void notBlank(String o, String message) {
+    if (StringUtils.isBlank(o)) {
+      throw new IllegalArgumentException(message);
+    }
+  }
+
+  public static void notBlank(String o, StringSupplier messageSupplier) {
+    if (StringUtils.isBlank(o)) {
+      throw new IllegalArgumentException(messageSupplier.get());
+    }
+  }
+
   public static void isTrue(boolean value) {
     if (!value) {
       throw new IllegalArgumentException("Argument must be true");
