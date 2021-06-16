@@ -8,24 +8,23 @@ import org.blacksmith.commons.tree.TreeNode.NodeVisitor;
 @SuppressWarnings("ForLoopReplaceableByForEach")
 public final class PreOrderTreeTraverserRecur implements TreeNode.TreeTraverser {
 
-  public <T, U> boolean traverse(TreeNode<T> root, NodeAcceptant<T, U> visitor, U callerData) {
-    if (visitor.reject(root, callerData)) {
-      return false;
+  @Override
+  public <T> void traverse(TreeNode<T> node, NodeAcceptant<T> visitor) {
+    if (!visitor.accept(node)) {
+      return;
     }
-    final List<TreeNode<T>> children = root.getChildren();
+    final List<TreeNode<T>> children = node.getChildren();
     for (int i = 0; i < children.size(); i++) {
-      if (!traverse(children.get(i), visitor, callerData)) {
-        return false;
-      }
+      traverse(children.get(i), visitor);
     }
-    return true;
   }
 
-  public <T, U> void traverse(TreeNode<T> root, NodeVisitor<T, U> visitor, U callerData) {
-    visitor.visit(root, callerData);
-    final List<TreeNode<T>> children = root.getChildren();
+  @Override
+  public <T> void traverse(TreeNode<T> node, NodeVisitor<T> visitor) {
+    visitor.visit(node);
+    final List<TreeNode<T>> children = node.getChildren();
     for (int i = 0; i < children.size(); i++) {
-      traverse(children.get(i), visitor, callerData);
+      traverse(children.get(i), visitor);
     }
   }
 }

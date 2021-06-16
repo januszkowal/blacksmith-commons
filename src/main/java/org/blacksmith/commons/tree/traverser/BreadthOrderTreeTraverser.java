@@ -8,26 +8,25 @@ import org.blacksmith.commons.tree.TreeNode.NodeVisitor;
 
 public final class BreadthOrderTreeTraverser implements TreeNode.TreeTraverser {
 
-  public <T, U> boolean traverse(TreeNode<T> root, NodeAcceptant<T, U> visitor, U callerData) {
+  @Override
+  public <T> void traverse(TreeNode<T> node, NodeAcceptant<T> visitor) {
     final Deque<TreeNode<T>> dq = new LinkedList<>();
-    dq.add(root);
+    dq.add(node);
     while (!dq.isEmpty()) {
       TreeNode<T> n = dq.pollFirst();
-      if (visitor.reject(n, callerData)) {
-        return false;
+      if (!visitor.accept(n)) {
+        return;
       }
-      dq.addAll(n.getChildren());
     }
-
-    return true;
   }
 
-  public <T, U> void traverse(TreeNode<T> root, NodeVisitor<T, U> visitor, U callerData) {
+  @Override
+  public <T> void traverse(TreeNode<T> node, NodeVisitor<T> visitor) {
     final Deque<TreeNode<T>> dq = new LinkedList<>();
-    dq.add(root);
+    dq.add(node);
     while (!dq.isEmpty()) {
       TreeNode<T> n = dq.pollFirst();
-      visitor.visit(n, callerData);
+      visitor.visit(n);
       dq.addAll(n.getChildren());
     }
   }

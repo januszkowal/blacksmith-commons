@@ -1,6 +1,5 @@
 package org.blacksmith.commons.tree;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -91,72 +90,44 @@ public interface TreeNode<T> {
 
   @SuppressWarnings("unchecked")
   default T[] toDataArray(T[] a, TreeTraverser traverser) {
-    final int size = size();
-    if (a.length < size) {
-      a = (T[]) Array.newInstance(a.getClass().getComponentType(), size);
-    }
+    return toDataList(traverser).toArray(a);
+  }
 
-    traverser.traverse(this, new NodeVisitor<>() {
-      int index = 0;
-
-      @Override
-      public void visit(TreeNode<T> node, T[] a) {
-        a[index++] = node.getData();
-      }
-    }, a);
-    return a;
+  default Object[] toDataArray(TreeTraverser traverser) {
+    return toList(traverser).toArray();
   }
 
   default Object[] toArray(TreeTraverser traverser) {
-    final int size = size();
-    Object[] a = new Object[size];
-    traverser.traverse(this, new NodeVisitor<>() {
-      int index = 0;
-
-      @Override
-      public void visit(TreeNode<T> node, Object[] a) {
-        a[index++] = node;
-      }
-    }, a);
-    return a;
+    return toList(traverser).toArray();
   }
 
   default List<TreeNode<T>> toList(TreeTraverser traverser) {
     List<TreeNode<T>> result = new ArrayList<>();
-    traverser.traverse(this, (node, x) -> {
-      x.add(node);
-    }, result);
+    traverser.traverse(this, (node) -> {
+      result.add(node);
+    });
     return result;
   }
 
   default List<T> toDataList(TreeTraverser traverser) {
     List<T> result = new ArrayList<>();
-    traverser.traverse(this, (node, x) -> {
-      x.add(node.getData());
-    }, result);
+    traverser.traverse(this, (node) -> {
+      result.add(node.getData());
+    });
     return result;
   }
 
-  interface NodeAcceptant<T, U> {
-
+  interface NodeAcceptant<T> {
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    boolean accept(TreeNode<T> node, U caller);
-
-    default boolean reject(TreeNode<T> node, U caller) {
-      return !accept(node, caller);
-    }
+    boolean accept(TreeNode<T> node);
   }
 
-  interface NodeVisitor<T, U> {
-
-    void visit(TreeNode<T> node, U caller);
+  interface NodeVisitor<T> {
+    void visit(TreeNode<T> node);
   }
 
   interface TreeTraverser {
-
-    <T, U> boolean traverse(TreeNode<T> root, NodeAcceptant<T, U> visitor, U callerData);
-
-    <T, U> void traverse(TreeNode<T> root, NodeVisitor<T, U> visitor, U callerData);
+    <T> void traverse(TreeNode<T> node, NodeAcceptant<T> visitor);
+    <T> void traverse(TreeNode<T> node, NodeVisitor<T> visitor);
   }
-
 }

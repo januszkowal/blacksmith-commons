@@ -9,10 +9,11 @@ import org.blacksmith.commons.tree.TreeNode.TreeTraverser;
 
 public final class PostOrderTreeTraverser implements TreeTraverser {
 
-  public <T, U> boolean traverse(TreeNode<T> root, NodeAcceptant<T, U> visitor, U callerData) {
+  @Override
+  public <T> void traverse(TreeNode<T> node, NodeAcceptant<T> visitor) {
     final Deque<TreeNode<T>> dq = new LinkedList<>();
     final Deque<TreeNode<T>> dq2 = new LinkedList<>();
-    dq.add(root);
+    dq.add(node);
 
     while (!dq.isEmpty()) {
       TreeNode<T> n = dq.pollLast();
@@ -22,18 +23,17 @@ public final class PostOrderTreeTraverser implements TreeTraverser {
 
     while (!dq2.isEmpty()) {
       TreeNode<T> n = dq2.pollLast();
-      if (visitor.reject(n, callerData)) {
-        return false;
+      if (!visitor.accept(n)) {
+        return;
       }
     }
-
-    return true;
   }
 
-  public <T, U> void traverse(TreeNode<T> root, NodeVisitor<T, U> visitor, U callerData) {
+  @Override
+  public <T> void traverse(TreeNode<T> node, NodeVisitor<T> visitor) {
     final Deque<TreeNode<T>> dq = new LinkedList<>();
     final Deque<TreeNode<T>> dq2 = new LinkedList<>();
-    dq.add(root);
+    dq.add(node);
 
     while (!dq.isEmpty()) {
       TreeNode<T> n = dq.pollLast();
@@ -43,7 +43,7 @@ public final class PostOrderTreeTraverser implements TreeTraverser {
 
     while (!dq2.isEmpty()) {
       TreeNode<T> n = dq2.pollLast();
-      visitor.visit(n, callerData);
+      visitor.visit(n);
     }
   }
 }
