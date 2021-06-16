@@ -1,13 +1,10 @@
 package org.blacksmith.commons.datetime;
 
 import java.time.DateTimeException;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.Year;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.IsoFields;
-import java.time.temporal.TemporalUnit;
 import java.util.stream.Stream;
 
 /*
@@ -40,6 +37,10 @@ public class DateUtils {
 
   public static long yearsBetween(LocalDate startInclusive, LocalDate endExclusive) {
     return ChronoUnit.YEARS.between(startInclusive, endExclusive);
+  }
+
+  public static double yearsFractionalBetween(LocalDate startInclusive, LocalDate endExclusive, double yearLength) {
+    return ChronoUnit.DAYS.between(startInclusive, endExclusive) / yearLength;
   }
 
   public static Period periodBetween(LocalDate d1, LocalDate d2) {
