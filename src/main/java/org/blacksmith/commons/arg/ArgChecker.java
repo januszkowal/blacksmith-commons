@@ -1,6 +1,7 @@
 package org.blacksmith.commons.arg;
 
 import java.util.Collection;
+import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 public class ArgChecker {
@@ -81,6 +82,12 @@ public class ArgChecker {
     }
   }
 
+  public static void notEmpty(Map<?,?> c) {
+    if (c == null || c.isEmpty()) {
+      throw new IllegalArgumentException("Map can't be empty or null");
+    }
+  }
+
   public static void notEmpty(Object[] a, String message) {
     if (a == null || a.length == 0) {
       throw new IllegalArgumentException(message);
@@ -93,6 +100,12 @@ public class ArgChecker {
     }
   }
 
+  public static void notEmpty(Map<?,?> c, String message) {
+    if (c == null || c.isEmpty()) {
+      throw new IllegalArgumentException(message);
+    }
+  }
+
   public static void notEmpty(Object[] a, StringSupplier messageSupplier) {
     if (a == null || a.length == 0) {
       throw new IllegalArgumentException(messageSupplier.get());
@@ -100,6 +113,12 @@ public class ArgChecker {
   }
 
   public static void notEmpty(Collection<?> c, StringSupplier messageSupplier) {
+    if (c == null || c.isEmpty()) {
+      throw new IllegalArgumentException(messageSupplier.get());
+    }
+  }
+
+  public static void notEmpty(Map<?, ?> c, StringSupplier messageSupplier) {
     if (c == null || c.isEmpty()) {
       throw new IllegalArgumentException(messageSupplier.get());
     }
