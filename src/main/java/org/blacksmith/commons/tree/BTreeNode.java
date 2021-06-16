@@ -1,8 +1,10 @@
 package org.blacksmith.commons.tree;
 
+import com.sun.source.tree.Tree;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 import org.blacksmith.commons.tree.traverser.RevOrderTreeTraverserRecur;
 
@@ -118,11 +120,11 @@ public class BTreeNode<T> implements TreeNode<T> {
 
   @Override
   public int size(TreeTraverser traverser) {
-    final int[] counter = {0};
-    traverser.traverse(this, (node, c) -> {
-      c[0] = c[0] + 1;
-    }, counter);
-    return counter[0];
+    AtomicInteger counter = new AtomicInteger();
+    traverser.traverse(this, (node) -> {
+      counter.incrementAndGet();
+    });
+    return counter.get();
   }
 
   @Override
@@ -148,15 +150,13 @@ public class BTreeNode<T> implements TreeNode<T> {
   @SuppressWarnings("unchecked")
   @Override
   public TreeNode<T> findDescendantWith(final T o) {
-    final Object[] found = {null};
-    TRAVERSER.traverse(this, (node, found1) -> {
-      if (node.getData().equals(o)) {
-        found1[0] = node;
-        return false;
-      }
-      return true;
-    }, found);
-    return (TreeNode<T>) found[0];
+    List<TreeNode<T>> descendants = findDescendantsWith(o);
+    if (descendants.size() == 1) {
+      return descendants.get(0);
+    }
+    else {
+      return null;
+    }
   }
 
   @SuppressWarnings("unchecked")
@@ -171,26 +171,25 @@ public class BTreeNode<T> implements TreeNode<T> {
     return findDescendantsWith(p).toArray(new TreeNode[0]);
   }
 
-  @SuppressWarnings("unchecked")
   @Override
   public List<TreeNode<T>> findDescendantsWith(T o) {
     final List<TreeNode<T>> found = new ArrayList<>();
-    TRAVERSER.traverse(this, (node, f) -> {
+    TRAVERSER.traverse(this, (node) -> {
       if (node.getData().equals(o)) {
-        f.add(node);
+        found.add(node);
       }
-    }, found);
+    });
     return found;
   }
 
   @Override
   public List<TreeNode<T>> findDescendantsWith(Predicate<T> p) {
     final List<TreeNode<T>> found = new ArrayList<>();
-    TRAVERSER.traverse(this, (node, f) -> {
+    TRAVERSER.traverse(this, (node) -> {
       if (p.test(node.getData())) {
-        f.add(node);
+        found.add(node);
       }
-    }, found);
+    });
     return found;
   }
 }
