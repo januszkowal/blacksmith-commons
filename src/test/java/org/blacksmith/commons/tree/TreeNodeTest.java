@@ -3,7 +3,8 @@ package org.blacksmith.commons.tree;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
-import org.assertj.core.util.Arrays;
+import java.util.stream.Collectors;
+import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.RevOrderTreeTraverserRecur;
 import org.junit.jupiter.api.Test;
 
@@ -268,16 +269,21 @@ class TreeNodeTest {
   @Test
   public void treeConversionTest() {
     TreeNode<Integer> tree = StdTraverseTreeFactory.createTree();
-    final Integer[] expected = Arrays.array(1, 3, 7, 6, 9, 8, 2, 5, 4);
-    assertThat(tree.toDataArray(new Integer[0], new RevOrderTreeTraverserRecur())).isEqualTo(expected);
-    assertThat(tree.toDataList(new RevOrderTreeTraverserRecur())).isEqualTo(List.of(expected));
-    assertThat(tree.toDataArray(new Integer[0])).isEqualTo(expected);
-    assertThat(tree.toDataList()).isEqualTo(List.of(expected));
-    assertThat(tree.toList()).extracting(TreeNode::getData).containsExactly(expected);
-    var nodeArray = tree.toArray();
-    assertThat(nodeArray.length).isEqualTo(expected.length);
-    for (int i = 0; i < expected.length; i++) {
-      assertThat(((TreeNode) nodeArray[i]).getData()).isEqualTo(expected[i]);
-    }
+    final Integer[] expectedRevOrderTreeTraverser = {1, 3, 7, 6, 9, 8, 2, 5, 4};
+    final Integer[] expectedPreOrderTreeTraverser = {1, 2, 4, 5, 3, 6, 8, 9, 7};
+    //RevOrderTreeTraverserRecur
+    assertThat(tree.toDataList(new RevOrderTreeTraverserRecur())).containsExactly(expectedRevOrderTreeTraverser);
+    assertThat(tree.toDataArray(new Integer[0], new RevOrderTreeTraverserRecur()))
+        .containsExactly(expectedRevOrderTreeTraverser);
+    assertThat(tree.toDataArray(new Integer[0])).containsExactly(expectedRevOrderTreeTraverser);
+    assertThat(tree.toDataList()).containsExactly(expectedRevOrderTreeTraverser);
+    assertThat(tree.toList()).extracting(TreeNode::getData).containsExactly(expectedRevOrderTreeTraverser);
+    //PreOrderTreeTraverserRecur
+    assertThat(tree.toDataList(new PreOrderTreeTraverser())).containsExactly(expectedPreOrderTreeTraverser);
+    assertThat(List.of(tree.toArray()).stream()
+        .map(node -> (TreeNode<Integer>) node)
+        .map(TreeNode::getData)
+        .collect(Collectors.toList()))
+        .containsExactly(expectedRevOrderTreeTraverser);
   }
 }
