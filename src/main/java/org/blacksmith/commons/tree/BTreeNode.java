@@ -3,7 +3,6 @@ package org.blacksmith.commons.tree;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
 import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverserRecur;
@@ -120,9 +119,9 @@ public class BTreeNode<T> implements TreeNode<T> {
 
   @Override
   public int size(TreeTraverser traverser) {
-    AtomicInteger counter = new AtomicInteger();
+    Counter counter = new Counter();
     traverser.traverse(this, (node) -> {
-      counter.incrementAndGet();
+      counter.increment();
     });
     return counter.get();
   }
