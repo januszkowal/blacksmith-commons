@@ -53,6 +53,8 @@ public interface TreeNode<T> {
 
   TreeNode<T> removeDescendantWith(T o);
 
+  List<TreeNode<T>> removeDescendantsWith(T o);
+
   TreeNode<T> findDescendantWith(final T o);
 
   TreeNode<T>[] findDescendantsArrayWith(final T o);
@@ -62,6 +64,8 @@ public interface TreeNode<T> {
   List<TreeNode<T>> findDescendantsWith(final T o);
 
   List<TreeNode<T>> findDescendantsWith(Predicate<T> p);
+
+  List<TreeNode<T>> findTopDescendantsWith(final T o);
 
   boolean contains(T o);
 
@@ -141,6 +145,9 @@ public interface TreeNode<T> {
     void visit(TreeNode<T> node);
 
     default boolean accept(TreeNode<T> node) {
+      return true;
+    }
+    default boolean acceptChildren(TreeNode<T> node) {
       return true;
     }
   }

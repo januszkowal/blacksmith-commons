@@ -15,7 +15,9 @@ public final class BreadthOrderTreeTraverser implements TreeNode.TreeTraverser {
       TreeNode<T> n = dq.pollFirst();
       if (visitor.accept(n)) {
         visitor.visit(n);
-        dq.addAll(n.getChildren());
+        if (visitor.acceptChildren(n)) {
+          dq.addAll(n.getChildren());
+        }
       }
     }
   }

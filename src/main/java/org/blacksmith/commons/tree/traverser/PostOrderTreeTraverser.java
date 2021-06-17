@@ -18,7 +18,9 @@ public final class PostOrderTreeTraverser implements TreeTraverser {
       TreeNode<T> n = dq.pollLast();
       if (visitor.accept(n)) {
         dq2.add(n);
-        dq.addAll(n.getChildren());
+        if (visitor.acceptChildren(n)) {
+          dq.addAll(n.getChildren());
+        }
       }
     }
 

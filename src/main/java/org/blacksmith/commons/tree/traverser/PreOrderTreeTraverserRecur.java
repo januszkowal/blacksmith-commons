@@ -12,9 +12,11 @@ public final class PreOrderTreeTraverserRecur implements TreeNode.TreeTraverser 
       return;
     }
     visitor.visit(node);
-    final List<TreeNode<T>> children = node.getChildren();
-    for (int i = 0; i < children.size(); i++) {
-      traverse(children.get(i), visitor);
+    if (visitor.acceptChildren(node)) {
+      final List<TreeNode<T>> children = node.getChildren();
+      for (int i = 0; i < children.size(); i++) {
+        traverse(children.get(i), visitor);
+      }
     }
   }
 }

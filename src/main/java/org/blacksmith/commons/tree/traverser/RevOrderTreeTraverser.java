@@ -12,9 +12,11 @@ public class RevOrderTreeTraverser implements TreeNode.TreeTraverser {
       return;
     }
     visitor.visit(node);
-    final List<TreeNode<T>> children = node.getChildren();
-    for (int i = children.size() - 1; i >= 0; --i) {
-      traverse(children.get(i), visitor);
+    if (visitor.acceptChildren(node)) {
+      final List<TreeNode<T>> children = node.getChildren();
+      for (int i = children.size() - 1; i >= 0; --i) {
+        traverse(children.get(i), visitor);
+      }
     }
   }
 }

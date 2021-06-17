@@ -241,6 +241,7 @@ class TreeOperationsTest {
     assertThat(root.findDescendantsWith(7).size()).isEqualTo(1);
     assertThat(root.findDescendantsWith((nd) -> nd == 7).size()).isEqualTo(1);
     assertThat(root.findDescendantsArrayWith((nd) -> nd == 7).length).isEqualTo(1);
+    assertThat(root.findTopDescendantsWith(20).size()).isEqualTo(3);
   }
 
   @Test

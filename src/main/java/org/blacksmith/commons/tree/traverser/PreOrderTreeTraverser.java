@@ -17,9 +17,11 @@ public final class PreOrderTreeTraverser implements TreeNode.TreeTraverser {
 
       if (visitor.accept(n)) {
         visitor.visit(n);
-        final List<TreeNode<T>> children = n.getChildren();
-        for (int i = children.size() - 1; i >= 0; --i) {
-          dq.add(children.get(i));
+        if (visitor.acceptChildren(n)) {
+          final List<TreeNode<T>> children = n.getChildren();
+          for (int i = children.size() - 1; i >= 0; --i) {
+            dq.add(children.get(i));
+          }
         }
       }
     }

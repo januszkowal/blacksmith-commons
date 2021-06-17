@@ -90,6 +90,16 @@ public class BTreeNode<T> implements TreeNode<T> {
   }
 
   @Override
+  public List<TreeNode<T>> removeDescendantsWith(T o) {
+    var nodes = findTopDescendantsWith(o);
+    for (TreeNode<T> node: nodes) {
+      node.getParent().removeChild(node);
+      node.setParent(null);
+    }
+    return nodes;
+  }
+
+  @Override
   public boolean contains(T o) {
     return findDescendantWith(o) != null;
   }
@@ -155,6 +165,24 @@ public class BTreeNode<T> implements TreeNode<T> {
     else {
       return null;
     }
+  }
+
+  @Override
+  public List<TreeNode<T>> findTopDescendantsWith(final T o) {
+    final List<TreeNode<T>> found = new ArrayList<>();
+    TRAVERSER.traverse(this, new NodeVisitor<T>() {
+      @Override
+      public void visit(TreeNode<T> node) {
+        if (node.getData().equals(o)) {
+          found.add(node);
+        }
+      }
+      @Override
+      public boolean acceptChildren(TreeNode<T> node) {
+        return !node.getData().equals(o);
+      }
+    });
+    return found;
   }
 
   @SuppressWarnings("unchecked")
