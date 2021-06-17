@@ -126,7 +126,7 @@ public interface TreeNode<T> {
 
   default List<TreeNode<T>> toList(TreeTraverser traverser) {
     List<TreeNode<T>> result = new ArrayList<>();
-    traverser.traverse(this, (node) -> {
+    traverser.fullTraverse(this, (node) -> {
       result.add(node);
     });
     return result;
@@ -134,7 +134,7 @@ public interface TreeNode<T> {
 
   default List<T> toDataList(TreeTraverser traverser) {
     List<T> result = new ArrayList<>();
-    traverser.traverse(this, (node) -> {
+    traverser.fullTraverse(this, (node) -> {
       result.add(node.getData());
     });
     return result;
@@ -155,5 +155,6 @@ public interface TreeNode<T> {
   interface TreeTraverser {
 
     <T> void traverse(TreeNode<T> node, NodeVisitor<T> visitor);
+    <T> void fullTraverse(TreeNode<T> node, NodeVisitor<T> visitor);
   }
 }

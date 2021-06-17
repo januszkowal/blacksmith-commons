@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.blacksmith.commons.tree.traverser.BreadthOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.PostOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverser;
-import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverserRecur;
+import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverser2;
 import org.blacksmith.commons.tree.traverser.RevOrderTreeTraverser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,7 @@ public class TreeTraverseTest {
   public void testPreOrderTreeTraverser() {
     TreeNode<Integer> tree = StdTraverseTreeFactory.createTree();
     assertThat(tree.toDataList(new PreOrderTreeTraverser())).containsExactly(PRE_ORDER_EXPECTED);
-    assertThat(tree.toDataList(new PreOrderTreeTraverserRecur())).containsExactly(PRE_ORDER_EXPECTED);
+    assertThat(tree.toDataList(new PreOrderTreeTraverser2())).containsExactly(PRE_ORDER_EXPECTED);
   }
 
   @Test

@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.blacksmith.commons.tree.traverser.BreadthOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.PostOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverser;
-import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverserRecur;
+import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverser2;
 import org.blacksmith.commons.tree.traverser.RevOrderTreeTraverser;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.RepeatedTest;
@@ -45,7 +45,7 @@ public class TreeTraverseSpeedTest {
 
   @RepeatedTest(TEST_REPEAT)
   public void testToListPreOrderTreeTraverserRecur() {
-    root.toList(new PreOrderTreeTraverserRecur());
+    root.toList(new PreOrderTreeTraverser2());
   }
 
   @RepeatedTest(TEST_REPEAT)

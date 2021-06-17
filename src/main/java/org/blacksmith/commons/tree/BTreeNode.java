@@ -129,7 +129,7 @@ public class BTreeNode<T> implements TreeNode<T> {
   @Override
   public int size(TreeTraverser traverser) {
     Counter counter = new Counter();
-    traverser.traverse(this, (node) -> {
+    traverser.fullTraverse(this, (node) -> {
       counter.increment();
     });
     return counter.get();
@@ -200,7 +200,7 @@ public class BTreeNode<T> implements TreeNode<T> {
   @Override
   public List<TreeNode<T>> findDescendantsWith(T o) {
     final List<TreeNode<T>> found = new ArrayList<>();
-    TRAVERSER.traverse(this, (node) -> {
+    TRAVERSER.fullTraverse(this, (node) -> {
       if (node.getData().equals(o)) {
         found.add(node);
       }
@@ -211,7 +211,7 @@ public class BTreeNode<T> implements TreeNode<T> {
   @Override
   public List<TreeNode<T>> findDescendantsWith(Predicate<T> p) {
     final List<TreeNode<T>> found = new ArrayList<>();
-    TRAVERSER.traverse(this, (node) -> {
+    TRAVERSER.fullTraverse(this, (node) -> {
       if (p.test(node.getData())) {
         found.add(node);
       }

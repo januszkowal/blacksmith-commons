@@ -1,7 +1,8 @@
 package org.blacksmith.commons.tree.traverser;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.LinkedList;
+import java.util.List;
 import org.blacksmith.commons.tree.TreeNode;
 import org.blacksmith.commons.tree.TreeNode.NodeVisitor;
 
@@ -9,16 +10,34 @@ public final class BreadthOrderTreeTraverser implements TreeNode.TreeTraverser {
 
   @Override
   public <T> void traverse(TreeNode<T> node, NodeVisitor<T> visitor) {
-    final Deque<TreeNode<T>> dq = new LinkedList<>();
+    final Deque<TreeNode<T>> dq = new ArrayDeque<>();
+    if (!visitor.accept(node)) {
+      return;
+    }
     dq.add(node);
-    while (!dq.isEmpty()) {
-      TreeNode<T> n = dq.pollFirst();
-      if (visitor.accept(n)) {
-        visitor.visit(n);
-        if (visitor.acceptChildren(n)) {
-          dq.addAll(n.getChildren());
+    TreeNode<T> n;
+    while ((n = dq.pollFirst()) != null) {
+      visitor.visit(n);
+      final List<TreeNode<T>> children = n.getChildren();
+      if (!children.isEmpty() && visitor.acceptChildren(n)) {
+        for (int i = 0; i < children.size(); ++i) {
+          TreeNode<T> child = children.get(i);
+          if (visitor.accept(child)) {
+            dq.add(child);
+          }
         }
       }
+    }
+  }
+
+  @Override
+  public <T> void fullTraverse(TreeNode<T> node, NodeVisitor<T> visitor) {
+    final Deque<TreeNode<T>> dq = new ArrayDeque<>();
+    dq.add(node);
+    TreeNode<T> n;
+    while ((n = dq.pollFirst()) != null) {
+      visitor.visit(n);
+      dq.addAll(n.getChildren());
     }
   }
 }
