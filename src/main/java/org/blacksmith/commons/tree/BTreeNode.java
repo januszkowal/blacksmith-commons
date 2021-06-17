@@ -1,17 +1,17 @@
 package org.blacksmith.commons.tree;
 
-import com.sun.source.tree.Tree;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
-import org.blacksmith.commons.tree.traverser.RevOrderTreeTraverserRecur;
+import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverser;
+import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverserRecur;
 
 public class BTreeNode<T> implements TreeNode<T> {
 
-  public static final TreeNode.TreeTraverser TRAVERSER = new RevOrderTreeTraverserRecur();
-  public static final TreeNode.TreeTraverser SIZE_TRAVERSER = new RevOrderTreeTraverserRecur();
+  public static final TreeNode.TreeTraverser TRAVERSER = new PreOrderTreeTraverser();
+  public static final TreeNode.TreeTraverser SIZE_TRAVERSER = new PreOrderTreeTraverserRecur();
   private T data;
   private BTreeNode<T> parent;
   private List<TreeNode<T>> children = Collections.emptyList();

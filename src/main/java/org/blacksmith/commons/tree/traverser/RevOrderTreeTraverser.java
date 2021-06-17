@@ -4,7 +4,7 @@ import java.util.List;
 import org.blacksmith.commons.tree.TreeNode;
 import org.blacksmith.commons.tree.TreeNode.NodeVisitor;
 
-public class RevOrderTreeTraverserRecur implements TreeNode.TreeTraverser {
+public class RevOrderTreeTraverser implements TreeNode.TreeTraverser {
 
   @Override
   public <T> void traverse(TreeNode<T> node, NodeVisitor<T> visitor) {

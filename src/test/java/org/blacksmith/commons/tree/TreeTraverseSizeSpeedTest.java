@@ -4,7 +4,7 @@ import org.blacksmith.commons.tree.traverser.BreadthOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.PostOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverserRecur;
-import org.blacksmith.commons.tree.traverser.RevOrderTreeTraverserRecur;
+import org.blacksmith.commons.tree.traverser.RevOrderTreeTraverser;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.RepetitionInfo;
@@ -49,6 +49,6 @@ public class TreeTraverseSizeSpeedTest {
 
   @RepeatedTest(TEST_REPEAT)
   public void testSizeRevOrderTreeTraverserRecur() {
-    System.out.println(root.size(new RevOrderTreeTraverserRecur()));
+    System.out.println(root.size(new RevOrderTreeTraverser()));
   }
 }

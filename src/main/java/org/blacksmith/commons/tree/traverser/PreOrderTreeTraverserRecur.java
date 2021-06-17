@@ -4,7 +4,6 @@ import java.util.List;
 import org.blacksmith.commons.tree.TreeNode;
 import org.blacksmith.commons.tree.TreeNode.NodeVisitor;
 
-@SuppressWarnings("ForLoopReplaceableByForEach")
 public final class PreOrderTreeTraverserRecur implements TreeNode.TreeTraverser {
 
   @Override
