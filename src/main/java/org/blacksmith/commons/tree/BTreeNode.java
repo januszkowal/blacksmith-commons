@@ -1,17 +1,15 @@
 package org.blacksmith.commons.tree;
 
-import com.sun.source.tree.Tree;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Predicate;
-import org.blacksmith.commons.tree.traverser.RevOrderTreeTraverserRecur;
+import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverser;
 
 public class BTreeNode<T> implements TreeNode<T> {
 
-  public static final TreeNode.TreeTraverser TRAVERSER = new RevOrderTreeTraverserRecur();
-  public static final TreeNode.TreeTraverser SIZE_TRAVERSER = new RevOrderTreeTraverserRecur();
+  public static final TreeNode.TreeTraverser TRAVERSER = new PreOrderTreeTraverser();
+  public static final TreeNode.TreeTraverser SIZE_TRAVERSER = new PreOrderTreeTraverser();
   private T data;
   private BTreeNode<T> parent;
   private List<TreeNode<T>> children = Collections.emptyList();
@@ -92,6 +90,16 @@ public class BTreeNode<T> implements TreeNode<T> {
   }
 
   @Override
+  public List<TreeNode<T>> removeDescendantsWith(T o) {
+    var nodes = findTopDescendantsWith(o);
+    for (TreeNode<T> node: nodes) {
+      node.getParent().removeChild(node);
+      node.setParent(null);
+    }
+    return nodes;
+  }
+
+  @Override
   public boolean contains(T o) {
     return findDescendantWith(o) != null;
   }
@@ -120,9 +128,9 @@ public class BTreeNode<T> implements TreeNode<T> {
 
   @Override
   public int size(TreeTraverser traverser) {
-    AtomicInteger counter = new AtomicInteger();
-    traverser.traverse(this, (node) -> {
-      counter.incrementAndGet();
+    Counter counter = new Counter();
+    traverser.fullTraverse(this, (node) -> {
+      counter.increment();
     });
     return counter.get();
   }
@@ -159,6 +167,24 @@ public class BTreeNode<T> implements TreeNode<T> {
     }
   }
 
+  @Override
+  public List<TreeNode<T>> findTopDescendantsWith(final T o) {
+    final List<TreeNode<T>> found = new ArrayList<>();
+    TRAVERSER.traverse(this, new NodeVisitor<T>() {
+      @Override
+      public void visit(TreeNode<T> node) {
+        if (node.getData().equals(o)) {
+          found.add(node);
+        }
+      }
+      @Override
+      public boolean acceptChildren(TreeNode<T> node) {
+        return !node.getData().equals(o);
+      }
+    });
+    return found;
+  }
+
   @SuppressWarnings("unchecked")
   @Override
   public TreeNode<T>[] findDescendantsArrayWith(T o) {
@@ -174,7 +200,7 @@ public class BTreeNode<T> implements TreeNode<T> {
   @Override
   public List<TreeNode<T>> findDescendantsWith(T o) {
     final List<TreeNode<T>> found = new ArrayList<>();
-    TRAVERSER.traverse(this, (node) -> {
+    TRAVERSER.fullTraverse(this, (node) -> {
       if (node.getData().equals(o)) {
         found.add(node);
       }
@@ -185,7 +211,7 @@ public class BTreeNode<T> implements TreeNode<T> {
   @Override
   public List<TreeNode<T>> findDescendantsWith(Predicate<T> p) {
     final List<TreeNode<T>> found = new ArrayList<>();
-    TRAVERSER.traverse(this, (node) -> {
+    TRAVERSER.fullTraverse(this, (node) -> {
       if (p.test(node.getData())) {
         found.add(node);
       }

@@ -1,12 +1,13 @@
 package org.blacksmith.commons.tree;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.Optional;
 import org.blacksmith.commons.tree.traverser.BreadthOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.PostOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverser;
-import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverserRecur;
-import org.blacksmith.commons.tree.traverser.RevOrderTreeTraverserRecur;
-import org.junit.jupiter.api.Assertions;
+import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverser2;
+import org.blacksmith.commons.tree.traverser.RevOrderTreeTraverser;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.RepeatedTest;
 
@@ -19,7 +20,6 @@ public class TreeTraverseSpeedTest {
 
   @BeforeAll
   public static void setUp() {
-    System.out.println("Set up");
     new TreeFactory<>(Long::intValue).populate(root, NODES_COUNT, 3);
   }
 
@@ -45,22 +45,21 @@ public class TreeTraverseSpeedTest {
 
   @RepeatedTest(TEST_REPEAT)
   public void testToListPreOrderTreeTraverserRecur() {
-    root.toList(new PreOrderTreeTraverserRecur());
+    root.toList(new PreOrderTreeTraverser2());
   }
 
   @RepeatedTest(TEST_REPEAT)
   public void testToListRevOrderTreeTraverserRecur() {
-    root.toList(new RevOrderTreeTraverserRecur());
+    root.toList(new RevOrderTreeTraverser());
   }
 
   @RepeatedTest(TEST_REPEAT)
   public void testFindFirst1() {
-    Assertions.assertEquals(5, Optional.ofNullable(root.findDescendantWith(5)).map(TreeNode::getData).orElse(null));
+    assertThat(Optional.ofNullable(root.findDescendantWith(5)).map(TreeNode::getData).orElse(null)).isEqualTo(5);
   }
 
   @RepeatedTest(TEST_REPEAT)
   public void testFindFirst2() {
-    Assertions
-        .assertNull(Optional.ofNullable(root.findDescendantWith(NODES_COUNT + 1)).map(TreeNode::getData).orElse(null));
+    assertThat(Optional.ofNullable(root.findDescendantWith(NODES_COUNT + 1)).map(TreeNode::getData).orElse(null)).isNull();
   }
 }

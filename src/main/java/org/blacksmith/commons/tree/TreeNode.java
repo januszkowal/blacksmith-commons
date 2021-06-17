@@ -5,12 +5,31 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * @f:off (1) / \ /     \ /         \ /             \ /                 \ /                     \ (2)
- *   (3) / \                      / \ /     \                  /     \ /         \              /         \ /
- *  \          /             \ (4)             (5)      (6)             (7) / \ /     \ /         \ /             \ (8)
- * (9)
- * @f:on PRE:             1,2,4,5,3,6,8,9,7 POST:            4,5,2,8,9,6,7,3,1 BREADTH_FIRST:   1,2,3,4,5,6,7,8,9 REV:
- * 1,3,7,6,9,8,2,5,4
+ * @formatter:off
+ *                        (1)
+ *                        / \
+ *                      /     \
+ *                    /         \
+ *                  /             \
+ *                /                 \
+ *              /                     \
+ *           (2)                      (3)
+ *           / \                      / \
+ *         /     \                  /     \
+ *       /         \              /         \
+ *     /             \          /             \
+ *   (4)             (5)      (6)             (7)
+ *                           / \
+ *                         /     \
+ *                       /         \
+ *                     /             \
+ *                   (8)             (9)
+ *
+ * PRE:             1,2,4,5,3,6,8,9,7
+ * POST:            4,5,2,8,9,6,7,3,1
+ * BREADTH_FIRST:   1,2,3,4,5,6,7,8,9
+ * REV:             1,3,7,6,9,8,2,5,4
+ * @formatter:on
  **/
 public interface TreeNode<T> {
 
@@ -34,6 +53,8 @@ public interface TreeNode<T> {
 
   TreeNode<T> removeDescendantWith(T o);
 
+  List<TreeNode<T>> removeDescendantsWith(T o);
+
   TreeNode<T> findDescendantWith(final T o);
 
   TreeNode<T>[] findDescendantsArrayWith(final T o);
@@ -43,6 +64,8 @@ public interface TreeNode<T> {
   List<TreeNode<T>> findDescendantsWith(final T o);
 
   List<TreeNode<T>> findDescendantsWith(Predicate<T> p);
+
+  List<TreeNode<T>> findTopDescendantsWith(final T o);
 
   boolean contains(T o);
 
@@ -103,7 +126,7 @@ public interface TreeNode<T> {
 
   default List<TreeNode<T>> toList(TreeTraverser traverser) {
     List<TreeNode<T>> result = new ArrayList<>();
-    traverser.traverse(this, (node) -> {
+    traverser.fullTraverse(this, (node) -> {
       result.add(node);
     });
     return result;
@@ -111,23 +134,27 @@ public interface TreeNode<T> {
 
   default List<T> toDataList(TreeTraverser traverser) {
     List<T> result = new ArrayList<>();
-    traverser.traverse(this, (node) -> {
+    traverser.fullTraverse(this, (node) -> {
       result.add(node.getData());
     });
     return result;
   }
 
-  interface NodeAcceptant<T> {
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    boolean accept(TreeNode<T> node);
-  }
-
   interface NodeVisitor<T> {
+
     void visit(TreeNode<T> node);
+
+    default boolean accept(TreeNode<T> node) {
+      return true;
+    }
+    default boolean acceptChildren(TreeNode<T> node) {
+      return true;
+    }
   }
 
   interface TreeTraverser {
-    <T> void traverse(TreeNode<T> node, NodeAcceptant<T> visitor);
+
     <T> void traverse(TreeNode<T> node, NodeVisitor<T> visitor);
+    <T> void fullTraverse(TreeNode<T> node, NodeVisitor<T> visitor);
   }
 }

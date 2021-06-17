@@ -9,6 +9,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
+    id "me.champeau.jmh" version "0.6.5"
 }
 
 apply from: 'dependencies.gradle'
@@ -31,11 +32,17 @@ dependencies {
     implementation libs.apacheCommons
     implementation libs.commonsBeanutils
     implementation libs.slf4jApi
+    jmhAnnotationProcessor libs.benchmarkAnnotationProcessors
+    testAnnotationProcessor libs.benchmarkAnnotationProcessors
+    testImplementation libs.junit
     testImplementation libs.assertj
     testImplementation libs.logback
-    testImplementation libs.junit
+    testImplementation libs.benchmarkCore
 }
 
+sourceSets {
+    jmh
+}
 
 jar {
     manifest {
