@@ -8,7 +8,7 @@ import org.blacksmith.commons.tree.traverser.PreOrderTreeTraverser;
 import org.blacksmith.commons.tree.traverser.RevOrderTreeTraverserRecur;
 import org.junit.jupiter.api.Test;
 
-class TreeNodeTest {
+class TreeOperationsTest {
 
   private TreeNode<Integer> treeRoot;
   private TreeNode<Integer> node2;
@@ -99,14 +99,14 @@ class TreeNodeTest {
   public void nodeSize() {
     setUp1();
     assertThat(treeRoot.size()).isEqualTo(9);
-//    assertThat(node2.size()).isEqualTo(3);
-//    assertThat(node3.size()).isEqualTo(5);
-//    assertThat(node4.size()).isEqualTo(1);
-//    assertThat(node5.size()).isEqualTo(1);
-//    assertThat(node6.size()).isEqualTo(3);
-//    assertThat(node7.size()).isEqualTo(1);
-//    assertThat(node8.size()).isEqualTo(1);
-//    assertThat(node9.size()).isEqualTo(1);
+    assertThat(node2.size()).isEqualTo(3);
+    assertThat(node3.size()).isEqualTo(5);
+    assertThat(node4.size()).isEqualTo(1);
+    assertThat(node5.size()).isEqualTo(1);
+    assertThat(node6.size()).isEqualTo(3);
+    assertThat(node7.size()).isEqualTo(1);
+    assertThat(node8.size()).isEqualTo(1);
+    assertThat(node9.size()).isEqualTo(1);
   }
 
   @Test

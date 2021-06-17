@@ -5,10 +5,9 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * @f:off (1) / \ /     \ /         \ /             \ /                 \ /                     \ (2)
- *   (3) / \                      / \ /     \                  /     \ /         \              /         \ /
- *  \          /             \ (4)             (5)      (6)             (7) / \ /     \ /         \ /             \ (8)
- * (9)
+ * @f:off (1) / \ /     \ /         \ /             \ /                 \ /                     \ (2) (3) / \
+ *           / \ /     \                  /     \ /         \              /         \ / \          /             \ (4)
+ * (5)      (6)             (7) / \ /     \ /         \ /             \ (8) (9)
  * @f:on PRE:             1,2,4,5,3,6,8,9,7 POST:            4,5,2,8,9,6,7,3,1 BREADTH_FIRST:   1,2,3,4,5,6,7,8,9 REV:
  * 1,3,7,6,9,8,2,5,4
  **/
@@ -117,17 +116,14 @@ public interface TreeNode<T> {
     return result;
   }
 
-  interface NodeAcceptant<T> {
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    boolean accept(TreeNode<T> node);
-  }
-
   interface NodeVisitor<T> {
     void visit(TreeNode<T> node);
+    default boolean accept(TreeNode<T> node) {
+      return true;
+    }
   }
 
   interface TreeTraverser {
-    <T> void traverse(TreeNode<T> node, NodeAcceptant<T> visitor);
     <T> void traverse(TreeNode<T> node, NodeVisitor<T> visitor);
   }
 }
