@@ -77,8 +77,6 @@ public interface TreeNode<T> {
 
   int size();
 
-  int size(TreeTraverser traverser);
-
   default boolean hasChildren() {
     return !getChildren().isEmpty();
   }

@@ -1,6 +1,5 @@
 package org.blacksmith.commons.tree;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.blacksmith.commons.tree.TreeNode.TreeTraverser;
 import org.openjdk.jmh.annotations.Benchmark;
@@ -23,7 +22,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Fork(2)
 @Warmup(iterations = 3)
 @Measurement(iterations = 5)
-public class TreeBenchmark {
+public class TreeBenchmark2 {
 
   private static TreeNode<Integer> smallTree() {
     BTreeNode<Integer> root = new BTreeNode<>(1);
@@ -45,8 +44,8 @@ public class TreeBenchmark {
   }
 
   @Benchmark
-  public List<Integer> getData(BenchmarkData data) {
-    return data.tree.toDataList(data.traverser);
+  public int getDefaultSize(BenchmarkData data) {
+    return data.tree.size();
   }
 
   @State(Scope.Benchmark)
@@ -55,15 +54,7 @@ public class TreeBenchmark {
     @Param({"SMALL", "BIG"})
     String size;
 
-    @Param({"BreadthOrderTreeTraverser",
-        "PostOrderTreeTraverser",
-        "PreOrderTreeTraverser",
-        "PreOrderTreeTraverser2",
-        "RevOrderTreeTraverser"})
-    TraverserType traverserType;
-
     TreeNode<Integer> tree;
-    TreeTraverser traverser;
 
     @Setup(Level.Trial)
     public void setUp() {
@@ -72,7 +63,6 @@ public class TreeBenchmark {
       } else {
         this.tree = bigTree();
       }
-      this.traverser = traverserType.createTraverser();
     }
   }
 }

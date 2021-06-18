@@ -26,29 +26,4 @@ public class TreeTraverseSizeSpeedTest {
   public void testSize(RepetitionInfo ri) {
     System.out.println(root.size());
   }
-
-  @RepeatedTest(TEST_REPEAT)
-  public void testSizeBreadthOrderTreeTraverser() {
-    System.out.println(root.size(new BreadthOrderTreeTraverser()));
-  }
-
-  @RepeatedTest(TEST_REPEAT)
-  public void testSizePostOrderTreeTraverser() {
-    System.out.println(root.size(new PostOrderTreeTraverser()));
-  }
-
-  @RepeatedTest(TEST_REPEAT)
-  public void testSizePreOrderTreeTraverser() {
-    System.out.println(root.size(new PreOrderTreeTraverser()));
-  }
-
-  @RepeatedTest(TEST_REPEAT)
-  public void testSizePreOrderTreeTraverserRecur() {
-    System.out.println(root.size(new PreOrderTreeTraverser2()));
-  }
-
-  @RepeatedTest(TEST_REPEAT)
-  public void testSizeRevOrderTreeTraverserRecur() {
-    System.out.println(root.size(new RevOrderTreeTraverser()));
-  }
 }

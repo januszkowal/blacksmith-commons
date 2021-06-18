@@ -123,16 +123,12 @@ public class BTreeNode<T> implements TreeNode<T> {
 
   @Override
   public int size() {
-    return size(SIZE_TRAVERSER);
-  }
-
-  @Override
-  public int size(TreeTraverser traverser) {
-    Counter counter = new Counter();
-    traverser.fullTraverse(this, (node) -> {
-      counter.increment();
-    });
-    return counter.get();
+    int size = 1;
+    List<TreeNode<T>> children = getChildren();
+    for (int i=0; i< children.size(); ++i) {
+      size += children.get(i).size();
+    }
+    return size;
   }
 
   @Override
