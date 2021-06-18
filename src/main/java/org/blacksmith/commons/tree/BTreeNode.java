@@ -92,7 +92,7 @@ public class BTreeNode<T> implements TreeNode<T> {
   @Override
   public List<TreeNode<T>> removeDescendantsWith(T o) {
     var nodes = findTopDescendantsWith(o);
-    for (TreeNode<T> node: nodes) {
+    for (TreeNode<T> node : nodes) {
       node.getParent().removeChild(node);
       node.setParent(null);
     }
@@ -125,7 +125,7 @@ public class BTreeNode<T> implements TreeNode<T> {
   public int size() {
     int size = 1;
     List<TreeNode<T>> children = getChildren();
-    for (int i=0; i< children.size(); ++i) {
+    for (int i = 0; i < children.size(); ++i) {
       size += children.get(i).size();
     }
     return size;
@@ -157,8 +157,7 @@ public class BTreeNode<T> implements TreeNode<T> {
     List<TreeNode<T>> descendants = findDescendantsWith(o);
     if (descendants.size() == 1) {
       return descendants.get(0);
-    }
-    else {
+    } else {
       return null;
     }
   }
@@ -173,6 +172,7 @@ public class BTreeNode<T> implements TreeNode<T> {
           found.add(node);
         }
       }
+
       @Override
       public boolean acceptChildren(TreeNode<T> node) {
         return !node.getData().equals(o);

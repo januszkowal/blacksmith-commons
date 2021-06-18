@@ -40,7 +40,7 @@ public class TreeBenchmark {
 
   private static TreeNode<Integer> bigTree() {
     BTreeNode<Integer> root = new BTreeNode<>(0);
-    new TreeFactory(TreeFactory.createIntegerSupplier()).populate(root, 10000, 3);
+    new TreeFactory(TreeFactory.createIntegerSupplier()).populateTotal(root, 10000, 3);
     return root;
   }
 

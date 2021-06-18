@@ -15,7 +15,7 @@ public class TreeSearchTest {
 
   @BeforeAll
   public static void setUp() {
-    new TreeFactory<>(TreeFactory.createLongSupplier()).populate(root, NODES_COUNT, 3);
+    new TreeFactory<>(TreeFactory.createLongSupplier()).populateTotal(root, NODES_COUNT, 3);
   }
 
   @Test

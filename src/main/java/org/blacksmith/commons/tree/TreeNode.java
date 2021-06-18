@@ -89,8 +89,7 @@ public interface TreeNode<T> {
     TreeNode<T> parent;
     while ((parent = n.getParent()) != null) {
       if (parent == node) {
-        return
-            true;
+        return true;
       }
       n = parent;
     }
@@ -145,6 +144,7 @@ public interface TreeNode<T> {
     default boolean accept(TreeNode<T> node) {
       return true;
     }
+
     default boolean acceptChildren(TreeNode<T> node) {
       return true;
     }
@@ -153,6 +153,7 @@ public interface TreeNode<T> {
   interface TreeTraverser {
 
     <T> void traverse(TreeNode<T> node, NodeVisitor<T> visitor);
+
     <T> void fullTraverse(TreeNode<T> node, NodeVisitor<T> visitor);
   }
 }

@@ -22,7 +22,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Fork(2)
 @Warmup(iterations = 3)
 @Measurement(iterations = 5)
-public class TreeBenchmark2 {
+public class TreeSizeBenchmark {
 
   private static TreeNode<Integer> smallTree() {
     BTreeNode<Integer> root = new BTreeNode<>(1);
@@ -37,21 +37,22 @@ public class TreeBenchmark2 {
     return root;
   }
 
-  private static TreeNode<Integer> bigTree() {
+  private static TreeNode<Integer> bigTree(int totalCount, int childCount) {
     BTreeNode<Integer> root = new BTreeNode<>(0);
-    new TreeFactory(TreeFactory.createIntegerSupplier()).populate(root, 10000, 3);
+    new TreeFactory(TreeFactory.createIntegerSupplier()).populateTotal(root, totalCount, childCount);
     return root;
   }
 
   @Benchmark
-  public int getDefaultSize(BenchmarkData data) {
-    return data.tree.size();
+  public int getSize(BenchmarkData data) {
+    int size = data.tree.size();
+    return size;
   }
 
   @State(Scope.Benchmark)
   public static class BenchmarkData {
 
-    @Param({"SMALL", "BIG"})
+    @Param({"SMALL", "BIG3", "BIG10"})
     String size;
 
     TreeNode<Integer> tree;
@@ -60,8 +61,15 @@ public class TreeBenchmark2 {
     public void setUp() {
       if (size.equals("SMALL")) {
         this.tree = smallTree();
-      } else {
-        this.tree = bigTree();
+      }
+      else if (size.equals("BIG3")) {
+        this.tree = bigTree(50000, 3);
+      }
+      else if (size.equals("BIG10")) {
+        this.tree = bigTree(50000, 10);
+      }
+      else {
+        this.tree = null;
       }
     }
   }
