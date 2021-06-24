@@ -55,4 +55,39 @@ public class ArrayUtils {
     return Stream.of(args).collect(Collectors.toList());
   }
 
+  public static double[] leftPad(double[] src, int size) {
+    double[] dst = new double[size];
+    int copyLength = Math.min(size, src.length);
+
+    System.arraycopy(src, src.length - copyLength, dst, dst.length - copyLength, copyLength);
+    return dst;
+  }
+
+  public static double[] leftPad(double[] src, int size, double fill) {
+    double[] dst = new double[size];
+    int copyLength = Math.min(size, src.length);
+    int fillLength = size - copyLength;
+    for (int i = 0; i < fillLength;i++) {
+      dst[i] = fill;
+    }
+    System.arraycopy(src, src.length - copyLength, dst, dst.length - copyLength, copyLength);
+    return dst;
+  }
+
+  public static double[] rightPad(double[] src, int size) {
+    double[] dst = new double[size];
+    int copyLength = Math.min(size, src.length);
+    System.arraycopy(src, 0, dst, 0, copyLength);
+    return dst;
+  }
+
+  public static double[] rightPad(double[] src, int size, double fill) {
+    double[] dst = new double[size];
+    int copyLength = Math.min(size, src.length);
+    System.arraycopy(src, 0, dst, 0, copyLength);
+    for (int i = copyLength; i < size; i++) {
+      dst[i] = fill;
+    }
+    return dst;
+  }
 }
