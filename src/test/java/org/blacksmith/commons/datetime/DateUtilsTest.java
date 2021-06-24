@@ -81,11 +81,11 @@ class DateUtilsTest {
   @Test
   public void isLeapDayInPeriod() {
     assertTrue(DateUtils.isLeapDayInPeriod(LocalDate.parse("2020-02-28"), LocalDate.parse("2020-03-01")));
-    assertFalse(DateUtils.isLeapDayInPeriod(LocalDate.parse("2020-01-29"), LocalDate.parse("2020-02-29")));
+    assertTrue(DateUtils.isLeapDayInPeriod(LocalDate.parse("2020-01-29"), LocalDate.parse("2020-02-29")));
     assertTrue(DateUtils.isLeapDayInPeriod(LocalDate.parse("2020-01-29"), LocalDate.parse("2020-03-01")));
     //
     assertFalse(DateUtils.isLeapDayInPeriodExcl(LocalDate.parse("2020-02-28"), LocalDate.parse("2020-02-28")));
-    assertTrue(DateUtils.isLeapDayInPeriodExcl(LocalDate.parse("2020-02-28"), LocalDate.parse("2020-02-29")));
+    assertFalse(DateUtils.isLeapDayInPeriodExcl(LocalDate.parse("2020-02-28"), LocalDate.parse("2020-02-29")));
     assertTrue(DateUtils.isLeapDayInPeriodExcl(LocalDate.parse("2020-02-28"), LocalDate.parse("2020-03-01")));
   }
 

@@ -61,12 +61,12 @@ public class DateUtils {
 
   public static boolean isLeapDayInPeriodExcl(LocalDate startInclusive, LocalDate endExclusive) {
     LocalDate nextLeap = nextOrSameLeapDay(startInclusive);
-    return nextLeap.isBefore(endExclusive);
+    return nextLeap.compareTo(endExclusive) < 0;
   }
 
   public static boolean isLeapDayInPeriod(LocalDate startInclusive, LocalDate endInclusive) {
     LocalDate nextLeap = nextOrSameLeapDay(startInclusive);
-    return !nextLeap.isAfter(endInclusive);
+    return nextLeap.compareTo(endInclusive) <= 0;
   }
 
   /**
