@@ -20,7 +20,7 @@ public class TreeTraverseSpeedTest {
 
   @BeforeAll
   public static void setUp() {
-    new TreeFactory<>(Long::intValue).populate(root, NODES_COUNT, 3);
+    new TreeFactory<>(Integer::intValue).populateTotal(root, NODES_COUNT, 3);
   }
 
   @RepeatedTest(TEST_REPEAT)
