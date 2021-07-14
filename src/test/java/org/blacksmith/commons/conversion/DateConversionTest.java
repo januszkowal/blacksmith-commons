@@ -1,4 +1,4 @@
-package org.blacksmith.commons.datetime;
+package org.blacksmith.commons.conversion;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import org.blacksmith.commons.DateFactory;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class DateConversionTest {
@@ -16,7 +18,7 @@ class DateConversionTest {
 
   @Test
   void convertLocalDateToDate() {
-    assertEquals(DateFactory.createDate(d1),
+    Assertions.assertEquals(DateFactory.createDate(d1),
         DateConversion.convertLocalDateToDate(d1));
   }
 

@@ -1,4 +1,4 @@
-package org.blacksmith.commons.num;
+package org.blacksmith.commons.conversion;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
+import org.blacksmith.commons.conversion.NumberConversion;
 import org.junit.jupiter.api.Test;
 
 @SuppressWarnings("ConstantConditions")

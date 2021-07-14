@@ -1,4 +1,4 @@
-package org.blacksmith.commons.datetime;
+package org.blacksmith.commons.conversion;
 
 import java.sql.Timestamp;
 import java.time.Instant;

@@ -1,4 +1,4 @@
-package org.blacksmith.commons.datetime;
+package org.blacksmith.commons;
 
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class DateFactory {
 
-  static java.sql.Timestamp createSqlTimestamp(LocalDateTime dt) {
+  public static java.sql.Timestamp createSqlTimestamp(LocalDateTime dt) {
     Calendar cal = Calendar.getInstance();
     cal.clear();
     cal.set(Calendar.YEAR, dt.getYear());
@@ -22,7 +22,7 @@ public class DateFactory {
     return result;
   }
 
-  static java.util.Date createDate(LocalDate d) {
+  public static java.util.Date createDate(LocalDate d) {
     Calendar cal = Calendar.getInstance();
     cal.clear();
     cal.set(Calendar.YEAR, d.getYear());
@@ -31,7 +31,7 @@ public class DateFactory {
     return new Date(cal.toInstant().toEpochMilli());
   }
 
-  static Date createDate(LocalDateTime dt) {
+  public static Date createDate(LocalDateTime dt) {
     Calendar cal = Calendar.getInstance();
     cal.clear();
     cal.set(Calendar.YEAR, dt.getYear());
@@ -43,7 +43,7 @@ public class DateFactory {
     return new Date(cal.toInstant().toEpochMilli());
   }
 
-  static java.sql.Date createSqlDate(LocalDate d) {
+  public static java.sql.Date createSqlDate(LocalDate d) {
     Calendar cal = Calendar.getInstance();
     cal.clear();
     cal.set(Calendar.YEAR, d.getYear());
@@ -52,7 +52,7 @@ public class DateFactory {
     return new java.sql.Date(cal.toInstant().toEpochMilli());
   }
 
-  static java.sql.Date createSqlDate(LocalDateTime dt) {
+  public static java.sql.Date createSqlDate(LocalDateTime dt) {
     Calendar cal = Calendar.getInstance();
     cal.clear();
     cal.set(Calendar.YEAR, dt.getYear());
@@ -64,7 +64,7 @@ public class DateFactory {
     return new java.sql.Date(cal.toInstant().toEpochMilli());
   }
 
-  static Timestamp createSqlTimestampWithoutNanos(LocalDateTime dt) {
+  public static Timestamp createSqlTimestampWithoutNanos(LocalDateTime dt) {
     Calendar cal = Calendar.getInstance();
     cal.clear();
     cal.set(Calendar.YEAR, dt.getYear());

@@ -2,6 +2,7 @@ package org.blacksmith.commons.arg;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.function.Supplier;
 import org.apache.commons.lang3.StringUtils;
 
 public class ArgChecker {
@@ -300,6 +301,13 @@ public class ArgChecker {
     if (value.length() < minLength || value.length() > maxLength) {
       throw new IllegalArgumentException(messageSupplier.get(value, minLength, maxLength));
     }
+  }
+
+  public static void validatePattern(String value, String regexPattern, Supplier<String> messageSupplier) {
+    if (StringUtils.isEmpty(regexPattern))
+      return;
+    if (StringUtils.isEmpty(value) || !value.matches(regexPattern))
+      throw new IllegalArgumentException(messageSupplier.get());
   }
 
   @FunctionalInterface

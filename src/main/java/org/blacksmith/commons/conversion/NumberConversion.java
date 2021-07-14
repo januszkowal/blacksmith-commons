@@ -1,4 +1,4 @@
-package org.blacksmith.commons.num;
+package org.blacksmith.commons.conversion;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
