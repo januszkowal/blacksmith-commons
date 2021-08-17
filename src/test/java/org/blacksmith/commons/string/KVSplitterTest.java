@@ -2,6 +2,7 @@ package org.blacksmith.commons.string;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.blacksmith.commons.vo.Pair;
 import org.junit.jupiter.api.Test;
 
 class KVSplitterTest {

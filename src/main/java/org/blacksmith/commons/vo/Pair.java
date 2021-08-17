@@ -1,4 +1,4 @@
-package org.blacksmith.commons.string;
+package org.blacksmith.commons.vo;
 
 public class Pair<L, R> {
 

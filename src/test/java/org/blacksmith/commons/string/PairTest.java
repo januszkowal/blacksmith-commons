@@ -2,6 +2,7 @@ package org.blacksmith.commons.string;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.blacksmith.commons.vo.Pair;
 import org.junit.jupiter.api.Test;
 
 class PairTest {

@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import org.blacksmith.commons.string.Pair;
+import org.blacksmith.commons.vo.Pair;
 import org.junit.jupiter.api.Test;
 
 class ClassPropertyUtilsTest {

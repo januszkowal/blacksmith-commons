@@ -79,9 +79,9 @@ class DateConversionTest {
   @Test
   void createLocalDateTimeFromMillis() {
     assertEquals(d1.atStartOfDay(),
-        DateConversion.createLocalDateTimeFromMillis(DateFactory.createDate(d1).getTime()));
+        DateConversion.milisToLocalDateTime(DateFactory.createDate(d1).getTime()));
     assertEquals(dt1n,
-        DateConversion.createLocalDateTimeFromMillis(DateFactory.createDate(dt1n).getTime()));
+        DateConversion.milisToLocalDateTime(DateFactory.createDate(dt1n).getTime()));
   }
 
   @Test
@@ -113,11 +113,11 @@ class DateConversionTest {
     ZoneId defaultZone = ZoneId.systemDefault();
     ZoneId warsawZone = ZoneId.of("Europe/Warsaw");
     assertEquals(ZonedDateTime.of(dt1n, defaultZone),
-        DateConversion.createZonedDateTimeFromDateViaInstant(DateFactory.createDate(dt1n)));
+        DateConversion.dateToZonedDateTimeViaInstant(DateFactory.createDate(dt1n)));
     assertEquals(ZonedDateTime.of(dt1n, defaultZone),
-        DateConversion.createZonedDateTimeFromDateViaInstant(DateFactory.createDate(dt1n), defaultZone));
+        DateConversion.dateToZonedDateTimeViaInstant(DateFactory.createDate(dt1n), defaultZone));
     assertEquals(ZonedDateTime.of(dt1n, warsawZone),
-        DateConversion.createZonedDateTimeFromDateViaInstant(DateFactory.createDate(dt1n), warsawZone));
+        DateConversion.dateToZonedDateTimeViaInstant(DateFactory.createDate(dt1n), warsawZone));
   }
 
 }
