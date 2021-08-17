@@ -15,7 +15,7 @@ public class DateConversion {
 
   /* java.time.LocalDate->java.util.Date */
   public static java.util.Date convertLocalDateToDate(LocalDate localDate) {
-    return (localDate == null) ? null : java.util.Date.from(localDateToZonedDateTime(localDate).toInstant());
+    return (localDate == null) ? null : java.util.Date.from(localDateToInstant(localDate));
   }
 
   /* java.time.LocalDate->java.util.Date */
@@ -248,8 +248,8 @@ public class DateConversion {
     return Instant.ofEpochMilli(milis).atZone(zoneId);
   }
 
-  public static ZonedDateTime timestampToZonedDateTime(Timestamp dateTime, ZoneId zoneId) {
-    return ZonedDateTime.of(dateTime.toLocalDateTime(), zoneId);
+  public static ZonedDateTime timestampToZonedDateTime(Timestamp timestamp, ZoneId zoneId) {
+    return ZonedDateTime.of(timestamp.toLocalDateTime(), zoneId);
   }
 
   public static ZonedDateTime localTimeToZonedDateTime(LocalDateTime dateTime, ZoneId zoneId) {
